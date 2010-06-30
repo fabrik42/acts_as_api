@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActsAsApi::Base</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActsAsApi::Base</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/acts_as_api/base_rb.html">
+                lib/acts_as_api/base.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This module enriches the ActiveRecord::Base module of Rails.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000004">acts_as_api</a>&nbsp;&nbsp;
+      <a href="#M000003">acts_as_api?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="Base/InstanceMethods.html">ActsAsApi::Base::InstanceMethods</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="Base/ClassMethods.html" class="link">ActsAsApi::Base::ClassMethods</a><br />
+Module <a href="Base/InstanceMethods.html" class="link">ActsAsApi::Base::InstanceMethods</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">acts_as_api</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+When invoked, it enriches the current model with the class and instance
+methods to act as api.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/acts_as_api/base.rb, line 12</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_api</span>
+
+      <span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">include</span> <span class="ruby-constant">ActsAsApi</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span><span class="ruby-operator">::</span><span class="ruby-constant">InstanceMethods</span>
+        <span class="ruby-identifier">extend</span> <span class="ruby-constant">ActsAsApi</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span><span class="ruby-operator">::</span><span class="ruby-constant">ClassMethods</span>
+      <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">acts_as_api?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Indicates if the current model acts as api. False by default.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/acts_as_api/base.rb, line 6</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_api?</span>
+      <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
