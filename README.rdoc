@@ -27,7 +27,7 @@ acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
 (The MIT License)
 
-Copyright (c) 2010 FIXME full name
+Copyright (c) 2010 Christian Bäuerlein
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
