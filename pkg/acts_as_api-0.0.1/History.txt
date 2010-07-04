@@ -1,3 +1,12 @@
+=== 0.0.3 2010-01-01
+
+* 1 small bugfix
+
+=== 0.0.2 2010-01-01
+
+* 1 major enhancement:
+  * Added a wrapping root node for JSON responses by default.
+
 === 0.0.1 2010-06-27
 
 * 1 major enhancement:

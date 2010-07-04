@@ -16,11 +16,16 @@ require "acts_as_api/array"
 # acts_as_api uses the default serializers of your rails app and doesn't
 # force you into more dependencies.
 module ActsAsApi
-  VERSION = '0.0.1'
+  VERSION = '0.0.3'
 
   # The accepted response formats
   # Default is +[:xml, :json]+
   ACCEPTED_API_FORMATS = [:xml, :json]
+
+  # Holds references to formats that need
+  # to get added an additional root node
+  # with the name of the model.
+  ADD_ROOT_NODE_FOR = [:json]
 
 end
 

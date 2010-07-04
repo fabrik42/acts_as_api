@@ -29,10 +29,18 @@ module ActsAsApi
 
       # set the name of the root node - pluralize for arrays
       api_root_name = api_model.is_a?(Array) ? api_model.first.class.name.downcase.pluralize : api_model.class.name.downcase
+
       output_params[:root] = api_root_name
 
+      api_response = api_model.as_api_response
+
+      if ActsAsApi::ADD_ROOT_NODE_FOR.include? api_format
+        api_response = { api_root_name.to_sym =>  api_response}
+      end
+
+
       # create the Hash as response
-      output_params[api_format] = api_model.as_api_response
+      output_params[api_format] = api_response
 
       render output_params
 
