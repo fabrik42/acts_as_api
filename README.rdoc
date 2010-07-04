@@ -1,12 +1,6 @@
 = acts_as_api
 
-* Source: http://github.com/ffwdme/acts_as_api
-
-* Docs: http://rdoc.info/projects/ffwdme/acts_as_api
-
-* Found a bug? http://github.com/ffwdme/acts_as_api/issues
-
-* Example App: http://github.com/ffwdme/acts_as_api_example
+* http://github.com/ffwdme/acts_as_api
 
 == DESCRIPTION:
 
@@ -160,6 +154,14 @@ If you want a working example right out of the box, grab the example app: http:/
 Then add acts_as_api to the Gemfile of your Rails project
 
     gem 'acts_as_api'
+
+== Links
+
+* Docs: http://rdoc.info/projects/ffwdme/acts_as_api
+
+* Found a bug? http://github.com/ffwdme/acts_as_api/issues
+
+* Example App: http://github.com/ffwdme/acts_as_api_example
 
 == LICENSE:
 
