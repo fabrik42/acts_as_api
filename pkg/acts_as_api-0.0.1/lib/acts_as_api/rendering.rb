@@ -28,9 +28,14 @@ module ActsAsApi
       output_params = render_options
 
       # set the name of the root node - pluralize for arrays
-      api_root_name = api_model.is_a?(Array) ? api_model.first.class.name.downcase.pluralize : api_model.class.name.downcase
+      if api_model.is_a?(Array)
+        api_root_name = api_model.respond_to?(:name) ? api_model.name.downcase.pluralize :  api_model.first.class.name.downcase.pluralize
+      else
+        api_root_name = api_model.class.name.downcase
+      end
 
-      output_params[:root] = api_root_name
+
+      output_params[:root] ||= api_root_name
 
       api_response = api_model.as_api_response
 

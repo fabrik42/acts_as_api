@@ -1,19 +1,27 @@
 = acts_as_api
 
-* http://github.com/ffwdme/acts_as_api
+* Source: http://github.com/ffwdme/acts_as_api
 
+* Found a bug? http://github.com/ffwdme/acts_as_api/issues
+
+* Example App: http://github.com/ffwdme/acts_as_api_example
 
 == DESCRIPTION:
 
 acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
-== FEATURES/PROBLEMS:
+== FEATURES:
 
-* FIX (list of features or problems)
+The built-in XML/JSON support of Rails is great but:
+
+You surely don't want to expose your models always with all attributes.
+
+acts_as_api enriches the models and controllers of your app in a rails-like way so
+you can easily determine how your API responses should look like.
 
 == SYNOPSIS:
 
-  See example app :)
+  If you want a working example right out of the box, grab the example app: http://github.com/ffwdme/acts_as_api_example
 
 == REQUIREMENTS:
 

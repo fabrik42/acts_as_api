@@ -66,6 +66,14 @@ module ActsAsApi
 
             end
 
+          when String
+            # go up the call chain
+            out = self
+            attribute.split(".").each do |method|
+              out = out.send(method.to_sym)
+            end
+            api_output[attribute] = out
+
           when Hash
 
             queue = []
@@ -90,6 +98,14 @@ module ActsAsApi
                     leaf[:parent][k] = out
 
                   end
+
+                when String
+                  # go up the call chain
+                  out = self
+                  v.split(".").each do |method|
+                    out = out.send(method.to_sym)
+                  end
+                  leaf[:parent][k] = out
 
                 when Hash
                   leaf[:parent][k] ||= {}
