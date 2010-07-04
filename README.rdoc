@@ -19,9 +19,15 @@ You surely don't want to expose your models always with all attributes.
 acts_as_api enriches the models and controllers of your app in a rails-like way so
 you can easily determine how your API responses should look like.
 
+acts_as_api uses the *default Rails serializers* for XML and JSON, so you don't have to
+mess around with even more dependencies. Once you change the serializers for your Rails app,
+they will be changed for acts_as_api too.
+
 == SYNOPSIS:
 
-Say you have a model +Customer+ and every customer +has many :orders+.
+=== Set up your model
+
+Say you have a model +Customer+ and every customer has many +:orders+.
 
 If you only want to expose the +firstname+ and +lastname+ attribute of a customer
 via the api, you would do something like this:
@@ -39,6 +45,8 @@ via the api, you would do something like this:
 
   end
 
+=== Set up controller
+
 Now you just have to exchange the +render+ method in your controller for the +render_for_api+ method.
 
   class CustomersController < ApplicationController
@@ -55,6 +63,8 @@ Now you just have to exchange the +render+ method in your controller for the +re
 
   end
 
+=== That's it!
+
 Try it. The response should now look like this:
 
   <?xml version="1.0" encoding="UTF-8"?>
@@ -66,6 +76,73 @@ Try it. The response should now look like this:
 Other attributes of the model like +created_at+ or +updated_at+ won't be included because they were
 not listed by +api_accessible+ in the model.
 
+=== What can I include in my responses?
+
+You can do basically anything:
+
+* Include attributes and all other kinds of methods of your model
+* Include child associations (if they also act_as_api this will be considered)
+* Call methods of a parent association
+* Rename attributes, methods, associations
+* Create your own hierarchies
+
+Here are two models from the example app that show how it works.
+
+The model +Customer+ shows all kinds of ways to add data to your API response.
+
+  class Customer < ActiveRecord::Base
+
+    has_many :orders
+
+    # let this model act as api!
+    acts_as_api
+
+    # define the accessible attributes/methods for the api response
+    # some attributes of the model
+    api_accessible :firstname, :lastname, :age,
+      # you can include methods
+      :full_name,
+      # include associated model in response
+      :orders,
+      # rename the key for orders
+      :renamed_orders => :orders,
+      # put orders in another subnode
+      :subnode_orders =>  { :sub_oders => :orders },
+      # rename nodes/tag names
+      :other_node => :say_something,
+      # create a deeper node hierarchy
+      :maybe => { :useful => { :for => :say_something } }
+
+    # some example methods
+    def full_name
+      '' << firstname.to_s << ' ' << lastname.to_s
+    end
+
+    def say_something
+      "something"
+    end
+
+  end
+
+The model +Order+ also acts as api and is even able to access a method of their parent customer.
+
+  class Order < ActiveRecord::Base
+
+    belongs_to :customer
+
+    # let this model act as api!
+    acts_as_api
+
+    # define the accessible attributes/methods for the api response
+    # some attributes of the model
+    api_accessible :city, :amount,
+    #access a method of the parent association
+      :parent_name => "customer.full_name"
+
+  end
+
+
+=== Is there an example I can play around with?
 
 If you want a working example right out of the box, grab the example app: http://github.com/ffwdme/acts_as_api_example
 
