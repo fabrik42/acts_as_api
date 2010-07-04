@@ -27,7 +27,7 @@ they will be changed for acts_as_api too.
 
 === Set up your model
 
-Say you have a model +Customer+ and every customer has many +:orders+.
+Say you have a model +Customer+ and every customer has many +Orders+.
 
 If you only want to expose the +firstname+ and +lastname+ attribute of a customer
 via the api, you would do something like this:
@@ -104,7 +104,7 @@ The model +Customer+ shows all kinds of ways to add data to your API response.
       :full_name,
       # include associated model in response
       :orders,
-      # rename the key for orders
+      # rename the node for orders
       :renamed_orders => :orders,
       # put orders in another subnode
       :subnode_orders =>  { :sub_oders => :orders },
