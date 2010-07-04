@@ -26,20 +26,45 @@ Say you have a model +Customer+ and every customer +has many :orders+.
 If you only want to expose the +firstname+ and +lastname+ attribute of a customer
 via the api, you would do something like this:
 
-<pre><code>
-class Customer < ActiveRecord::Base
 
-  has_many :orders
+  class Customer < ActiveRecord::Base
 
-  # let this model act as api!
-  acts_as_api
+    has_many :orders
 
-  # define the accessible attributes/methods for the api response
-  api_accessible :firstname, :lastname
+    # let this model act as api!
+    acts_as_api
 
-end
-</code></pre>
+    # define the accessible attributes/methods for the api response
+    api_accessible :firstname, :lastname
 
+  end
+
+Now you just have to exchange the +render+ method in your controller for the +render_for_api+ method.
+
+  class CustomersController < ApplicationController
+
+    def show
+      @customer = Customer.find(params[:id])
+
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml   { render_for_api :xml  => @customer }
+        format.json  { render_for_api :json => @customer }
+      end
+    end
+
+  end
+
+Try it. The response should now look like this:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <customer>
+    <firstname>John</firstname>
+    <lastname>Doe</lastname>
+  </customer>
+
+Other attributes of the model like +created_at+ or +updated_at+ won't be included because they were
+not listed by +api_accessible+ in the model.
 
 
 If you want a working example right out of the box, grab the example app: http://github.com/ffwdme/acts_as_api_example
@@ -52,6 +77,10 @@ If you want a working example right out of the box, grab the example app: http:/
 == INSTALL:
 
     sudo gem install acts_as_api
+
+Then add acts_as_api to the Gemfile of your Rails project
+
+    gem 'acts_as_api'
 
 == LICENSE:
 
