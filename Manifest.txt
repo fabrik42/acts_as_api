@@ -1,7 +1,6 @@
 README.rdoc
 History.txt
 Manifest.txt
-PostInstall.txt
 Rakefile
 lib/acts_as_api.rb
 lib/acts_as_api/array.rb

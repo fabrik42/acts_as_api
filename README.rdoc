@@ -21,7 +21,29 @@ you can easily determine how your API responses should look like.
 
 == SYNOPSIS:
 
-  If you want a working example right out of the box, grab the example app: http://github.com/ffwdme/acts_as_api_example
+Say you have a model +Customer+ and every customer +has many :orders+.
+
+If you only want to expose the +firstname+ and +lastname+ attribute of a customer
+via the api, you would do something like this:
+
+<pre><code>
+class Customer < ActiveRecord::Base
+
+  has_many :orders
+
+  # let this model act as api!
+  acts_as_api
+
+  # define the accessible attributes/methods for the api response
+  api_accessible :firstname, :lastname
+
+end
+</code></pre>
+
+
+
+If you want a working example right out of the box, grab the example app: http://github.com/ffwdme/acts_as_api_example
+
 
 == REQUIREMENTS:
 
