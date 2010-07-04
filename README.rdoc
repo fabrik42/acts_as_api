@@ -2,6 +2,8 @@
 
 * Source: http://github.com/ffwdme/acts_as_api
 
+* Docs: http://rdoc.info/projects/ffwdme/acts_as_api
+
 * Found a bug? http://github.com/ffwdme/acts_as_api/issues
 
 * Example App: http://github.com/ffwdme/acts_as_api_example
