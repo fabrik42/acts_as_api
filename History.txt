@@ -1,3 +1,7 @@
+=== 0.1.7 2010-07-05
+
+* Fixed bug with multi-word models.
+
 === 0.1.4 2010-07-04
 
 * Added better documentation.

@@ -27,15 +27,26 @@ module ActsAsApi
       # set the params to render
       output_params = render_options
 
+
       # set the name of the root node - pluralize for arrays
       if api_model.is_a?(Array)
-        api_root_name = api_model.respond_to?(:name) ? api_model.name.downcase.pluralize :  api_model.first.class.name.downcase.pluralize
+        api_root_name = api_model.respond_to?(:model_name) ? api_model.model_name.singular.pluralize :  api_model.first.class.model_name.singular.pluralize
       else
-        api_root_name = api_model.class.name.downcase
+        api_root_name = api_model.class.model_name.singular
       end
 
+      api_root_name.dasherize if api_format.to_s == :xml.to_s
+
+      # Does not work
+      #api_root_name.camelize if api_format.to_s == :json.to_s
 
       output_params[:root] ||= api_root_name
+
+      
+
+      #output_params[:root] = output_params[:root].camelize if render_options.has_key?(:camelize) && render_options[:camelize]
+      #output_params[:root] = output_params[:root].dasherize if !render_options.has_key?(:dasherize) || render_options[:dasherize]
+
 
       api_response = api_model.as_api_response
 
