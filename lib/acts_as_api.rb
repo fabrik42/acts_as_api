@@ -16,7 +16,7 @@ require "acts_as_api/array"
 # acts_as_api uses the default serializers of your rails app and doesn't
 # force you into more dependencies.
 module ActsAsApi
-  VERSION = '0.1.7'
+  VERSION = '0.1.10'
 
   # The accepted response formats
   # Default is +[:xml, :json]+
@@ -26,6 +26,15 @@ module ActsAsApi
   # to get added an additional root node
   # with the name of the model.
   ADD_ROOT_NODE_FOR = [:json]
+
+  # Holds formats that should be dasherized
+  DASHERIZE_FOR = [:xml]
+
+  # The default name of a root node of a response
+  # if no root paramter is passed in render_for_api
+  # and the gem is not able to determine a root name
+  # automatically
+  DEFAULT_ROOT = :record
 
 end
 

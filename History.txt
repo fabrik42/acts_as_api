@@ -1,3 +1,8 @@
+=== 0.1.10 2010-07-23
+
+* More Bugfixes. When you want to render an Array of records (e.g. from MyRecord.all)
+make sure you pass the :root options to render_as_api - in case it will return an empty array
+
 === 0.1.7 2010-07-05
 
 * Fixed bug with multi-word models.
