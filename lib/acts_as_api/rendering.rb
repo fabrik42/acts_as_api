@@ -12,15 +12,15 @@ module ActsAsApi
 
       # extract the api format and model
       api_format_options = {}
-			
+      
       ActsAsApi::ACCEPTED_API_FORMATS.each do |item|
         if render_options.has_key?(item)
           api_format_options[item] = render_options[item]
           render_options.delete item
         end
       end
-			
-			meta_hash = render_options[:meta] if render_options.has_key?(:meta)
+      
+      meta_hash = render_options[:meta] if render_options.has_key?(:meta)
 
       api_format =  api_format_options.keys.first
       api_model =  api_format_options.values.first
@@ -64,8 +64,8 @@ module ActsAsApi
         api_response = { api_root_name.to_sym =>  api_response}
       end
 
-			api_response = meta_hash.merge api_response if meta_hash
-			
+      api_response = meta_hash.merge api_response if meta_hash
+      
       # create the Hash as response
       output_params[api_format] = api_response
 
