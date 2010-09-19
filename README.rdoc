@@ -59,6 +59,24 @@ Now you just have to exchange the +render+ method in your controller for the +re
 
   end
 
+=== Metadata
+
+You can include metadata elements in the response outside of your objects and collections. Typical usage for this is to include a total results count or page. Just pass in a :meta key with a hash of the meta items you want.
+
+  class CustomersController < ApplicationController
+
+    def index
+      @customers = Customer.paginate(:all, :page = params[:page])
+      metadata = { :total => @customers.total_entries, :page => params[:page] }
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml   { render_for_api :xml  => @customer, :meta => metadata }
+        format.json  { render_for_api :json => @customer, :meta => metadata }
+      end
+    end
+
+  end
+
 === That's it!
 
 Try it. The response should now look like this:
