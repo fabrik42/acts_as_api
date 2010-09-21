@@ -231,7 +231,7 @@ If you want a working example right out of the box, grab the example app: http:/
 
 == REQUIREMENTS:
 
-* Rails 3 beta 4
+* Rails 3.0.0
 
 == INSTALL:
 
