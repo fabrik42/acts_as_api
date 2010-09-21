@@ -16,7 +16,7 @@ require "acts_as_api/array"
 # acts_as_api uses the default serializers of your rails app and doesn't
 # force you into more dependencies.
 module ActsAsApi
-  VERSION = '0.1.10'
+  VERSION = '0.2.1'
 
   # The accepted response formats
   # Default is +[:xml, :json]+
@@ -43,7 +43,7 @@ if defined?(ActiveRecord::Base)
   ActiveRecord::Base.extend ActsAsApi::Base
 end
 
-# Attach ourselves to the abstract controller of rails
-if defined?(AbstractController::Rendering)
-  AbstractController::Rendering.send :include, ActsAsApi::Rendering
+# Attach ourselves to the action controller of rails
+if defined?(ActionController::Base)
+  ActionController::Base.send :include, ActsAsApi::Rendering
 end

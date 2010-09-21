@@ -1,3 +1,12 @@
+=== 0.2.1 2010-09-20
+
+* Updated to work with Rails 3.0.0
+
+* Added support for multiple renderings of the same model (e.g. useful for versioning).
+  Note that the interface of acts as api changed, soyou have to update your code.
+
+* Updated dependecies to user Rails 3.0.0 libs instead of beta.
+
 === 0.1.10 2010-07-23
 
 * More Bugfixes. When you want to render an Array of records (e.g. from MyRecord.all)

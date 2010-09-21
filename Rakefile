@@ -14,7 +14,7 @@ $hoe = Hoe.spec 'acts_as_api' do
   self.developer 'Christian Bäuerlein', 'christian@ffwdme.com'
   #self.post_install_message = 'PostInstall.txt' # TODO remove if post-install message not required
   #self.rubyforge_name       = self.name # TODO this is default value
-  self.extra_deps         = [['activerecord','>= 3.0.0.beta4'], ['actionpack','>= 3.0.0.beta4']]
+  self.extra_deps         = [['activerecord','>= 3.0.0'], ['actionpack','>= 3.0.0']]
 
 end
 

@@ -19,6 +19,12 @@ acts_as_api uses the *default Rails serializers* for XML and JSON, so you don't 
 mess around with even more dependencies. Once you change the serializers for your Rails app,
 they will be changed for acts_as_api too.
 
+As of the version 0.2.0 it supports multiple api rendering templates for a models.
+This is especially useful for API versioning or for example for private vs. public
+access points to a user's profile.
+
+*Note that upgrading to 0.2.0 will break code that worked with previous versions as you now have to specify an API template*
+
 == SYNOPSIS:
 
 === Set up your model
@@ -37,9 +43,12 @@ via the api, you would do something like this:
     acts_as_api
 
     # define the accessible attributes/methods for the api response
-    api_accessible :firstname, :lastname
+    api_accessible :default => [ :firstname, :lastname ]
 
   end
+
+
+An API template with the name +:default+ was created, see below how to use it in the controller:
 
 === Set up controller
 
@@ -52,12 +61,66 @@ Now you just have to exchange the +render+ method in your controller for the +re
 
       respond_to do |format|
         format.html # show.html.erb
-        format.xml   { render_for_api :xml  => @customer }
-        format.json  { render_for_api :json => @customer }
+        format.xml   { render_for_api :default, :xml  => @customer }
+        format.json  { render_for_api :default, :json => @customer }
       end
     end
 
   end
+
+=== API Versioning
+
+With the different named API templates, API versioning is pretty easy:
+
+  class User < ActiveRecord::Base
+
+    # let this model act as api!
+    acts_as_api
+
+    # define the accessible attributes/methods for the api response
+    api_accessible
+      :v1_public  => [ :firstname, :age ],
+      :v2_public  => [ :firstname, :age, :sex ],
+
+      :v1_private => [ :firstname, :lastname, :age, :sex ],
+      :v2_private => [ :firstname, :lastname, :age, :sex, :phone ]
+
+  end
+
+Now you could create a method in the application controller of your app:
+
+    def api_template(version = :v2, template = :public)
+      "#{version.to_s}_#{template.to_s}".to_sym
+    end
+
+And render the API responses:
+
+  class UsersController < ApplicationController
+
+    # renders the :v2_public template
+    def show
+      @user = User.find(params[:id])
+
+      respond_to do |format|
+        format.html # show.html.erb        
+        format.xml   { render_for_api api_template, :xml  => @user }
+        format.json  { render_for_api api_template, :json => @user }
+      end
+    end
+
+    # renders the :v1_private template
+    def profile_deprecated
+      @user = @current_user
+
+      respond_to do |format|
+        format.html # show.html.erb        
+        format.xml   { render_for_api api_template(:v1, :private), :xml  => @user }
+        format.json  { render_for_api api_template(:v1, :private), :json => @user }
+      end
+    end
+
+  end
+
 
 === Metadata
 
@@ -70,8 +133,8 @@ You can include metadata elements in the response outside of your objects and co
       metadata = { :total => @customers.total_entries, :page => params[:page] }
       respond_to do |format|
         format.html # show.html.erb
-        format.xml   { render_for_api :xml  => @customer, :meta => metadata }
-        format.json  { render_for_api :json => @customer, :meta => metadata }
+        format.xml   { render_for_api :default, :xml  => @customer, :meta => metadata }
+        format.json  { render_for_api :default, :json => @customer, :meta => metadata }
       end
     end
 
@@ -113,19 +176,20 @@ The model +Customer+ shows all kinds of ways to add data to your API response.
 
     # define the accessible attributes/methods for the api response
     # some attributes of the model
-    api_accessible :firstname, :lastname, :age,
+    api_accessible :default => [ :firstname, :lastname, :age,
       # you can include methods
       :full_name,
       # include associated model in response
       :orders,
       # rename the node for orders
-      :renamed_orders => :orders,
+      { :renamed_orders => :orders },
       # put orders in another subnode
-      :subnode_orders =>  { :sub_oders => :orders },
+      { :subnode_orders =>  { :sub_oders => :orders } },
       # rename nodes/tag names
-      :other_node => :say_something,
+      { :other_node => :say_something },
       # create a deeper node hierarchy
-      :maybe => { :useful => { :for => :say_something } }
+      { :maybe => { :useful => { :for => :say_something } } }
+    ]
 
     # some example methods
     def full_name
@@ -149,9 +213,10 @@ The model +Order+ also acts as api and is even able to access a method of their 
 
     # define the accessible attributes/methods for the api response
     # some attributes of the model
-    api_accessible :city, :amount,
+    api_accessible :default => [ :city, :amount,
     #access a method of the parent association
-      :parent_name => "customer.full_name"
+      { :parent_name => "customer.full_name" }
+    ]
 
   end
 

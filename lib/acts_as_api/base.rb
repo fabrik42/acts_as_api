@@ -28,13 +28,15 @@ module ActsAsApi
       # *Note*: There is only whitelisting for api accessible attributes.
       # So once the model acts as api, you have to determine all attributes here that should
       # be contained in the api responses.
-      def api_accessible(*attributes)
-        write_inheritable_attribute(:api_accessible, Set.new(attributes) + (api_accessible_attributes || []))
+      def api_accessible(api_templates)
+        api_templates.each do |api_template, attributes|
+          write_inheritable_attribute("api_accessible_#{api_template}".to_sym, Set.new(attributes) + (api_accessible_attributes(api_template) || []))
+        end
       end
 
       # Returns an array of all the attributes that have been made accessible to the api response.
-      def api_accessible_attributes
-        read_inheritable_attribute(:api_accessible)
+      def api_accessible_attributes(api_template)
+        read_inheritable_attribute("api_accessible_#{api_template}".to_sym)
       end
 
     end
@@ -43,8 +45,8 @@ module ActsAsApi
     module InstanceMethods
 
       # Creates the api response of the model and returns it as a Hash.
-      def as_api_response
-        api_attributes = self.class.api_accessible_attributes
+      def as_api_response(api_template)
+        api_attributes = self.class.api_accessible_attributes(api_template)
 
         api_output = {}
 
@@ -59,7 +61,7 @@ module ActsAsApi
               out = send attribute
 
               if out.respond_to?(:as_api_response)
-                out = out.send(:as_api_response)
+                out = out.send(:as_api_response, api_template)
               end
 
               api_output[attribute] = out
@@ -92,7 +94,7 @@ module ActsAsApi
                     out = send v
 
                     if out.respond_to?(:as_api_response)
-                      out = out.send(:as_api_response)
+                      out = out.send(:as_api_response, api_template)
                     end
 
                     leaf[:parent][k] = out
@@ -117,13 +119,13 @@ module ActsAsApi
             end
 
           end
-          
+
         end
 
         api_output
 
       end
-      
+
     end
 
 
