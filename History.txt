@@ -1,3 +1,7 @@
+=== 0.2.2 2010-10-21
+
+* Version bump only for changing the github account in the docs.
+
 === 0.2.1 2010-09-20
 
 * Updated to work with Rails 3.0.0

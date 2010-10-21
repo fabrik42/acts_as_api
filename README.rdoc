@@ -1,6 +1,6 @@
 = acts_as_api
 
-* http://github.com/ffwdme/acts_as_api
+* http://github.com/fabrik42/acts_as_api
 
 == DESCRIPTION:
 
@@ -226,7 +226,7 @@ The model +Order+ also acts as api and is even able to access a method of their 
 
 === Is there an example I can play around with?
 
-If you want a working example right out of the box, grab the example app: http://github.com/ffwdme/acts_as_api_example
+If you want a working example right out of the box, grab the example app: http://github.com/fabrik42/acts_as_api_example
 
 
 == REQUIREMENTS:
@@ -243,11 +243,11 @@ Then add acts_as_api to the Gemfile of your Rails project
 
 == Links
 
-* Docs: http://rdoc.info/projects/ffwdme/acts_as_api
+* Docs: http://rdoc.info/projects/fabrik42/acts_as_api
 
-* Found a bug? http://github.com/ffwdme/acts_as_api/issues
+* Found a bug? http://github.com/fabrik42/acts_as_api/issues
 
-* Example App: http://github.com/ffwdme/acts_as_api_example
+* Example App: http://github.com/fabrik42/acts_as_api_example
 
 == LICENSE:
 
