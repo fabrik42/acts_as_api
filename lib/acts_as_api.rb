@@ -16,7 +16,6 @@ require "acts_as_api/array"
 # acts_as_api uses the default serializers of your rails app and doesn't
 # force you into more dependencies.
 module ActsAsApi
-  VERSION = '0.2.2'
 
   # The accepted response formats
   # Default is +[:xml, :json]+
