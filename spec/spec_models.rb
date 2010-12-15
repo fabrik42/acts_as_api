@@ -34,7 +34,7 @@ class Order < ActiveRecord::Base
 
   acts_as_api
 
-  api_accessible :city, :amount
+  api_accessible :v1_default => [ :city, :amount ]
 
 end
 

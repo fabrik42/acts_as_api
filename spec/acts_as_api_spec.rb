@@ -25,9 +25,9 @@ describe "setting up acts_as_api" do
 
   it "check simple attributes list" do
 
-    Customer.api_accessible :firstname, :lastname
+    Customer.api_accessible :v1_default => [ :firstname, :lastname ]
 
-    response = @luke.as_api_response
+    response = @luke.as_api_response(:v1_default)
 
     response.should be_kind_of(Hash)
 
@@ -41,9 +41,9 @@ describe "setting up acts_as_api" do
 
   it "check method call in attributes list" do
 
-    Customer.api_accessible :full_name
+    Customer.api_accessible :v1_only_full_name => [ :full_name ]
 
-    response = @luke.as_api_response
+    response = @luke.as_api_response(:v1_only_full_name)
 
     response.should be_kind_of(Hash)
 
