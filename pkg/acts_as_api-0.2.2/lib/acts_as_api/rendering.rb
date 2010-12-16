@@ -32,9 +32,9 @@ module ActsAsApi
       api_root_name = nil
 
       if !output_params[:root].nil?
-
         api_root_name = output_params[:root].to_s
-
+      elsif api_model.respond_to?(:collection_name)
+        api_root_name = api_model.collection_name
       elsif api_model.respond_to?(:model_name)
         api_root_name = api_model.model_name
       elsif api_model.is_a?(Array) && !api_model.empty? && api_model.first.class.respond_to?(:model_name)

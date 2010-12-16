@@ -13,8 +13,11 @@ Gem::Specification.new do |s|
   s.description = %q{acts_as_api enriches the models and controllers of your app in a rails-like way so you can easily determine how your XML/JSON API responses should look like.}
 
   #  s.rubyforge_project = "acts_as_api"
-  s.add_dependency('activerecord','>= 3.0.0')
-  s.add_dependency('actionpack','>= 3.0.0')
+  #s.add_dependency('activerecord','>= 3.0.0')
+  #s.add_dependency('actionpack','>= 3.0.0')
+  s.add_dependency('activemodel','>= 3.0.0')
+  s.add_dependency('activesupport','>= 3.0.0')
+  s.add_dependency('json','>= 1.4.6')
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

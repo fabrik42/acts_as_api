@@ -1,4 +1,7 @@
-require "rubygems"
+require 'set'
+require 'active_model'
+require 'active_support/core_ext/class'
+require 'json'
 
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
