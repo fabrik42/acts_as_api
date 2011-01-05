@@ -16,10 +16,6 @@ end
 class Task < ActiveRecord::Base
 
   belongs_to :user
- 
-#  acts_as_api
-
-#  api_accessible :v1_default => [ :heading, :done, :time_spent ]
 
 end
 
