@@ -1,2 +1,5 @@
 nbproject/
+pkg/*
+.bundle
+Gemfile.lock
 test
