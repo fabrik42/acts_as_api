@@ -1,87 +1,115 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-# Time to add your specs!
-# http://rspec.info/
-describe "setting up acts_as_api" do
+describe "acts_as_api" do
 
   before(:each) do
     @luke = Customer.new({ :firstname => 'Luke', :lastname => 'Skywalker', :age => 25, :active => true  })
     @han  = Customer.new({ :firstname => 'Han',  :lastname => 'Solo',      :age => 35, :active => true  })
     @leia = Customer.new({ :firstname => 'Princess',  :lastname => 'Leia', :age => 25, :active => false })
-
-    # always reset the api_accessible values
-    Customer.write_inheritable_attribute(:api_accessible, Set.new )
   end
   
-  it "should be disabled by default" do
-    Customer.acts_as_api?.should be_false
-    Customer.should_not respond_to :api_accessible
-    # now enable it
-    Customer.acts_as_api
-    # should respond now
-    Customer.acts_as_api?.should be_true
-    Customer.should respond_to :api_accessible
+  describe "acts_as_api is disabled by default" do
+    it "should indicate that acts_as_api is disabled" do
+      Customer.acts_as_api?.should be_false
+    end
+
+    it "should not respond to api_accessible" do
+      Customer.should_not respond_to :api_accessible
+    end
   end
 
-  it "check simple attributes list" do
+  describe "acts_as_api is enabled" do
 
-    Customer.api_accessible :firstname, :lastname
+    before(:each) do
+      Customer.acts_as_api
+    end
 
-    response = @luke.as_api_response
+    it "should indicate that acts_as_api is enabled" do
+      Customer.acts_as_api?.should be_true
+    end
 
-    response.should be_kind_of(Hash)
+    it "should not respond to api_accessible" do
+      Customer.should respond_to :api_accessible
+    end
 
-    response.should have(2).keys
+    describe "listing attributes in the api template" do
 
-    response.keys.should include(:firstname, :lastname)
+      before(:each) do
+        Customer.api_accessible :v1_default => [ :firstname, :lastname ]
+        @response = @luke.as_api_response(:v1_default)
+      end
+      
+      it "should return a hash" do
+        @response.should be_kind_of(Hash)
+      end
 
-    response.values.should include(@luke.firstname, @luke.lastname)
+      it "should return the correct number of keys" do
+        @response.should have(2).keys
+      end
 
-  end
+      it "should return all specified fields" do
+        @response.keys.should include(:firstname, :lastname)
+      end
 
-  it "check method call in attributes list" do
+      it "should return the correct values for the specified fields" do
+        @response.values.should include(@luke.firstname, @luke.lastname)
+      end
+      
+    end
 
-    Customer.api_accessible :full_name
+    describe "calling a method in the api template" do
 
-    response = @luke.as_api_response
+      before(:each) do
+        Customer.api_accessible :v1_only_full_name => [ :full_name ]
+        @response = @luke.as_api_response(:v1_only_full_name)
+      end
 
-    response.should be_kind_of(Hash)
+      it "should return a hash" do
+        @response.should be_kind_of(Hash)
+      end
 
-    response.should have(1).keys
+      it "should return the correct number of keys" do
+        @response.should have(1).key
+      end
 
-    response.keys.should include(:full_name)
+      it "should return all specified fields" do
+        @response.keys.should include(:full_name)
+      end
 
-    response.values.should include(@luke.full_name)
+      it "should return the correct values for the specified fields" do
+        @response.values.should include(@luke.full_name)
+      end      
 
-  end
-
+    end
   
-  it "check renaming the node/key of an attribute" do
+    describe "renaming an attribute in the api template" do
+       
+    end
 
-  end
+    describe "renaming the node/key of a method in the api template" do
 
-  it "check renaming the node/key of a method" do
+    end
 
-  end
+    describe "including a scoped association in the api template" do
 
-  it "check included associations in attributes list (DON'T act_as_api themselves)" do
+    end
+
+    describe "including an association (which doesn't acts_as_api) in the api template" do
     
+    end
+
+    describe "including an association (which does acts_as_api) in the api template" do
+
+    end
+
+    describe "creating a sub node in the api template and putting an attribute in it" do
+
+    end
+
+    describe "creating multiple sub nodes in the api template and putting an attribute in it" do
+
+    end
+
   end
-
-
-  it "check included associations in attributes list (DO act_as_api themselves)" do
-
-  end
-
-  it "check creating a sub node and putting an attribute in it" do
-
-  end
-
-
-
-  it "check creating multiple sub nodes and putting an attribute in it" do
-
-  end
-
 
 end

@@ -1,4 +1,7 @@
-require "rubygems"
+require 'set'
+require 'active_model'
+require 'active_support/core_ext/class'
+require 'json'
 
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
@@ -16,7 +19,6 @@ require "acts_as_api/array"
 # acts_as_api uses the default serializers of your rails app and doesn't
 # force you into more dependencies.
 module ActsAsApi
-  VERSION = '0.2.2'
 
   # The accepted response formats
   # Default is +[:xml, :json]+

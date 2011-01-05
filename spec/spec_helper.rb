@@ -1,5 +1,5 @@
 begin
-  require 'spec'
+  #require 'spec'
 rescue LoadError
   require 'rubygems' unless ENV['NO_RUBYGEMS']
   gem 'rspec'

@@ -2,21 +2,6 @@ class Customer < ActiveRecord::Base
 
   has_many :orders
 
-  #acts_as_api
-
-  # define the accessible attributes/methods for the api response
-  #api_accessible :firstname, :age, :created_at, :lastname, :full_name,
-    # include associated model in response
-  #  :orders,
-    # rename the key for orders
-  #  :renamed_orders => :orders,
-    # put orders in another subnode
-  #  :subnode_orders =>  { :sub_oders => :orders },
-    # rename nodes/tag names
- #   :other_node => :say_something,
-    # create a deeper node hierarchy
-  #  :maybe => { :useful => { :for => :say_something } }
-
   def full_name
     '' << firstname.to_s << ' ' << lastname.to_s
   end
@@ -34,7 +19,7 @@ class Order < ActiveRecord::Base
 
   acts_as_api
 
-  api_accessible :city, :amount
+  api_accessible :v1_default => [ :city, :amount ]
 
 end
 
