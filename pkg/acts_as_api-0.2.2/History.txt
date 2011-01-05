@@ -1,3 +1,11 @@
+=== 0.3.0 TO BE RELEASED AS A GEM
+
+* Added bundler support
+
+* Added mongoid support
+
+* Removed lots of unnecessary dependencies esp. ActiveRecord
+
 === 0.2.2 2010-10-21
 
 * Version bump only for changing the github account in the docs.

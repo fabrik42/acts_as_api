@@ -1,9 +1,9 @@
-class Customer < ActiveRecord::Base
+class User < ActiveRecord::Base
 
-  has_many :orders
+  has_many :tasks
 
   def full_name
-    '' << firstname.to_s << ' ' << lastname.to_s
+    '' << first_name.to_s << ' ' << last_name.to_s
   end
 
   def say_something
@@ -13,13 +13,13 @@ class Customer < ActiveRecord::Base
 end
 
 
-class Order < ActiveRecord::Base
+class Task < ActiveRecord::Base
 
-  belongs_to :customer
+  belongs_to :user
+ 
+#  acts_as_api
 
-  acts_as_api
-
-  api_accessible :v1_default => [ :city, :amount ]
+#  api_accessible :v1_default => [ :heading, :done, :time_spent ]
 
 end
 
@@ -28,20 +28,21 @@ ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :dbfile => ":memo
 
 ActiveRecord::Schema.define do
 
-    create_table "customers", :force => true do |t|
-    t.string   "firstname"
-    t.string   "lastname"
+    create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.integer  "age"
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "orders", :force => true do |t|
-    t.integer  "customer_id"
-    t.integer  "amount"
-    t.string   "city"
-    t.string   "postcode"
+  create_table "tasks", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "heading"
+    t.string   "description"
+    t.integer  "time_spent"
+    t.boolean  "done"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
