@@ -74,6 +74,7 @@ module ActsAsApi
             attribute.split(".").each do |method|
               out = out.send(method.to_sym)
             end
+
             api_output[attribute] = out
 
           when Hash
@@ -107,6 +108,11 @@ module ActsAsApi
                   v.split(".").each do |method|
                     out = out.send(method.to_sym)
                   end
+
+                  if out.respond_to?(:as_api_response)
+                    out = out.send(:as_api_response, api_template)
+                  end
+
                   leaf[:parent][k] = out
 
                 when Hash
