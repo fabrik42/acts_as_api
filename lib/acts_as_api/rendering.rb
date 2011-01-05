@@ -13,7 +13,7 @@ module ActsAsApi
       # extract the api format and model
       api_format_options = {}
 
-      ActsAsApi::ACCEPTED_API_FORMATS.each do |item|
+      ActsAsApi::Config.accepted_api_formats.each do |item|
         if render_options.has_key?(item)
           api_format_options[item] = render_options[item]
           render_options.delete item
@@ -28,7 +28,6 @@ module ActsAsApi
       # set the params to render
       output_params = render_options
 
-
       api_root_name = nil
 
       if !output_params[:root].nil?
@@ -42,7 +41,7 @@ module ActsAsApi
       elsif api_model.class.respond_to?(:model_name)
         api_root_name = api_model.class.model_name
       else
-        api_root_name = ActsAsApi::DEFAULT_ROOT.to_s
+        api_root_name = ActsAsApi::Config.default_root.to_s
       end
 
       api_root_name = api_root_name.underscore.tr('/', '_')
@@ -51,7 +50,7 @@ module ActsAsApi
         api_root_name = api_root_name.pluralize
       end
 
-      api_root_name = api_root_name.dasherize if ActsAsApi::DASHERIZE_FOR.include? api_format.to_sym
+      api_root_name = api_root_name.dasherize if ActsAsApi::Config.dasherize_for.include? api_format.to_sym
 
       output_params[:root] = api_root_name
 
@@ -60,7 +59,7 @@ module ActsAsApi
 
       api_response = api_model.as_api_response(api_template)
 
-      if meta_hash or ActsAsApi::ADD_ROOT_NODE_FOR.include? api_format
+      if meta_hash or ActsAsApi::Config.add_root_node_for.include? api_format
         api_response = { api_root_name.to_sym =>  api_response}
       end
 

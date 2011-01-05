@@ -6,6 +6,7 @@ require 'json'
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
+require "acts_as_api/config"
 require "acts_as_api/base"
 require "acts_as_api/rendering"
 require "acts_as_api/array"
@@ -19,25 +20,6 @@ require "acts_as_api/array"
 # acts_as_api uses the default serializers of your rails app and doesn't
 # force you into more dependencies.
 module ActsAsApi
-
-  # The accepted response formats
-  # Default is +[:xml, :json]+
-  ACCEPTED_API_FORMATS = [:xml, :json]
-
-  # Holds references to formats that need
-  # to get added an additional root node
-  # with the name of the model.
-  ADD_ROOT_NODE_FOR = [:json]
-
-  # Holds formats that should be dasherized
-  DASHERIZE_FOR = [:xml]
-
-  # The default name of a root node of a response
-  # if no root paramter is passed in render_for_api
-  # and the gem is not able to determine a root name
-  # automatically
-  DEFAULT_ROOT = :record
-
 end
 
 # Attach ourselves to active record

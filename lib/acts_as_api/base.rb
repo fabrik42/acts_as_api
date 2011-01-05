@@ -16,6 +16,10 @@ module ActsAsApi
         extend ActsAsApi::Base::ClassMethods
       end
 
+      if block_given?
+        yield ActsAsApi::Config
+      end
+     
     end
 
     module ClassMethods
