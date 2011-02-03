@@ -7,6 +7,7 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 require "acts_as_api/config"
+require "acts_as_api/api_template"
 require "acts_as_api/base"
 require "acts_as_api/rendering"
 require "acts_as_api/array"
