@@ -3,3 +3,4 @@ pkg/*
 .bundle
 Gemfile.lock
 test
+acts_as_api.tmproj
