@@ -45,8 +45,7 @@ module ActsAsApi
 
         attributes = api_accessible_attributes(api_template) || ApiTemplate.new
 
-
-        #        attributes.merge!(api_accessible_attributes(options[:extend])) if options[:extend]
+        attributes.merge!(api_accessible_attributes(options[:extend])) if options[:extend]
 
         if block_given?
           yield attributes
@@ -95,6 +94,16 @@ module ActsAsApi
                   leaf[:parent][k] = out
 
                 end
+
+              when Proc
+                
+                out = v.call(self)
+                
+                if out.respond_to?(:as_api_response)
+                  out = out.send(:as_api_response, api_template)
+                end                
+                
+                leaf[:parent][k] = out
 
               when String
                 # go up the call chain
