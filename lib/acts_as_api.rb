@@ -5,12 +5,8 @@ require 'json'
 
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
-
-require "acts_as_api/config"
-require "acts_as_api/api_template"
-require "acts_as_api/base"
-require "acts_as_api/rendering"
-require "acts_as_api/array"
+  
+ require "acts_as_api/array"
 
 # acts_as_api is a gem that aims to make the construction of JSON and XML
 # responses in rails 3 easy and fun.
@@ -21,6 +17,12 @@ require "acts_as_api/array"
 # acts_as_api uses the default serializers of your rails app and doesn't
 # force you into more dependencies.
 module ActsAsApi
+  autoload :Config,       "acts_as_api/config"
+  autoload :ApiTemplate,  "acts_as_api/api_template"
+  autoload :Base,         "acts_as_api/base"
+  autoload :Rendering,    "acts_as_api/rendering"
+  
+  
 end
 
 # Attach ourselves to active record
