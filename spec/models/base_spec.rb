@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper.rb'
+require File.dirname(__FILE__) + '/../spec_helper.rb'
 
 describe "acts_as_api" do
 
@@ -33,7 +33,7 @@ describe "acts_as_api" do
       User.acts_as_api
     end
 
-    it "should indicate that acts_as_api is enabled" do
+    it "should indicate that acts_as_api is enabled" do      
       User.acts_as_api?.should be_true
     end
 
@@ -239,15 +239,13 @@ describe "acts_as_api" do
       end
     
       it "should return all specified fields" do
-        @response.keys.should eql([:all_caps_name, :without_param])
+        @response.keys.sort_by(&:to_s).should eql([:all_caps_name, :without_param])
       end
     
       it "should return the correct values for the specified fields" do
-        @response.values.should eql(["LUKE SKYWALKER", "Time"])
-      end
-    
-    end
-    
+        @response.values.sort.should eql(["LUKE SKYWALKER", "Time"])
+      end    
+    end    
     
     describe "calling a lambda in the api (the record is passed as only parameter)" do
     
@@ -269,11 +267,11 @@ describe "acts_as_api" do
       end
     
       it "should return all specified fields" do
-        @response.keys.should eql([:all_caps_name, :without_param])
+        @response.keys.sort_by(&:to_s).should eql([:all_caps_name, :without_param])
       end
     
       it "should return the correct values for the specified fields" do
-        @response.values.should eql(["LUKE SKYWALKER", "Time"])
+        @response.values.sort.should eql(["LUKE SKYWALKER", "Time"])
       end
     
     end    
