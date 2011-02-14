@@ -1,18 +1,13 @@
-begin
-  #require 'spec'
-rescue LoadError
-  require 'rubygems' unless ENV['NO_RUBYGEMS']
-  gem 'rspec'
-  require 'spec'
-end
+require "rails_app/config/environment"
+
 
 $:.unshift(File.dirname(__FILE__) + '/../lib')
-require 'rubygems'
-require 'active_support'
-require 'active_record'
-require 'action_controller'
-
 require 'acts_as_api'
 
-require 'spec_models'
+ENV["RAILS_ENV"] = "test"
 
+load_schema = lambda {
+  load "#{Rails.root.to_s}/db/schema.rb" # use db agnostic schema by default
+  # ActiveRecord::Migrator.up('db/migrate') # use migrations
+}
+silence_stream(STDOUT, &load_schema)

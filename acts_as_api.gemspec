@@ -16,6 +16,13 @@ Gem::Specification.new do |s|
   s.add_dependency('activesupport','>= 3.0.0')
   # TODO: Problem in Rails with JSON dependency?!
   # s.add_dependency('json','>= 1.4.6')
+  s.has_rdoc      = true
+  s.rdoc_options  = ['--main', 'README.rdoc', '--charset=UTF-8']
+  s.extra_rdoc_files = ['README.rdoc']
+  
+  s.add_development_dependency('rails', ['>= 3.0.0'])
+  s.add_development_dependency('rspec', ['>= 2.3'])
+  s.add_development_dependency('rspec-rails', ['>= 2.3'])
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
