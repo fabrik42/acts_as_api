@@ -1,7 +1,6 @@
 require 'set'
 require 'active_model'
 require 'active_support/core_ext/class'
-require 'json'
 
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
@@ -20,9 +19,7 @@ module ActsAsApi
   autoload :Config,       "acts_as_api/config"
   autoload :ApiTemplate,  "acts_as_api/api_template"
   autoload :Base,         "acts_as_api/base"
-  autoload :Rendering,    "acts_as_api/rendering"
-  
-  
+  autoload :Rendering,    "acts_as_api/rendering"    
 end
 
 # Attach ourselves to active record
