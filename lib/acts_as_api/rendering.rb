@@ -67,6 +67,8 @@ module ActsAsApi
 
       # create the Hash as response
       output_params[api_format] = api_response
+      
+      output_params[:callback] = params[:callback] if ActsAsApi::Config.allow_jsonp_callback && params[:callback]
 
       render output_params
 

@@ -13,6 +13,8 @@ module ActsAsApi
     # to get added an additional root node
     # with the name of the model.
     ADD_ROOT_NODE_FOR = [:json]
+    
+    ALLOW_JSONP_CALLBACK = false
 
     # The default name of a root node of a response
     # if no root paramter is passed in render_for_api
@@ -24,11 +26,14 @@ module ActsAsApi
     mattr_accessor :dasherize_for
     mattr_accessor :add_root_node_for
     mattr_accessor :default_root
+    mattr_accessor :allow_jsonp_callback    
 
     @@accepted_api_formats = ACCEPTED_API_FORMATS
     @@dasherize_for        = DASHERIZE_FOR
     @@add_root_node_for    = ADD_ROOT_NODE_FOR
     @@default_root         = DEFAULT_ROOT
+    @@allow_jsonp_callback = ALLOW_JSONP_CALLBACK    
+    
 
   end
 
