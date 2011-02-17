@@ -5,5 +5,7 @@ gemspec
 
 
 group :test do
-  gem "sqlite3-ruby"
+  gem 'sqlite3-ruby'
+  gem 'rspec-rails', '>= 2.4.1'
+  gem 'webrat'  
 end
