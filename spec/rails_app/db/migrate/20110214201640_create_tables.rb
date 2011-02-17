@@ -19,11 +19,17 @@ class CreateTables < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
     end
+    
+    create_table :untoucheds do |t|
+      t.string   "nothing"
+      t.timestamps
+    end
 
   end
 
   def self.down
+    drop_table :untoucheds
     drop_table :tasks
-    drop_table :users
+    drop_table :users    
   end
 end
