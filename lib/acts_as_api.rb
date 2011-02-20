@@ -6,6 +6,7 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
   
  require "acts_as_api/array"
+ require "acts_as_api/rails_renderer"
 
 # acts_as_api is a gem that aims to make the construction of JSON and XML
 # responses in rails 3 easy and fun.
@@ -30,4 +31,5 @@ end
 # Attach ourselves to the action controller of rails
 if defined?(ActionController::Base)
   ActionController::Base.send :include, ActsAsApi::Rendering
+  ActsAsApi::RailsRenderer.setup
 end

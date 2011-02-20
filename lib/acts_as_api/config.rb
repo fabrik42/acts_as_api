@@ -24,6 +24,8 @@ module ActsAsApi
       attr_accessor_with_default :default_root, :record
       
       attr_accessor_with_default :allow_jsonp_callback, false
+      
+      attr_accessor_with_default :add_http_status_to_jsonp_response, true      
 
     end
     

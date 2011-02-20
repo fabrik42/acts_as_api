@@ -64,14 +64,16 @@ module ActsAsApi
       end
 
       api_response = meta_hash.merge api_response if meta_hash
+      
+      if ActsAsApi::Config.allow_jsonp_callback && params[:callback]
+        output_params[:callback] = params[:callback]
+        api_format = :acts_as_api_jsonp if ActsAsApi::Config.add_http_status_to_jsonp_response
+      end
 
       # create the Hash as response
       output_params[api_format] = api_response
-      
-      output_params[:callback] = params[:callback] if ActsAsApi::Config.allow_jsonp_callback && params[:callback]
 
       render output_params
-
     end
 
   end

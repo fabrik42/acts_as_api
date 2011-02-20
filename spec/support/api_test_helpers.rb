@@ -13,7 +13,7 @@ module ApiTestHelpers
   end
   
   def jsonp_callback(callback)
-    /\A#{callback}\((.*)\)\z/
+    /\A#{callback}\((.*),\s+\d{3}\)\z/
   end
   
 end
