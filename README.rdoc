@@ -2,9 +2,28 @@
 
 acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
-== Features:
+== Introduction
 
-acts_as_api enriches the models and controllers of your app in a rails-like way so you can easily determine how your API responses should look like.
+acts_as_api enriches the models and controllers of your app in a rails-like way so you can easily determine how your API responses should look like:
+
+    class User < ActiveRecord::Base
+
+      acts_as_api
+
+      api_accessible :name_only do |template|
+        template.add :first_name
+        template.add :last_name
+      end
+
+    end
+
+
+A nice introduction about acts_as_api with examples can be found here:
+
+http://fabrik42.github.com/acts_as_api
+
+
+== Features:
 
 * DRY templates for your api responses
 * Easy but very flexible syntax for defining the templates
@@ -13,19 +32,13 @@ acts_as_api enriches the models and controllers of your app in a rails-like way 
 * Does not rely on ActiveRecord (can be used with other ORMs like Mongoid)
 * Supports multiple api rendering templates for a models. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.
 
-== Introduction
-
-A nice introduction about acts_as_api can be found here:
-
-http://fabrik42.github.com/acts_as_api/
-
-== Requirements:
+=== Requirements:
 
 * ActiveModel (>= 3.0.0)
 * ActiveSupport (>= 3.0.0)
 * Rack (>= 1.1.0)
 
-== Links
+=== Links
 
 * Introduction: http://fabrik42.github.com/acts_as_api/
 
@@ -35,12 +48,12 @@ http://fabrik42.github.com/acts_as_api/
 
 * Wiki: https://github.com/fabrik42/acts_as_api/wiki/
 
-== Downwards Compatibility
+=== Downwards Compatibility
 
 Note that upgrading to 0.3.0 will break code that worked with previous versions due to a complete overhaul of the lib.
 For a legacy version of this readme file look here: https://github.com/fabrik42/acts_as_api/wiki/legacy-acts_as_api-0.2-readme
 
-== LICENSE:
+=== LICENSE:
 
 (The MIT License)
 
