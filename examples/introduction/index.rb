@@ -109,6 +109,19 @@ end
 #
 #  [wi]: https://github.com/fabrik42/acts_as_api/wiki/
 
+# ***
+
+### Links
+# * Check out the [source code on Github][so]
+# * For more usage examples visit the [wiki][wi]
+# * Found a bug or do you have a feature request? [issue tracker][to]
+# * [Docs][do]
+#
+# [so]: https://github.com/fabrik42/acts_as_api/
+# [wi]: https://github.com/fabrik42/acts_as_api/wiki/
+# [to]: https://github.com/fabrik42/acts_as_api/issues
+# [do]: http://rdoc.info/github/fabrik42/acts_as_api
+
 
 
 
