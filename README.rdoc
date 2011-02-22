@@ -23,7 +23,7 @@ As of the version 0.2.0 it supports multiple api rendering templates for a model
 This is especially useful for API versioning or for example for private vs. public
 access points to a user's profile.
 
-*Note that upgrading to 0.2.0 will break code that worked with previous versions as you now have to specify an API template*
+*Note that upgrading to 0.3.0 will break code that worked with previous versions due to a complete overhaul of the lib*
 
 == SYNOPSIS:
 

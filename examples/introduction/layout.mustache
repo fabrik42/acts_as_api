@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>acts_as_api</title>
+  <link rel="stylesheet" href="./docco.css">
+  <link  href="http://fonts.googleapis.com/css?family=Copse:regular" rel="stylesheet" type="text/css" >
+  <style>
+  h1, h2, h3, h4, h5 {
+    font-family: 'Copse', serif;
+    font-style: normal;
+    font-weight: 700;
+    text-shadow: none;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 1.2;
+  }
+  </style>  
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  {{#sources?}}
+  <div id="jump_to">
+    Jump To &hellip;
+    <div id="jump_wrapper">
+      <div id="jump_page">
+        {{#sources}}
+          <a class="source" href="{{ url }}">{{ basename }}</a>
+        {{/sources}}
+      </div>
+    </div>
+  </div>
+  {{/sources?}}
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs>
+        <h1>acts_as_api</h1>
+        <p>Makes creating XML/JSON responses in Rails 3 easy and fun.</p>
+      </th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#sections}}
+    <tr id='section-{{ section_id }}'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-{{ section_id }}">&#182;</a>
+        </div>
+        {{{ docs }}}
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>{{{ code }}}</pre></div>
+      </td>
+    </tr>
+    {{/sections}}
+  </table>
+</div>
+<a href="https://github.com/fabrik42/acts_as_api"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://assets1.github.com/img/7afbc8b248c68eb468279e8c17986ad46549fb71?repo=&url=http%3A%2F%2Fs3.amazonaws.com%2Fgithub%2Fribbons%2Fforkme_right_darkblue_121621.png&path=" alt="Fork me on GitHub"></a>
+</body>

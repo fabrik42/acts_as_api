@@ -16,3 +16,5 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include(gemspec.extra_rdoc_files)
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+#bundle exec rocco examples/introduction/intro.rb -t examples/introduction/intro.mustache

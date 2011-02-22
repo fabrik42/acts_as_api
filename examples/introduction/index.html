@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>acts_as_api</title>
+  <link rel="stylesheet" href="./docco.css">
+  <link  href="http://fonts.googleapis.com/css?family=Copse:regular" rel="stylesheet" type="text/css" >
+  <style>
+  h1, h2, h3, h4, h5 {
+    font-family: 'Copse', serif;
+    font-style: normal;
+    font-weight: 700;
+    text-shadow: none;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 1.2;
+  }
+  </style>  
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs>
+        <h1>acts_as_api</h1>
+        <p>Makes creating XML/JSON responses in Rails 3 easy and fun.</p>
+      </th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p>The built-in XML/JSON support of Rails is great but:
+You surely don’t want to expose your models always with all attributes.</p>
+
+<p>acts_as_api enriches the models and controllers of your app in a rails-like way so you can easily determine how your API responses should look like.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Features'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Features">&#182;</a>
+        </div>
+        <h2>Features</h2>
+
+<ul>
+<li>DRY templates for your api responses</li>
+<li>Easy but very flexible syntax for defining the templates</li>
+<li>XML, JSON and JSON-P support out of the  box, easy to extend</li>
+<li>Minimal dependecies (you can also use it without Rails)</li>
+<li>Does not rely on ActiveRecord (can be used with other ORMs like Mongoid)</li>
+<li>Supports multiple api rendering templates for a models. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.</li>
+</ul>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <hr />
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Rails_3.0.x_Quickstart'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Rails_3.0.x_Quickstart">&#182;</a>
+        </div>
+        <h2>Rails 3.0.x Quickstart</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>Add to gemfile</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">gem</span> <span class="s1">&#39;acts_as_api&#39;</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-6'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-6">&#182;</a>
+        </div>
+        <p>Update your bundle</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">bundle</span> <span class="n">install</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Setting_up_your_Model'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Setting_up_your_Model">&#182;</a>
+        </div>
+        <h3>Setting up your Model</h3>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-8'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-8">&#182;</a>
+        </div>
+        <p>Given you have a model <code>User</code>.
+If you only want to expose the <code>first_name</code> and <code>last_name</code> attribute of a user via your api, you would do something like this:</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-9">&#182;</a>
+        </div>
+        <p>Within your model:</p>
+
+<p>First you activate acts_as_api for your model by calling <code>acts_as_api</code>.</p>
+
+<p>Then you define an api template to render the model with <code>api_accessible</code>.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+
+  <span class="n">acts_as_api</span>
+
+  <span class="n">api_accessible</span> <span class="ss">:name_only</span> <span class="k">do</span> <span class="o">|</span><span class="n">template</span><span class="o">|</span>
+    <span class="n">template</span><span class="o">.</span><span class="n">add</span> <span class="ss">:first_name</span>
+    <span class="n">template</span><span class="o">.</span><span class="n">add</span> <span class="ss">:last_name</span>
+  <span class="k">end</span>
+
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-10'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-10">&#182;</a>
+        </div>
+        <p>An API template with the name <code>:name_only</code> was created.</p>
+
+<p>See below how to use it in the controller:</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Setting_up_your_Controller'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Setting_up_your_Controller">&#182;</a>
+        </div>
+        <h3>Setting up your Controller</h3>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-12'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-12">&#182;</a>
+        </div>
+        <p>Now you just have to exchange the <code>render</code> method in your controller for the <code>render_for_api</code> method.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">all</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-13'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-13">&#182;</a>
+        </div>
+        <p>Note that it&rsquo;s wise to add a <code>root</code> param when rendering lists.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:xml</span> <span class="o">=&gt;</span> <span class="vi">@users</span><span class="p">,</span> <span class="ss">:root</span> <span class="o">=&gt;</span> <span class="ss">:users</span>  <span class="p">}</span>
+      <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:json</span> <span class="o">=&gt;</span> <span class="vi">@users</span><span class="p">,</span> <span class="ss">:root</span> <span class="o">=&gt;</span> <span class="ss">:users</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">show</span>
+    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+    
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:xml</span>  <span class="o">=&gt;</span> <span class="vi">@user</span> <span class="p">}</span>
+      <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:json</span> <span class="o">=&gt;</span> <span class="vi">@user</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-That&amp;rsquo;s_it!'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-That&amp;rsquo;s_it!">&#182;</a>
+        </div>
+        <h3>That&rsquo;s it!</h3>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-15'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-15">&#182;</a>
+        </div>
+        <p>Try it. The JSON response of #show should now look like this:</p>
+
+<p>Other attributes of the model like <code>created_at</code> or <code>updated_at</code> won’t be included
+because they were not listed by <code>api_accessible</code> in the model.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;first_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;last_name&quot;</span><span class="p">:</span>  <span class="s2">&quot;Doe&quot;</span>    
+  <span class="p">}</span>
+<span class="p">}</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-16'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-16">&#182;</a>
+        </div>
+        <hr />
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-But_wait!_&amp;hellip;_there&amp;rsquo;s_more'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-But_wait!_&amp;hellip;_there&amp;rsquo;s_more">&#182;</a>
+        </div>
+        <h2>But wait! &hellip; there&rsquo;s more</h2>
+
+<p>Often the pure rendering of database values is just not enough, so acts_as_api
+provides you some tools to customize your API responses.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-What_can_I_include_in_my_responses?'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-What_can_I_include_in_my_responses?">&#182;</a>
+        </div>
+        <h3>What can I include in my responses?</h3>
+
+<p>You can do basically anything:</p>
+
+<ul>
+<li>Include attributes and all other kinds of methods of your model</li>
+<li>Include child associations (if they also act_as_api this will be considered)</li>
+<li>Include lambdas and Procs</li>
+<li>Call methods of a parent association</li>
+<li>Call scopes of your model or child associations</li>
+<li>Rename attributes, methods, associations</li>
+<li>Create your own hierarchies</li>
+</ul>
+
+
+<p>You can find advanced examples in the <a href="https://github.com/fabrik42/acts_as_api/wiki/">Github Wiki</a></p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
+<a href="https://github.com/fabrik42/acts_as_api"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://assets1.github.com/img/7afbc8b248c68eb468279e8c17986ad46549fb71?repo=&url=http%3A%2F%2Fs3.amazonaws.com%2Fgithub%2Fribbons%2Fforkme_right_darkblue_121621.png&path=" alt="Fork me on GitHub"></a>
+</body>
