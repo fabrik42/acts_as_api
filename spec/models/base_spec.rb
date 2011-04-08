@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper.rb'
 
-describe "acts_as_api" do
+describe "acts_as_api", :orm => :active_record do
 
   before(:each) do
     @luke = User.create({ :first_name => 'Luke',      :last_name => 'Skywalker', :age => 25, :active => true  })  

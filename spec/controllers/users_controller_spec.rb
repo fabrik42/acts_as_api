@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper.rb'
 
-describe UsersController do
+describe UsersController, :orm => :active_record do
 
   include ApiTestHelpers
 

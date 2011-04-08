@@ -14,10 +14,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency('activemodel','>= 3.0.0')
   s.add_dependency('activesupport','>= 3.0.0')
-  s.add_dependency('rack','>= 1.1.0')  
-  # TODO: Problem in Rails with JSON dependency?!
-  # s.add_dependency('json','>= 1.4.6')
-  
+  s.add_dependency('rack','>= 1.1.0')
+    
   s.add_development_dependency('rails', ['>= 3.0.0'])
   
   s.has_rdoc      = true
