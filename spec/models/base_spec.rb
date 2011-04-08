@@ -3,9 +3,11 @@ require File.dirname(__FILE__) + '/../spec_helper.rb'
 describe "acts_as_api" do
 
   before(:each) do
-    @luke = User.create({ :first_name => 'Luke',      :last_name => 'Skywalker', :age => 25, :active => true  })
+    @luke = User.create({ :first_name => 'Luke',      :last_name => 'Skywalker', :age => 25, :active => true  })  
     @han  = User.create({ :first_name => 'Han',       :last_name => 'Solo',      :age => 35, :active => true  })
     @leia = User.create({ :first_name => 'Princess',  :last_name => 'Leia',      :age => 25, :active => false })
+
+    @luke.profile = Profile.create({ :avatar => 'picard.jpg', :homepage => 'lukasarts.com' })
 
     @destroy_deathstar = @luke.tasks.create({ :heading => "Destroy Deathstar", :description => "XWing, Shoot, BlowUp",  :time_spent => 30,  :done => true })
     @study_with_yoda   = @luke.tasks.create({ :heading => "Study with Yoda",   :description => "Jedi Stuff, ya know",   :time_spent => 60,  :done => true })
@@ -273,44 +275,88 @@ describe "acts_as_api" do
     end
     
     describe "including an association (which does acts_as_api) in the api template" do
+      
+      context "has_many" do
     
-      before(:each) do
-        Task.acts_as_api
-        Task.api_accessible :include_tasks do |t|
-          t.add :heading
-          t.add :done
+        before(:each) do
+          Task.acts_as_api
+          Task.api_accessible :include_tasks do |t|
+            t.add :heading
+            t.add :done
+          end
+          @response = @luke.as_api_response(:include_tasks)        
         end
-        @response = @luke.as_api_response(:include_tasks)
-      end
     
-      it "should return a hash" do
-        @response.should be_kind_of(Hash)
-      end
-    
-      it "should return the correct number of keys" do
-        @response.should have(1).key
-      end
-    
-      it "should return all specified fields" do
-        @response.keys.should include(:tasks)
-      end
-    
-      it "should return the correct values for the specified fields" do
-        @response[:tasks].should be_an Array
-        @response[:tasks].should have(3).tasks
-      end
-    
-      it "should contain the associated child models with the determined api template" do
-        @response[:tasks].each do |task|
-          task.keys.should include(:heading, :done)
-          task.keys.should have(2).attributes
+        it "should return a hash" do
+          @response.should be_kind_of(Hash)
         end
-      end
     
-      it "should contain the correct data of the child models" do
-        task_hash = [  @destroy_deathstar, @study_with_yoda, @win_rebellion  ].collect{|t| { :done => t.done, :heading => t.heading } }
-        @response[:tasks].should eql task_hash
+        it "should return the correct number of keys" do
+          @response.should have(1).key
+        end
+    
+        it "should return all specified fields" do
+          @response.keys.should include(:tasks)
+        end
+    
+        it "should return the correct values for the specified fields" do
+          @response[:tasks].should be_an Array
+          @response[:tasks].should have(3).tasks
+        end
+    
+        it "should contain the associated child models with the determined api template" do
+          @response[:tasks].each do |task|
+            task.keys.should include(:heading, :done)
+            task.keys.should have(2).attributes
+          end
+        end
+    
+        it "should contain the correct data of the child models" do
+          task_hash = [  @destroy_deathstar, @study_with_yoda, @win_rebellion  ].collect{|t| { :done => t.done, :heading => t.heading } }
+          @response[:tasks].should eql task_hash
+        end
+      
       end
+      
+      context "has_one" do
+          
+        before(:each) do
+          Profile.acts_as_api
+          Profile.api_accessible :include_profile do |t|
+            t.add :avatar
+            t.add :homepage
+          end
+          @response = @luke.as_api_response(:include_profile)
+        end
+          
+        it "should return a hash" do
+          @response.should be_kind_of(Hash)
+        end
+          
+        it "should return the correct number of keys" do
+          @response.should have(1).key
+        end
+          
+        it "should return all specified fields" do
+          @response.keys.should include(:profile)
+        end
+          
+        it "should return the correct values for the specified fields" do
+          @response[:profile].should be_a Hash
+          @response[:profile].should have(2).attributes
+        end
+          
+        it "should contain the associated child models with the determined api template" do
+          @response[:profile].keys.should include(:avatar, :homepage)
+        end
+          
+        it "should contain the correct data of the child models" do
+          profile_hash = { :avatar => @luke.profile.avatar, :homepage => @luke.profile.homepage }
+          @response[:profile].should eql profile_hash
+        end
+      
+      end      
+      
     end
     
     describe "including an association (which does acts_as_api, but with using another template name) in the api template", :meow => true do
@@ -321,12 +367,6 @@ describe "acts_as_api" do
           t.add :description
           t.add :time_spent
         end
-        
-        User.api_accessible :other_sub_template do |t|
-          t.add :first_name
-          t.add :tasks, :template => :other_template
-        end
-
         @response = @luke.as_api_response(:other_sub_template)
       end
     

@@ -40,9 +40,6 @@ module ActsAsApi
 
       def api_accessible(api_template, options = {}, &block)
 
-        #        return api_accessible_deprecated([api_template]) if api_template.is_a? Hash
-
-
         attributes = api_accessible_attributes(api_template) || ApiTemplate.new
 
         attributes.merge!(api_accessible_attributes(options[:extend])) if options[:extend]
@@ -60,7 +57,6 @@ module ActsAsApi
       end
 
     end
-
 
     module InstanceMethods
 
@@ -94,10 +90,8 @@ module ActsAsApi
                   out = send v
                 end
 
-              when Proc
-                
+              when Proc                
                 out = v.call(self)
-
 
               when String
                 # go up the call chain
@@ -113,7 +107,7 @@ module ActsAsApi
               end
               
               if out.respond_to?(:as_api_response)
-                out = out.send(:as_api_response, sub_template)
+                out = out.send(:as_api_response, sub_template)              
               end
               
               leaf[:parent][k] = out

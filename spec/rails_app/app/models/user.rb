@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
   has_many :tasks
   
+  has_one :profile
+  
   acts_as_api
   
   api_accessible :name_only do |t|
@@ -40,11 +42,19 @@ class User < ActiveRecord::Base
     t.add lambda{|model| model.full_name.upcase  }, :as => :all_caps_name
     t.add lambda{ Time.now.class.to_s  }, :as => :without_param
   end
-  
   User.api_accessible :include_tasks do |t| 
     t.add :tasks
   end
-  
+     
+  api_accessible :include_profile do |t| 
+    t.add :profile
+  end     
+        
+  api_accessible :other_sub_template do |t|
+    t.add :first_name
+    t.add :tasks, :template => :other_template
+  end
+   
   api_accessible :include_completed_tasks do |t| 
     t.add "tasks.completed.all", :as => :completed_tasks
   end

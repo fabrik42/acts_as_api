@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(:version => 20110214201640) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  create_table "profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "avatar"
+    t.string   "homepage"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end  
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
@@ -30,5 +38,10 @@ ActiveRecord::Schema.define(:version => 20110214201640) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  create_table "untoucheds", :force => true do |t|
+    t.string   "nothing"
+    t.timestamps
+  end  
 
 end

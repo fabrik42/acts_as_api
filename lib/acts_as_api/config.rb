@@ -7,7 +7,7 @@ module ActsAsApi
       # The accepted response formats
       # Default is <tt>[:xml, :json]</tt>
       attr_accessor_with_default :accepted_api_formats, [:xml, :json] # :nodoc:
-      
+
       # Holds formats that should be dasherized      
       # Default is <tt>[:xml]</tt>      
       attr_accessor_with_default :dasherize_for, [:xml]
