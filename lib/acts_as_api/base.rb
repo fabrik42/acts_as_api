@@ -81,29 +81,23 @@ module ActsAsApi
 
             leaf[:item].each do |k,v|
 
+              if leaf[:item].respond_to?(:option_for)
+                sub_template = leaf[:item].option_for(k, :template) || api_template
+              else
+                sub_template = api_template
+              end
+
               case v
               when Symbol
 
                 if self.respond_to?(v)
                   out = send v
-
-                  if out.respond_to?(:as_api_response)
-                    out = out.send(:as_api_response, api_template)
-                  end
-
-                  leaf[:parent][k] = out
-
                 end
 
               when Proc
                 
                 out = v.call(self)
-                
-                if out.respond_to?(:as_api_response)
-                  out = out.send(:as_api_response, api_template)
-                end                
-                
-                leaf[:parent][k] = out
+
 
               when String
                 # go up the call chain
@@ -112,16 +106,17 @@ module ActsAsApi
                   out = out.send(method.to_sym)
                 end
 
-                if out.respond_to?(:as_api_response)
-                  out = out.send(:as_api_response, api_template)
-                end
-
-                leaf[:parent][k] = out
-
               when Hash
                 leaf[:parent][k] ||= {}
                 queue << { :parent =>  leaf[:parent][k], :item => v}
+                next
               end
+              
+              if out.respond_to?(:as_api_response)
+                out = out.send(:as_api_response, sub_template)
+              end
+              
+              leaf[:parent][k] = out
 
             end
 

@@ -311,8 +311,63 @@ describe "acts_as_api" do
         task_hash = [  @destroy_deathstar, @study_with_yoda, @win_rebellion  ].collect{|t| { :done => t.done, :heading => t.heading } }
         @response[:tasks].should eql task_hash
       end
-    
     end
+    
+    describe "including an association (which does acts_as_api, but with using another template name) in the api template", :meow => true do
+    
+      before(:each) do
+        Task.acts_as_api
+        Task.api_accessible :other_template do |t|
+          t.add :description
+          t.add :time_spent
+        end
+        
+        User.api_accessible :other_sub_template do |t|
+          t.add :first_name
+          t.add :tasks, :template => :other_template
+        end
+
+        @response = @luke.as_api_response(:other_sub_template)
+      end
+    
+      it "should return a hash" do
+        @response.should be_kind_of(Hash)
+      end
+    
+      it "should return the correct number of keys" do
+        @response.should have(2).keys
+      end
+      
+      it "should return all specified fields" do
+        @response.keys.should include(:first_name)
+      end
+    
+      it "should return the correct values for the specified fields" do
+        @response.values.should include(@luke.first_name)
+      end      
+    
+      it "should return all specified fields" do
+        @response.keys.should include(:tasks)
+      end
+    
+      it "should return the correct values for the specified fields" do
+        @response[:tasks].should be_an Array
+        @response[:tasks].should have(3).tasks
+      end
+    
+      it "should contain the associated child models with the determined api template" do
+        @response[:tasks].each do |task|
+          task.keys.should include(:description, :time_spent)
+          task.keys.should have(2).attributes
+        end
+      end
+    
+      it "should contain the correct data of the child models" do
+        task_hash = [  @destroy_deathstar, @study_with_yoda, @win_rebellion  ].collect{|t| { :description => t.description, :time_spent => t.time_spent } }
+        @response[:tasks].should eql task_hash
+      end
+    
+    end        
     
     describe "including a scoped association in the api template" do
     
