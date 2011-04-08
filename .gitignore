@@ -8,3 +8,4 @@ spec/rails_app/db/*.sqlite3
 spec/rails_app/tmp/**/*
 spec/rails_app/log/*.log
 .rspec
+.rvmrc
