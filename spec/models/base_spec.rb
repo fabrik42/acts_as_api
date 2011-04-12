@@ -407,7 +407,70 @@ describe "acts_as_api", :orm => :active_record do
         @response[:tasks].should eql task_hash
       end
     
-    end        
+    end
+    
+    describe "handling nil values in associations", :meow => true do
+      
+      context "has_many" do
+    
+        before(:each) do
+          Task.acts_as_api
+          Task.api_accessible :include_tasks do |t|
+            t.add :heading
+            t.add :done
+          end
+          @response = @han.as_api_response(:include_tasks)        
+        end
+    
+        it "should return a hash" do
+          @response.should be_kind_of(Hash)
+        end
+    
+        it "should return the correct number of keys" do
+          @response.should have(1).key
+        end
+    
+        it "should return all specified fields" do
+          @response.keys.should include(:tasks)
+        end
+    
+        it "should return the correct values for the specified fields" do
+          @response[:tasks].should be_kind_of(Array)
+        end
+    
+        it "should contain the associated child models with the determined api template" do
+          @response[:tasks].should have(0).items
+        end
+      
+      end      
+      
+      context "has one" do  
+        before(:each) do
+          Profile.acts_as_api
+          Profile.api_accessible :include_profile do |t|
+            t.add :avatar
+            t.add :homepage
+          end
+          @response = @han.as_api_response(:include_profile)
+        end
+        
+        it "should return a hash" do
+          @response.should be_kind_of(Hash)
+        end
+        
+        it "should return the correct number of keys" do
+          @response.should have(1).key
+        end
+        
+        it "should return all specified fields" do
+          @response.keys.should include(:profile)
+        end
+        
+        it "should return the correct values for the specified fields" do
+          @response[:profile].should be_nil
+        end
+      end
+    end
     
     describe "including a scoped association in the api template" do
     
