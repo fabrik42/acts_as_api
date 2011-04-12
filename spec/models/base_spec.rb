@@ -409,7 +409,7 @@ describe "acts_as_api", :orm => :active_record do
     
     end
     
-    describe "handling nil values in associations", :meow => true do
+    describe "handling nil values in associations" do
       
       context "has_many" do
     
