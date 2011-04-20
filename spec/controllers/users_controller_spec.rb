@@ -108,6 +108,33 @@ describe UsersController, :orm => :active_record do
       end
 
     end
+    
+    describe 'get a single user with a nil profile' do
+
+      before(:each) do
+        Profile.acts_as_api
+        Profile.api_accessible :include_profile do |t|
+          t.add :avatar
+          t.add :homepage
+        end
+        
+        get :show, :format => 'json', :api_template => :include_profile, :id => @han.id
+      end
+
+      it "should have a root node named user" do
+        response_body_json.should have_key("user")
+      end
+
+      it "should contain the specified attributes" do
+        response_body_json["user"].should have(1).key        
+        response_body_json["user"].should have_key("profile")
+      end
+
+      it "should contain the specified values" do
+        response_body_json["user"]["profile"].should be_nil
+      end
+
+    end    
 
   end
 
