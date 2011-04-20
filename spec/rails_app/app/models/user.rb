@@ -65,8 +65,11 @@ class User < ActiveRecord::Base
   
   api_accessible :nested_sub_node do |t| 
     t.add Hash[:foo, Hash[:bar, :last_name]], :as => :sub_nodes
-  end  
+  end
     
+  api_accessible :nested_sub_hash do |t| 
+    t.add :sub_hash
+  end
 
   def full_name
     '' << first_name.to_s << ' ' << last_name.to_s
@@ -74,6 +77,13 @@ class User < ActiveRecord::Base
 
   def say_something
     "something"
+  end
+  
+  def sub_hash
+    {
+      :foo => "bar",
+      :hello => "world"
+    }
   end
 
 end

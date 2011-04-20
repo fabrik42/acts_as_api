@@ -591,5 +591,37 @@ describe "acts_as_api", :orm => :active_record do
     end
 
   end
+  
+  describe "creating a sub hash in the api template using a method" do
+
+    before(:each) do
+      @response = @luke.as_api_response(:nested_sub_hash)      
+    end
+
+    it "should return a hash" do
+      @response.should be_kind_of(Hash)
+    end
+
+    it "should return the correct number of keys" do
+      @response.should have(1).key
+    end
+
+    it "should return all specified fields" do
+      @response.keys.should include(:sub_hash)
+    end
+
+    it "should provide the correct number of sub nodes" do
+      @response[:sub_hash].should have(2).keys
+    end
+    
+    it "should provide the correct sub nodes" do
+      @response[:sub_hash].keys.should include(:foo, :hello)
+    end
+    
+    it "should provide the correct values in its sub nodes" do
+      @response[:sub_hash].values.should include("bar", "world")
+    end    
+
+  end  
 
 end
