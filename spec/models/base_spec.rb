@@ -67,6 +67,14 @@ describe "acts_as_api", :orm => :active_record do
     
     end
     
+    describe "trying to render an api template that is not defined" do
+      
+      it "should raise an descriptive error" do
+        lambda{ @luke.as_api_response(:does_not_exist) }.should raise_error(RuntimeError)
+      end
+      
+    end
+    
     describe "calling a method in the api template" do
     
       before(:each) do

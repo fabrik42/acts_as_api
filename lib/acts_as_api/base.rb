@@ -64,6 +64,8 @@ module ActsAsApi
       def as_api_response(api_template)
         api_attributes = self.class.api_accessible_attributes(api_template)
 
+        raise "acts_as_api template :#{api_template.to_s} was not found for model #{self.class}" if api_attributes.nil?
+
         api_output = {}
 
         return api_output if api_attributes.nil?
