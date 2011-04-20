@@ -97,17 +97,24 @@ end
 #
 # You can do basically anything:
 # 
-# * Include attributes and all other kinds of methods of your model
-# * Include child associations (if they also act_as_api this will be considered)
-# * Include lambdas and Procs
-# * Call methods of a parent association
-# * Call scopes of your model or child associations
-# * Rename attributes, methods, associations
-# * Create your own hierarchies
+# * [Include attributes and all other kinds of methods of your model][w1]
+# * [Include child associations (if they also act_as_api this will be considered)][w2]
+# * [Include lambdas and Procs][w3]
+# * [Call methods of a parent association][w4]
+# * [Call scopes of your model or child associations][w5]
+# * [Rename attributes, methods, associations][w6]
+# * [Create your own hierarchies][w7]
 #
-# You can find advanced examples in the [Github Wiki][wi]
+# You can find more advanced examples in the [Github Wiki][wi]
 #
 #  [wi]: https://github.com/fabrik42/acts_as_api/wiki/
+#  [w1]: https://github.com/fabrik42/acts_as_api/wiki/Calling-a-method-of-the-model
+#  [w2]: https://github.com/fabrik42/acts_as_api/wiki/Including-a-child-association
+#  [w3]: https://github.com/fabrik42/acts_as_api/wiki/Calling-a-lambda-in-the-api-template
+#  [w4]: https://github.com/fabrik42/acts_as_api/wiki/Calling-a-method-of-the-model
+#  [w5]: https://github.com/fabrik42/acts_as_api/wiki/Calling-a-scope-of-a-sub-resource
+#  [w6]: https://github.com/fabrik42/acts_as_api/wiki/Renaming-an-attribute
+#  [w7]: https://github.com/fabrik42/acts_as_api/wiki/Creating-a-completely-different-response-structure
 
 # ***
 

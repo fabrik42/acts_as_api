@@ -2,21 +2,34 @@
 
 acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
+It provides a simple interface to determine the representation of your model data, that should be rendered in your API responses.
+
+In addition to Rails it theoretically can be used with any ruby app and any database as it only has few dependencies.
+
 == Introduction
 
-acts_as_api enriches the models and controllers of your app in a rails-like way so you can easily determine how your API responses should look like:
+acts_as_api enriches the models and controllers of your app in a Rails-like way so you can easily determine how your API responses should look like:
 
     class User < ActiveRecord::Base
 
       acts_as_api
 
-      api_accessible :name_only do |template|
+      api_accessible :public do |template|
+        template.add :first_name
+        template.add :age        
+      end
+
+      api_accessible :private do |template|
         template.add :first_name
         template.add :last_name
+        template.add :age
+        template.add :birthday                
       end
 
     end
 
+
+== Getting started
 
 A nice introduction about acts_as_api with examples can be found here:
 
@@ -30,7 +43,7 @@ http://fabrik42.github.com/acts_as_api
 * XML, JSON and JSON-P support out of the  box, easy to extend
 * Minimal dependecies (you can also use it without Rails)
 * Does not rely on ActiveRecord (can be used with other ORMs like Mongoid)
-* Supports multiple api rendering templates for a models. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.
+* Supports multiple api rendering templates per model. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.
 
 === Requirements:
 
@@ -40,13 +53,13 @@ http://fabrik42.github.com/acts_as_api
 
 === Links
 
-* Introduction: http://fabrik42.github.com/acts_as_api/
+* Introduction: http://fabrik42.github.com/acts_as_api
 
 * Docs: http://rdoc.info/projects/fabrik42/acts_as_api
 
 * Found a bug? http://github.com/fabrik42/acts_as_api/issues
 
-* Wiki: https://github.com/fabrik42/acts_as_api/wiki/
+* Wiki: https://github.com/fabrik42/acts_as_api/wiki
 
 === Downwards Compatibility
 
