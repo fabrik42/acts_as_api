@@ -30,6 +30,16 @@ module ActsAsApi
     def option_for(attribute, option)
       @options[attribute][option] if @options[attribute]
     end
+    
+    def api_template_for(queue_item, attribute)
+      return api_template unless queue_item.is_a? ActsAsApi::ApiTemplate
+      queue_item.option_for(attribute, :template) || api_template
+    end
+    
+    def allowed_to_render?(queue_item, attribute)
+      # TODO implement :if, :unless options
+      true
+    end
 
     def to_response_hash(model)
       queue = []
@@ -41,11 +51,7 @@ module ActsAsApi
 
           leaf[:item].each do |k,v|
 
-            if leaf[:item].respond_to?(:option_for)
-              sub_template = leaf[:item].option_for(k, :template) || api_template
-            else
-              sub_template = api_template
-            end
+            next unless allowed_to_render?(leaf[:item], k)
 
             case v
             when Symbol
@@ -70,11 +76,11 @@ module ActsAsApi
             end
 
             if out.respond_to?(:as_api_response)
+              sub_template = api_template_for(leaf[:item], k)
               out = out.send(:as_api_response, sub_template)
             end
 
             leaf[:parent][k] = out
-
           end
         end
 
