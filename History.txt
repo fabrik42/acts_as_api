@@ -1,4 +1,14 @@
-=== 0.3.0 TO BE RELEASED AS A GEM
+=== 0.3.2 2011-04-20
+
+* Raise an exception if a specified api template is not found 
+
+=== 0.3.1 2011-04-08
+
+* Added the :template option to specify sub templates
+
+* Fixed a bug concerning extended api templates 
+
+=== 0.3.0 2011-02-22
 
 * Added bundler support
 
