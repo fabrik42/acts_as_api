@@ -1,15 +1,35 @@
 module ActsAsApi
-  #
+  # Represents an api template for a model.
+  # This class should not be initiated by yourself, api templates
+  # are created by defining them in the model by calling: +api_accessible+.
+  # 
+  # The api template is configured in the block passed to +api_accessible+.
+  # 
+  # Please note that +ApiTemplate+ inherits from +Hash+ so you can use all
+  # kind of +Hash+ and +Enumerable+ methods to manipulate the template.
   class ApiTemplate < Hash
 
+    # The name of the api template as a Symbol.
     attr_accessor :api_template
 
+    # Returns a new ApiTemplate with the api template name
+    # set to the passed template.
     def self.create(template)
       t = ApiTemplate.new
       t.api_template = template
       return t
     end
 
+    # Adds an item to the api template
+    #
+    # The value passed can be one of the following:
+    #  * Symbol - the method with the same name will be called on the model when rendering.
+    #  * String - must be in the form "method1.method2.method3", will call this method chain.
+    #  * Hash - will be added as a sub hash and all its items will be resolved the way described above.
+    #
+    # Possible options to pass:
+    #  * :template - Determine the template that should be used to render the item if it is
+    #    +api_accessible+ itself.
     def add(val, options = {})
       item_key = (options[:as] || val).to_sym
 
@@ -19,28 +39,37 @@ module ActsAsApi
       @options[item_key] = options
     end
 
-    def remove(attribute)
-      self.delete(attribute)
+    # Removes an item from the template
+    def remove(item)
+      self.delete(item)
     end
 
-    def options_for(attribute)
-      @options[attribute]
+    # Returns the options of an item in the api template
+    def options_for(item)
+      @options[item]
     end
 
-    def option_for(attribute, option)
-      @options[attribute][option] if @options[attribute]
+    # Returns the passed option of an item in the api template
+    def option_for(item, option)
+      @options[item][option] if @options[item]
     end
     
-    def api_template_for(queue_item, attribute)
-      return api_template unless queue_item.is_a? ActsAsApi::ApiTemplate
-      queue_item.option_for(attribute, :template) || api_template
+    # If a special template name for the passed item is specified
+    # it will be returned, if not the original api template.
+    def api_template_for(parent, item)
+      return api_template unless parent.is_a? ActsAsApi::ApiTemplate
+      parent.option_for(item, :template) || api_template
     end
     
-    def allowed_to_render?(queue_item, attribute)
+    # Decides if the passed item should be added to
+    # the response.
+    def allowed_to_render?(parent, item)
       # TODO implement :if, :unless options
       true
     end
 
+    # Generates a hash that represents the api response based on this
+    # template for the passed model instance.
     def to_response_hash(model)
       queue = []
       api_output = {}

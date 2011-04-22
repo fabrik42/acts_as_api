@@ -23,8 +23,12 @@ module ActsAsApi
       # automatically      
       attr_accessor_with_default :default_root, :record
       
+      # If true a json response will be automatically wrapped into
+      # a JavaScript function call in case a :callback param is passed.
       attr_accessor_with_default :allow_jsonp_callback, false
       
+      # If true the jsonp function call will get the http status passed
+      # as a second parameter
       attr_accessor_with_default :add_http_status_to_jsonp_response, true      
 
     end

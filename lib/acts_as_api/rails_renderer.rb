@@ -1,5 +1,7 @@
 module ActsAsApi
-  # Contains rails specific renderers used by acts_as_api
+  # Contains rails specific renderers used by acts_as_api to render a jsonp response
+  #
+  # See ActsAsApi::Config about the possible configurations
   module RailsRenderer
 
     def self.setup

@@ -1,4 +1,4 @@
-# The standard ruby Array class is extended by one method.
+# The standard ruby Array class is extended by one instance method.
 class Array
 
   # Neccessary to render an Array of models, e.g. the result of a search.
