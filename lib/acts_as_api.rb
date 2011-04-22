@@ -1,12 +1,11 @@
-require 'set'
 require 'active_model'
 require 'active_support/core_ext/class'
 
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
   
- require "acts_as_api/array"
- require "acts_as_api/rails_renderer"
+require "acts_as_api/array"
+require "acts_as_api/rails_renderer"
 
 # acts_as_api is a gem that aims to make the construction of JSON and XML
 # responses in rails 3 easy and fun.
