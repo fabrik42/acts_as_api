@@ -32,12 +32,6 @@ module ActsAsApi
       # *Note*: There is only whitelisting for api accessible attributes.
       # So once the model acts as api, you have to determine all attributes here that should
       # be contained in the api responses.
-      def api_accessible_deprecated(api_templates)
-        api_templates.each do |api_template, attributes|
-          write_inheritable_attribute("api_accessible_#{api_template}".to_sym, Set.new(attributes) + (api_accessible_attributes(api_template) || []))
-        end
-      end
-
       def api_accessible(api_template, options = {}, &block)
 
         attributes = api_accessible_attributes(api_template) || ApiTemplate.new
