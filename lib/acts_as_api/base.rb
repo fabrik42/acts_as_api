@@ -34,7 +34,7 @@ module ActsAsApi
       # be contained in the api responses.
       def api_accessible(api_template, options = {}, &block)
 
-        attributes = api_accessible_attributes(api_template) || ApiTemplate.new
+        attributes = api_accessible_attributes(api_template) || ApiTemplate.create(api_template)
 
         attributes.merge!(api_accessible_attributes(options[:extend])) if options[:extend]
 
@@ -49,75 +49,22 @@ module ActsAsApi
       def api_accessible_attributes(api_template)
         read_inheritable_attribute("api_accessible_#{api_template}".to_sym)
       end
-
     end
 
     module InstanceMethods
 
       # Creates the api response of the model and returns it as a Hash.
+      # Will raise an exception if the passed api template is not defined for the model
       def as_api_response(api_template)
         api_attributes = self.class.api_accessible_attributes(api_template)
-
+        
         raise "acts_as_api template :#{api_template.to_s} was not found for model #{self.class}" if api_attributes.nil?
-
-        api_output = {}
-
-        return api_output if api_attributes.nil?
-
-        queue = []
-        queue << { :parent =>  api_output, :item => api_attributes}
-
-        until queue.empty? do
-
-            leaf = queue.pop
-
-            leaf[:item].each do |k,v|
-
-              if leaf[:item].respond_to?(:option_for)
-                sub_template = leaf[:item].option_for(k, :template) || api_template
-              else
-                sub_template = api_template
-              end
-
-              case v
-              when Symbol
-
-                if self.respond_to?(v)
-                  out = send v
-                end
-
-              when Proc                
-                out = v.call(self)
-
-              when String
-                # go up the call chain
-                out = self
-                v.split(".").each do |method|
-                  out = out.send(method.to_sym)
-                end
-
-              when Hash
-                leaf[:parent][k] ||= {}
-                queue << { :parent =>  leaf[:parent][k], :item => v}
-                next
-              end
-              
-              if out.respond_to?(:as_api_response)
-                out = out.send(:as_api_response, sub_template)              
-              end
-              
-              leaf[:parent][k] = out
-
-            end
-
-          end
-
-          api_output
-
-        end
-
+        
+        api_attributes.to_response_hash(self)
       end
 
     end
-    
+
   end
+
+end
