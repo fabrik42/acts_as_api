@@ -12,18 +12,12 @@ module ActsAsApi
     # The name of the api template as a Symbol.
     attr_accessor :api_template
     
-    attr_accessor :include_root
-
     # Returns a new ApiTemplate with the api template name
     # set to the passed template.
     def self.create(template)
       t = ApiTemplate.new
       t.api_template = template
       return t
-    end
-
-    def initialize
-      @include_root = false
     end
 
     # Adds a field to the api template
@@ -88,22 +82,19 @@ module ActsAsApi
       end
       !result.nil? && !result.is_a?(FalseClass)
     end
-    
-    def wrap_in_root_node(fieldset, output)
-      return output unless fieldset.is_a?(ActsAsApi::ApiTemplate) && fieldset.include_root
-      Hash[fieldset.include_root, output]
-    end
 
     # Generates a hash that represents the api response based on this
     # template for the passed model instance.
     def to_response_hash(model)
       queue = []
       api_output = {}
+      
       queue << { :output =>  api_output, :item => self }
 
       until queue.empty? do
         leaf = queue.pop
         fieldset = leaf[:item]
+                
         fieldset.each do |field, value|
 
           next unless allowed_to_render?(fieldset, field, model)
@@ -138,10 +129,8 @@ module ActsAsApi
           leaf[:output][field] = out
         end
         
-        leaf[:output] = wrap_in_root_node(fieldset, leaf[:output])
-        
       end
-
+      
       api_output
     end
     
