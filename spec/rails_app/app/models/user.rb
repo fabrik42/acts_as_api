@@ -70,6 +70,58 @@ class User < ActiveRecord::Base
   api_accessible :nested_sub_hash do |t| 
     t.add :sub_hash
   end
+  
+  api_accessible :if_over_thirty do |t| 
+    t.add :first_name
+    t.add :last_name, :if => :over_thirty? 
+  end  
+
+  api_accessible :if_returns_nil do |t| 
+    t.add :first_name
+    t.add :last_name, :if => :return_nil
+  end
+  
+  api_accessible :if_over_thirty_proc do |t| 
+    t.add :first_name
+    t.add :last_name, :if => lambda{|u| u.over_thirty? }
+  end  
+
+  api_accessible :if_returns_nil_proc do |t| 
+    t.add :first_name
+    t.add :last_name, :if => lambda{ nil }
+  end
+  
+  api_accessible :unless_under_thirty do |t| 
+    t.add :first_name
+    t.add :last_name, :unless => :under_thirty? 
+  end  
+
+  api_accessible :unless_returns_nil do |t| 
+    t.add :first_name
+    t.add :last_name, :unless => :return_nil
+  end
+  
+  api_accessible :unless_under_thirty_proc do |t| 
+    t.add :first_name
+    t.add :last_name, :unless => lambda{|u| u.under_thirty? }
+  end  
+
+  api_accessible :unless_returns_nil_proc do |t| 
+    t.add :first_name
+    t.add :last_name, :unless => lambda{ nil }
+  end  
+
+  def over_thirty?
+    age > 30
+  end
+  
+  def under_thirty?
+    age < 30
+  end  
+
+  def return_nil
+    nil
+  end
 
   def full_name
     '' << first_name.to_s << ' ' << last_name.to_s

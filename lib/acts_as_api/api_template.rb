@@ -63,9 +63,22 @@ module ActsAsApi
     
     # Decides if the passed item should be added to
     # the response.
-    def allowed_to_render?(parent, item)
-      # TODO implement :if, :unless options
-      true
+    def allowed_to_render?(parent, item, model)
+      return true unless parent.is_a? ActsAsApi::ApiTemplate
+      allowed = true
+      allowed = condition_fulfilled?(model, parent.option_for(item, :if)) if parent.option_for(item, :if)
+      allowed = !(condition_fulfilled?(model, parent.option_for(item, :unless))) if parent.option_for(item, :unless)
+      return allowed
+    end
+    
+    def condition_fulfilled?(model, condition)
+      case condition
+      when Symbol
+        result = model.send(condition)
+      when Proc
+        result = condition.call(model)
+      end
+      !result.nil? && !result.is_a?(FalseClass)
     end
 
     # Generates a hash that represents the api response based on this
@@ -80,7 +93,7 @@ module ActsAsApi
 
           leaf[:item].each do |k,v|
 
-            next unless allowed_to_render?(leaf[:item], k)
+            next unless allowed_to_render?(leaf[:item], k, model)
 
             case v
             when Symbol

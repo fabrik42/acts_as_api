@@ -67,7 +67,7 @@ describe UsersController, :orm => :active_record do
         get :index, :format => 'json', :api_template => :name_only
       end
 
-      it "should have a root node named users" do
+      it "should have a root node named users" do        
         response_body_json.should have_key("users")
       end
 
@@ -93,7 +93,7 @@ describe UsersController, :orm => :active_record do
         get :show, :format => 'json', :api_template => :name_only, :id => @luke.id
       end
 
-      it "should have a root node named user" do
+      it "should have a root node named user" do        
         response_body_json.should have_key("user")
       end
 
@@ -163,7 +163,7 @@ describe UsersController, :orm => :active_record do
           get :index, :format => 'json', :api_template => :name_only, :callback => @callback
         end
 
-        it "should wrap the response in the callback" do
+        it "should wrap the response in the callback" do        
           response_body_jsonp(@callback).should_not be_nil
         end
 
@@ -175,7 +175,7 @@ describe UsersController, :orm => :active_record do
           get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :callback => @callback
         end
 
-        it "should wrap the response in the callback" do
+        it "should wrap the response in the callback" do          
           response_body_jsonp(@callback).should_not be_nil
         end
 
@@ -183,6 +183,5 @@ describe UsersController, :orm => :active_record do
 
     end
   end
-
 
 end
