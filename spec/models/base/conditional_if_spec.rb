@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../../spec_helper.rb'
 
 describe ActsAsApi::Base do
 
-  describe "conditional statements", :orm => :active_record, :meow => true do
+  describe "conditional statements", :orm => :active_record do
 
     before(:each) do
       setup_models
@@ -175,4 +175,4 @@ describe ActsAsApi::Base do
     end
 
   end
-end
+ end
