@@ -1,3 +1,7 @@
+=== 0.3.3 2011-04-24
+
+* Added support for :if and :unless options
+
 === 0.3.2 2011-04-20
 
 * Raise an exception if a specified api template is not found 
