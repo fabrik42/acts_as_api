@@ -35,6 +35,9 @@ A nice introduction about acts_as_api with examples can be found here:
 
 http://fabrik42.github.com/acts_as_api
 
+See the Wiki for a lot of usage examples and features:
+
+https://github.com/fabrik42/acts_as_api/wiki
 
 == Features:
 
