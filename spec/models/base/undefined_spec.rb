@@ -13,7 +13,7 @@ describe ActsAsApi::Base do
     end
 
     it "raises an descriptive error" do
-      lambda{ @luke.as_api_response(:does_not_exist) }.should raise_error(RuntimeError)
+      lambda{ @luke.as_api_response(:does_not_exist) }.should raise_error(ActsAsApi::TemplateNotFoundError)
     end
 
   end

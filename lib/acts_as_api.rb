@@ -6,6 +6,7 @@ $:.unshift(File.dirname(__FILE__)) unless
   
 require "acts_as_api/array"
 require "acts_as_api/rails_renderer"
+require "acts_as_api/exceptions"
 
 # acts_as_api is a gem that aims to make the construction of JSON and XML
 # responses in rails 3 easy and fun.
