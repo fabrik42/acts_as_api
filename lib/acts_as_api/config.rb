@@ -12,6 +12,11 @@ module ActsAsApi
       # Default is <tt>[:xml]</tt>      
       attr_accessor_with_default :dasherize_for, [:xml]
       
+      # If true, the root node in json collections will be added
+      # so the response will look like the default Rails 3 json
+      # response
+      attr_accessor_with_default :include_root_in_json_collections, false
+
       # Holds references to formats that need
       # to get added an additional root node
       # with the name of the model.      

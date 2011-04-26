@@ -59,6 +59,10 @@ module ActsAsApi
 
       api_response = api_model.as_api_response(api_template)
 
+      if api_response.is_a?(Array) && api_format.to_sym == :json && ActsAsApi::Config.include_root_in_json_collections
+        api_response = api_response.collect{|f| { api_root_name.singularize => f } }
+      end
+
       if meta_hash or ActsAsApi::Config.add_root_node_for.include? api_format
         api_response = { api_root_name.to_sym =>  api_response}
       end

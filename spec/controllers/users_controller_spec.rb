@@ -138,6 +138,69 @@ describe UsersController, :orm => :active_record do
 
   end
 
+  describe 'Rails 3 default style json responses' do
+
+    before(:each) do
+      @org_include_root_in_json_collections = ActsAsApi::Config.include_root_in_json_collections
+      ActsAsApi::Config.include_root_in_json_collections = true
+    end
+
+    after(:each) do
+      ActsAsApi::Config.include_root_in_json_collections = @org_include_root_in_json_collections
+    end
+
+    describe 'get all users' do
+
+      before(:each) do
+        get :index, :format => 'json', :api_template => :name_only
+      end
+
+      it "should have a root node named users" do
+        response_body_json.should have_key("users")
+      end
+
+      it "should contain all users" do
+        response_body_json["users"].should be_a(Array)
+      end
+
+      it "should contain the specified attributes" do
+        response_body_json["users"].first["user"].should have_key("first_name")
+        response_body_json["users"].first["user"].should have_key("last_name")
+      end
+
+      it "contains the user root nodes" do
+        response_body_json["users"].collect(&:keys).flatten.uniq.should eql(["user"])
+      end
+
+      it "should contain the specified values" do
+        response_body_json["users"].first["user"]["first_name"].should eql("Luke")
+        response_body_json["users"].first["user"]["last_name"].should eql("Skywalker")
+      end
+
+    end
+
+    describe 'get a single user' do
+
+      before(:each) do
+        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id
+      end
+
+      it "should have a root node named user" do
+        response_body_json.should have_key("user")
+      end
+
+      it "should contain the specified attributes" do
+        response_body_json["user"].should have_key("first_name")
+        response_body_json["user"].should have_key("last_name")
+      end
+
+      it "should contain the specified values" do
+        response_body_json["user"]["first_name"].should eql("Luke")
+        response_body_json["user"]["last_name"].should eql("Skywalker")
+      end
+    end
+
+  end
 
   describe 'jsonp responses with callback' do
 
