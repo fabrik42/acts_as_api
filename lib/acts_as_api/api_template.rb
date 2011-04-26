@@ -12,12 +12,23 @@ module ActsAsApi
     # The name of the api template as a Symbol.
     attr_accessor :api_template
     
+    attr_reader :options
+
     # Returns a new ApiTemplate with the api template name
     # set to the passed template.
     def self.create(template)
       t = ApiTemplate.new
       t.api_template = template
       return t
+    end
+
+    def initialize
+      @options ||= {}
+    end
+
+    def merge!(other_hash, &block)
+      super
+      self.options.merge!(other_hash.options) if other_hash.respond_to?(:options)
     end
 
     # Adds a field to the api template
@@ -35,7 +46,6 @@ module ActsAsApi
 
       self[item_key] = val
 
-      @options ||= {}
       @options[item_key] = options
     end
 
