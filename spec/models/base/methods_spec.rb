@@ -18,7 +18,7 @@ describe ActsAsApi::Base do
     end
 
     it "returns the correct number of fields" do
-      @response.should have(1).key
+      @response.should have(1).keys
     end
 
     it "returns all specified fields by name" do

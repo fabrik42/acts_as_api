@@ -126,7 +126,7 @@ describe UsersController, :orm => :active_record do
       end
 
       it "should contain the specified attributes" do
-        response_body_json["user"].should have(1).key        
+        response_body_json["user"].should have(1).keys
         response_body_json["user"].should have_key("profile")
       end
 

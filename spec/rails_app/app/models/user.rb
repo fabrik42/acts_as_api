@@ -35,14 +35,14 @@ class User < ActiveRecord::Base
   
   api_accessible :calling_a_proc do |t|
     t.add Proc.new{|model| model.full_name.upcase  }, :as => :all_caps_name
-    t.add Proc.new{ Time.now.class.to_s  }, :as => :without_param
+    t.add Proc.new{|model| Time.now.class.to_s  }, :as => :without_param
   end  
   
   api_accessible :calling_a_lambda do |t|
     t.add lambda{|model| model.full_name.upcase  }, :as => :all_caps_name
-    t.add lambda{ Time.now.class.to_s  }, :as => :without_param
+    t.add lambda{|model| Time.now.class.to_s  }, :as => :without_param
   end
-  User.api_accessible :include_tasks do |t| 
+  api_accessible :include_tasks do |t| 
     t.add :tasks
   end
      
@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
 
   api_accessible :if_returns_nil_proc do |t| 
     t.add :first_name
-    t.add :last_name, :if => lambda{ nil }
+    t.add :last_name, :if => lambda{|u| nil }
   end
   
   api_accessible :unless_under_thirty do |t| 
@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
 
   api_accessible :unless_returns_nil_proc do |t| 
     t.add :first_name
-    t.add :last_name, :unless => lambda{ nil }
+    t.add :last_name, :unless => lambda{|u| nil }
   end  
 
   def over_thirty?
