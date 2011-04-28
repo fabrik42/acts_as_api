@@ -8,17 +8,13 @@ class Array
   # If they don't, the item itself will be collected.
   def as_api_response(api_template)
 
-    sub_items = []
-
-    each do |item|
+    collect do |item|
       if item.respond_to?(:as_api_response)
-        sub_items << item.as_api_response(api_template)
+        item.as_api_response(api_template)
       else
-        sub_items << item
+        item
       end
     end
-
-    sub_items
 
   end
 
