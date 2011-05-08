@@ -1,0 +1,32 @@
+require File.dirname(__FILE__) + '/../spec_helper.rb'
+
+RSpec.configure do |c|
+  c.alias_it_should_behave_like_to :it_supports, 'supports:'
+end
+
+describe ActiveRecord do
+  
+  before(:each) do
+    setup_models(:active_record)
+  end
+
+  after(:each) do
+    clean_up
+  end
+  
+  describe :act_as_api do
+    it_supports "including an association in the api template"
+    it_supports "calling a closure in the api template"
+    it_supports "conditional if statements"
+    it_supports "conditional unless statements" 
+    it_supports "acts_as_api is enabled"
+    it_supports "extending a given api template"
+    it_supports "calling a method in the api template"
+    it_supports "renaming"
+    it_supports "listing attributes in the api template"
+    it_supports "creating a sub hash in the api template"
+    it_supports "trying to render an api template that is not defined"
+    it_supports "untouched models" 
+  end
+  
+end
