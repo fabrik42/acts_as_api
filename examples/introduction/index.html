@@ -191,7 +191,7 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-  
+
   <span class="k">def</span> <span class="nf">index</span>
     <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">all</span></pre></div>
       </td>
@@ -209,16 +209,59 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
       <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:json</span> <span class="o">=&gt;</span> <span class="vi">@users</span><span class="p">,</span> <span class="ss">:root</span> <span class="o">=&gt;</span> <span class="ss">:users</span> <span class="p">}</span>
     <span class="k">end</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">show</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-    
+
     <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
       <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:xml</span>  <span class="o">=&gt;</span> <span class="vi">@user</span> <span class="p">}</span>
       <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:json</span> <span class="o">=&gt;</span> <span class="vi">@user</span> <span class="p">}</span>
     <span class="k">end</span>
   <span class="k">end</span>
-  
+
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Using_a_Responder'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Using_a_Responder">&#182;</a>
+        </div>
+        <h3>Using a Responder</h3>
+
+<p>Alternatively, you can dry up your actions by setting the controller&rsquo;s responder to
+the <code>ActsAsApi::Responder</code> class. With this in place, you can use the built-in <code>respond_with</code> method.
+You can do this on a per-controller basis, or, you
+can create a parent class for your controllers to inherit from, as seen here.
+Note that the <code>:api_template</code> parameter is where you specify which template you&rsquo;d like to render,
+and is required on all <code>respond_with</code> calls.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">class</span> <span class="nc">ApiController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="nb">self</span><span class="o">.</span><span class="n">responder</span> <span class="o">=</span> <span class="no">ActsAsApi</span><span class="o">::</span><span class="no">Responder</span>
+  <span class="n">respond_to</span> <span class="ss">:json</span><span class="p">,</span> <span class="ss">:xml</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApiController</span>
+
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">all</span>
+    <span class="n">respond_with</span> <span class="vi">@users</span><span class="p">,</span> <span class="ss">:api_template</span> <span class="o">=&gt;</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:root</span> <span class="o">=&gt;</span> <span class="ss">:users</span>
+  <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-15'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-15">&#182;</a>
+        </div>
+        <p>You&rsquo;re free to add additional options to the <code>respond_with</code> call, e.g., specifying a HTTP Location header.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">show</span>
+    <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+    <span class="n">respond_with</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">:api_template</span> <span class="o">=&gt;</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:location</span> <span class="o">=&gt;</span> <span class="n">user_path</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span></pre></div>
       </td>
     </tr>
@@ -233,10 +276,10 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-15'>
+    <tr id='section-17'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-15">&#182;</a>
+          <a class="pilcrow" href="#section-17">&#182;</a>
         </div>
         <p>Try it. The JSON response of #show should now look like this:</p>
 
@@ -247,15 +290,15 @@ because they were not listed by <code>api_accessible</code> in the model.</p>
         <div class='highlight'><pre><span class="p">{</span>
   <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;first_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;last_name&quot;</span><span class="p">:</span>  <span class="s2">&quot;Doe&quot;</span>    
+    <span class="s2">&quot;last_name&quot;</span><span class="p">:</span>  <span class="s2">&quot;Doe&quot;</span>
   <span class="p">}</span>
 <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-16'>
+    <tr id='section-18'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-16">&#182;</a>
+          <a class="pilcrow" href="#section-18">&#182;</a>
         </div>
         <hr />
       </td>
@@ -303,10 +346,10 @@ provides you some tools to customize your API responses.</p>
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-19'>
+    <tr id='section-21'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-19">&#182;</a>
+          <a class="pilcrow" href="#section-21">&#182;</a>
         </div>
         <hr />
       </td>

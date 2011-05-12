@@ -4,21 +4,24 @@ module ActsAsApi
   #
   # Example:
   #
-  # class UsersController < ApplicationController
-  #   # Set this controller to use our custom responder
-  #   # (This could be done in a base controller class, if desired)
-  #   self.responder = ActsAsApi::Responder
+  #  class UsersController < ApplicationController
+  #    # Set this controller to use our custom responder
+  #    # (This could be done in a base controller class, if desired)
+  #    self.responder = ActsAsApi::Responder
   #
-  #   respond_to :json, :xml
+  #    respond_to :json, :xml
   #
-  #   def index
-  #     @users = User.all
-  #     respond_with @users, :api_template => :name_only
-  #   end
-  # end
-
+  #    def index
+  #      @users = User.all
+  #      respond_with @users, :api_template => :name_only
+  #    end
+  #  end
+  #
+  # The `:api_template` parameter is required so the responder knows which api template it should render.
 
   class Responder < ActionController::Responder
+
+    # Should be specified as an option to the `respond_with` call
     attr_reader :api_template
 
     # Grabs the required :api_template parameter, then hands control back to
