@@ -23,9 +23,14 @@ module ActsAsApi
   autoload :Rendering,    "acts_as_api/rendering"    
 end
 
-# Attach ourselves to active record
+# Attach ourselves to ActiveRecord
 if defined?(ActiveRecord::Base)
   ActiveRecord::Base.extend ActsAsApi::Base
+end
+
+# Attach ourselves to Mongoid
+if defined?(Mongoid::Document)
+  Mongoid::Document.send :include, ActsAsApi::Mongoid  
 end
 
 # Attach ourselves to the action controller of rails
