@@ -67,7 +67,7 @@ describe UsersController, :orm => :active_record do
         get :index, :format => 'json', :api_template => :name_only
       end
 
-      it "should have a root node named users" do        
+      it "should have a root node named users" do
         response_body_json.should have_key("users")
       end
 
@@ -93,7 +93,7 @@ describe UsersController, :orm => :active_record do
         get :show, :format => 'json', :api_template => :name_only, :id => @luke.id
       end
 
-      it "should have a root node named user" do        
+      it "should have a root node named user" do
         response_body_json.should have_key("user")
       end
 
@@ -108,7 +108,7 @@ describe UsersController, :orm => :active_record do
       end
 
     end
-    
+
     describe 'get a single user with a nil profile' do
 
       before(:each) do
@@ -117,7 +117,7 @@ describe UsersController, :orm => :active_record do
           t.add :avatar
           t.add :homepage
         end
-        
+
         get :show, :format => 'json', :api_template => :include_profile, :id => @han.id
       end
 
@@ -134,7 +134,7 @@ describe UsersController, :orm => :active_record do
         response_body_json["user"]["profile"].should be_nil
       end
 
-    end    
+    end
 
   end
 
@@ -220,13 +220,20 @@ describe UsersController, :orm => :active_record do
         end
       end
 
+      after(:each) do
+        # put things back to the way they were
+        User.acts_as_api do |config|
+          config.allow_jsonp_callback = false
+        end
+      end
+
       describe 'get all users' do
 
         before(:each) do
           get :index, :format => 'json', :api_template => :name_only, :callback => @callback
         end
 
-        it "should wrap the response in the callback" do        
+        it "should wrap the response in the callback" do
           response_body_jsonp(@callback).should_not be_nil
         end
 
@@ -238,7 +245,7 @@ describe UsersController, :orm => :active_record do
           get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :callback => @callback
         end
 
-        it "should wrap the response in the callback" do          
+        it "should wrap the response in the callback" do
           response_body_jsonp(@callback).should_not be_nil
         end
 
