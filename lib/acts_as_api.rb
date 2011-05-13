@@ -22,6 +22,7 @@ module ActsAsApi
   autoload :Base,         "acts_as_api/base"
   autoload :Rendering,    "acts_as_api/rendering"
   autoload :Responder,    "acts_as_api/responder"
+  autoload :Adapters,     "acts_as_api/adapters"
 end
 
 # Attach ourselves to ActiveRecord
@@ -31,10 +32,10 @@ end
 
 # Attach ourselves to Mongoid
 if defined?(Mongoid::Document)
-  Mongoid::Document.send :include, ActsAsApi::Adapters::Mongoid  
+  Mongoid::Document.send :include, ActsAsApi::Adapters::Mongoid
 end
 
-# Attach ourselves to the action controller of rails
+# Attach ourselves to the action controller of Rails
 if defined?(ActionController::Base)
   ActionController::Base.send :include, ActsAsApi::Rendering
   ActsAsApi::RailsRenderer.setup
