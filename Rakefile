@@ -26,8 +26,9 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'doc'
   rdoc.title = "#{gemspec.name} #{gemspec.version}"
   rdoc.options += gemspec.rdoc_options
+  rdoc.options += '--line-numbers' << '--inline-source'  
   rdoc.rdoc_files.include(gemspec.extra_rdoc_files)
-  rdoc.rdoc_files.include('lib/**/*.rb')
+  rdoc.rdoc_files.include('README.rdoc')
 end
 
 #bundle exec rocco examples/introduction/index.rb -t examples/introduction/layout.mustache
