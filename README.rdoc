@@ -64,6 +64,12 @@ https://github.com/fabrik42/acts_as_api/wiki
 
 * Wiki: https://github.com/fabrik42/acts_as_api/wiki
 
+=== Tested with:
+
+* MRI 1.9.2-p180
+* MRI 1.8.7-p334
+* But it just should work fine with other versions too... :)
+
 === Downwards Compatibility
 
 Note that upgrading to 0.3.0 will break code that worked with previous versions due to a complete overhaul of the lib.
