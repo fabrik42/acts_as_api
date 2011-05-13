@@ -3,13 +3,11 @@ shared_examples_for "a controller with ActsAsApi responses" do
   include ApiTestHelpers
 
   before(:each) do
-    @luke = User.create({ :first_name => 'Luke',      :last_name => 'Skywalker', :age => 25, :active => true  })
-    @han  = User.create({ :first_name => 'Han',       :last_name => 'Solo',      :age => 35, :active => true  })
-    @leia = User.create({ :first_name => 'Princess',  :last_name => 'Leia',      :age => 25, :active => false })
+    setup_active_record_models
   end
 
   after(:each) do
-    User.delete_all
+   clean_up_active_record_models
   end
 
   describe 'xml responses' do

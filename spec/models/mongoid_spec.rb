@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe ActiveRecord, :orm => "active_record" do
+describe Mongoid, :orm => "mongoid" do
   
   before(:each) do
-    setup_active_record_models
+    setup_mongoid_models
   end
 
   after(:each) do
-    clean_up_active_record_models
+    clean_up_mongoid_models
   end
   
   describe :act_as_api do
