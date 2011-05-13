@@ -7,6 +7,19 @@ Bundler::GemHelper.install_tasks
 
 RSpec::Core::RakeTask.new
 
+namespace :spec do
+
+  desc "Run ActiveRecord RSpec code examples only"
+  RSpec::Core::RakeTask.new do |t|
+    t.name = :active_record
+    t.rspec_opts = ["--color", "--format", "documentation", "--tag", "orm:active_record"]
+  end
+
+end
+
+
+
+
 gemspec = Gem::Specification.load("acts_as_api.gemspec")
 
 Rake::RDocTask.new do |rdoc|
