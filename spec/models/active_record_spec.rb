@@ -1,5 +1,4 @@
-#require File.dirname(__FILE__) + '/../spec_helper.rb'
-#require 'spec_helper'
+require 'spec_helper'
 
 RSpec.configure do |c|
   c.alias_it_should_behave_like_to :it_supports, 'supports:'
