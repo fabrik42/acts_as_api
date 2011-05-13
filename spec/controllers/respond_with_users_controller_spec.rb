@@ -1,5 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper.rb'
 
 describe RespondWithUsersController do
-  pending "we need to fix the root node for json first"
+  
+  # see spec/support/controller_examples.rb
+  it_behaves_like "a controller with ActsAsApi responses"
+
 end

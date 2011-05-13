@@ -3,7 +3,7 @@ require 'active_support/core_ext/class'
 
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
-  
+
 require "acts_as_api/array"
 require "acts_as_api/rails_renderer"
 require "acts_as_api/exceptions"
@@ -20,7 +20,8 @@ module ActsAsApi
   autoload :Config,       "acts_as_api/config"
   autoload :ApiTemplate,  "acts_as_api/api_template"
   autoload :Base,         "acts_as_api/base"
-  autoload :Rendering,    "acts_as_api/rendering"    
+  autoload :Rendering,    "acts_as_api/rendering"
+  autoload :Responder,    "acts_as_api/responder"
 end
 
 # Attach ourselves to active record
