@@ -52,7 +52,7 @@ end
 
 # Now you just have to exchange the `render` method in your controller for the `render_for_api` method.
 class UsersController < ApplicationController
-  
+
   def index
     @users = User.all
     # Note that it's wise to add a `root` param when rendering lists.
@@ -61,28 +61,56 @@ class UsersController < ApplicationController
       format.json { render_for_api :name_only, :json => @users, :root => :users }
     end
   end
-  
+
   def show
     @user = User.find(params[:id])
-    
+
     respond_to do |format|
       format.xml  { render_for_api :name_only, :xml  => @user }
       format.json { render_for_api :name_only, :json => @user }
     end
   end
-  
+
 end
+
+#### Using a Responder
+# Alternatively, you can dry up your actions by setting the controller's responder to
+# the `ActsAsApi::Responder` class. With this in place, you can use the built-in `respond_with` method.
+# You can do this on a per-controller basis, or, you
+# can create a parent class for your controllers to inherit from, as seen here.
+# Note that the `:api_template` parameter is where you specify which template you'd like to render,
+# and is required on all `respond_with` calls.
+
+class ApiController < ApplicationController
+  self.responder = ActsAsApi::Responder
+  respond_to :json, :xml
+end
+
+class UsersController < ApiController
+
+  def index
+    @users = User.all
+    respond_with @users, :api_template => :name_only, :root => :users
+  end
+
+  # You're free to add additional options to the `respond_with` call, e.g., specifying a HTTP Location header.
+  def show
+    @users = User.find(params[:id])
+    respond_with @user, :api_template => :name_only, :location => user_path(@user)
+  end
+end
+
 
 #### That's it!
 
 # Try it. The JSON response of #show should now look like this:
 #
-# Other attributes of the model like `created_at` or `updated_at` won’t be included 
+# Other attributes of the model like `created_at` or `updated_at` won’t be included
 # because they were not listed by `api_accessible` in the model.
 {
   "user": {
     "first_name": "John",
-    "last_name":  "Doe"    
+    "last_name":  "Doe"
   }
 }
 
@@ -96,7 +124,7 @@ end
 #### What can I include in my responses?
 #
 # You can do basically anything:
-# 
+#
 # * [Include attributes and all other kinds of methods of your model][w1]
 # * [Include child associations (if they also act_as_api this will be considered)][w2]
 # * [Include lambdas and Procs][w3]
