@@ -31,7 +31,7 @@ end
 
 # Attach ourselves to Mongoid
 if defined?(Mongoid::Document)
-  Mongoid::Document.send :include, ActsAsApi::Mongoid  
+  Mongoid::Document.send :include, ActsAsApi::Adapters::Mongoid  
 end
 
 # Attach ourselves to the action controller of rails
