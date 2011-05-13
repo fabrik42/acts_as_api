@@ -1,3 +1,8 @@
+=== 0.3.6 2011-05-13
+
+* Finally added Mongoid Support out of the box
+* Support for Rails 3 Responders
+
 === 0.3.4 2011-04-26
 
 * Fixed a bug concerning the inheritance of sub templates/additional options
