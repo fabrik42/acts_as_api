@@ -9,7 +9,7 @@
 # * XML, JSON and JSON-P support out of the  box, easy to extend
 # * Support for Rails 3 Responders
 # * Minimal dependecies (you can also use it without Rails)
-# * Ships with support for *ActiveRecord* and *Mongoid*
+# * Ships with support for **ActiveRecord** and **Mongoid**
 # * Supports multiple api rendering templates for a models. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.
 
 # ***
