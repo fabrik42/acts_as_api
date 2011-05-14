@@ -1,0 +1,2 @@
+class VanillaUntouched
+end
