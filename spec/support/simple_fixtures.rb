@@ -1,6 +1,7 @@
 module SimpleFixtures
   
   def setup_active_record_models
+    @orm_for_testing  = :active_record
     @user_model       = User
     @task_model       = Task
     @profile_model    = Profile
@@ -23,6 +24,7 @@ module SimpleFixtures
   end  
   
   def setup_mongoid_models
+    @orm_for_testing  = :mongoid    
     @user_model       = MongoUser
     @task_model       = MongoTask
     @profile_model    = MongoProfile

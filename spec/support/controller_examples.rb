@@ -2,20 +2,12 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
   include ApiTestHelpers
 
-  before(:each) do
-    setup_active_record_models
-  end
-
-  after(:each) do
-   clean_up_active_record_models
-  end
-
   describe 'xml responses' do
 
     describe 'get all users' do
 
       before(:each) do
-        get :index, :format => 'xml', :api_template => :name_only
+        get :index, :format => 'xml', :api_template => :name_only, :orm => @orm_for_testing
       end
 
       it "should have a root node named users" do
@@ -38,7 +30,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a single user' do
 
       before(:each) do
-        get :show, :format => 'xml', :api_template => :name_only, :id => @luke.id
+        get :show, :format => 'xml', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
       end
 
       it "should have a root node named user" do
@@ -60,7 +52,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get all users' do
 
       before(:each) do
-        get :index, :format => 'json', :api_template => :name_only
+        get :index, :format => 'json', :api_template => :name_only, :orm => @orm_for_testing
       end
 
       it "should have a root node named users" do
@@ -86,7 +78,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a single user' do
 
       before(:each) do
-        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id
+        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
       end
 
       it "should have a root node named user" do
@@ -108,13 +100,13 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a single user with a nil profile' do
 
       before(:each) do
-        Profile.acts_as_api
-        Profile.api_accessible :include_profile do |t|
+        @profile_model.acts_as_api
+        @profile_model.api_accessible :include_profile do |t|
           t.add :avatar
           t.add :homepage
         end
 
-        get :show, :format => 'json', :api_template => :include_profile, :id => @han.id
+        get :show, :format => 'json', :api_template => :include_profile, :id => @han.id, :orm => @orm_for_testing
       end
 
       it "should have a root node named user" do
@@ -148,7 +140,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get all users' do
 
       before(:each) do
-        get :index, :format => 'json', :api_template => :name_only
+        get :index, :format => 'json', :api_template => :name_only, :orm => @orm_for_testing
       end
 
       it "should have a root node named users" do
@@ -178,7 +170,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a single user' do
 
       before(:each) do
-        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id
+        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
       end
 
       it "should have a root node named user" do
@@ -202,7 +194,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
     it "should be disabled by default" do
       @callback = "mycallback"
-      get :index, :format => 'json', :api_template => :name_only, :callback => @callback
+      get :index, :format => 'json', :api_template => :name_only, :callback => @callback, :orm => @orm_for_testing
       response_body_jsonp(@callback).should be_nil
     end
 
@@ -211,14 +203,14 @@ shared_examples_for "a controller with ActsAsApi responses" do
       before(:each) do
         @callback = "mycallback"
 
-        User.acts_as_api do |config|
+        @user_model.acts_as_api do |config|
           config.allow_jsonp_callback = true
         end
       end
 
       after(:each) do
         # put things back to the way they were
-        User.acts_as_api do |config|
+        @user_model.acts_as_api do |config|
           config.allow_jsonp_callback = false
         end
       end
@@ -226,7 +218,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
       describe 'get all users' do
 
         before(:each) do
-          get :index, :format => 'json', :api_template => :name_only, :callback => @callback
+          get :index, :format => 'json', :api_template => :name_only, :callback => @callback, :orm => @orm_for_testing
         end
 
         it "should wrap the response in the callback" do
@@ -238,7 +230,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
       describe 'get a single user' do
 
         before(:each) do
-          get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :callback => @callback
+          get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :callback => @callback, :orm => @orm_for_testing
         end
 
         it "should wrap the response in the callback" do
