@@ -1,7 +1,6 @@
 class MongoUser
   
   include Mongoid::Document
-  extend ActsAsApi::Base
   
   field :first_name, :type => String
   field :last_name, :type => String
