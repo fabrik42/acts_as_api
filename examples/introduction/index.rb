@@ -7,8 +7,9 @@
 # * DRY templates for your api responses
 # * Easy but very flexible syntax for defining the templates
 # * XML, JSON and JSON-P support out of the  box, easy to extend
+# * Support for Rails 3 Responders
 # * Minimal dependecies (you can also use it without Rails)
-# * Out of the box support for *ActiveRecord* and *Mongoid*
+# * Ships with support for *ActiveRecord* and *Mongoid*
 # * Supports multiple api rendering templates for a models. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.
 
 # ***
@@ -72,34 +73,6 @@ class UsersController < ApplicationController
   end
 
 end
-
-#### Using a Responder
-# Alternatively, you can dry up your actions by setting the controller's responder to
-# the `ActsAsApi::Responder` class. With this in place, you can use the built-in `respond_with` method.
-# You can do this on a per-controller basis, or, you
-# can create a parent class for your controllers to inherit from, as seen here.
-# Note that the `:api_template` parameter is where you specify which template you'd like to render,
-# and is required on all `respond_with` calls.
-
-class ApiController < ApplicationController
-  self.responder = ActsAsApi::Responder
-  respond_to :json, :xml
-end
-
-class UsersController < ApiController
-
-  def index
-    @users = User.all
-    respond_with @users, :api_template => :name_only, :root => :users
-  end
-
-  # You're free to add additional options to the `respond_with` call, e.g., specifying a HTTP Location header.
-  def show
-    @users = User.find(params[:id])
-    respond_with @user, :api_template => :name_only, :location => user_path(@user)
-  end
-end
-
 
 #### That's it!
 

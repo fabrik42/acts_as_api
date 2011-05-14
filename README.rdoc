@@ -4,7 +4,7 @@ acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
 It provides a simple interface to determine the representation of your model data, that should be rendered in your API responses.
 
-In addition to Rails it theoretically can be used with any ruby app and any database as it only has few dependencies.
+In addition to Rails it theoretically can be used with any ruby app and any database (*ActiveRecord* and *Mongoid* are supported out of the box) as it only has few dependencies.
 
 == Introduction
 
@@ -44,8 +44,9 @@ https://github.com/fabrik42/acts_as_api/wiki
 * DRY templates for your api responses
 * Easy but very flexible syntax for defining the templates
 * XML, JSON and JSON-P support out of the  box, easy to extend
+* Support for Rails 3 Responders
 * Minimal dependecies (you can also use it without Rails)
-* Out of the box support for *ActiveRecord* and *Mongoid*
+* Ships with support for *ActiveRecord* and *Mongoid*
 * Supports multiple api rendering templates per model. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.
 
 === Requirements:
