@@ -1,13 +1,5 @@
 class UsersController < ApplicationController
 
-  before_filter do
-    if params[:orm] == :active_record
-      @user_model = User
-    elsif params[:orm] == :mongoid
-      @user_model = MongoUser
-    end
-  end
-
   def index
     @users = @user_model.all
 
@@ -34,5 +26,6 @@ class UsersController < ApplicationController
       format.json { render :json => @user }
     end
   end
+
 
 end
