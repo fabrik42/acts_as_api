@@ -3,7 +3,7 @@ class RespondWithUsersController < ApplicationController
   respond_to :json, :xml
 
   self.responder = ActsAsApi::Responder
-  
+
   before_filter do
     if params[:orm] == :active_record
       @user_model = User
@@ -21,6 +21,11 @@ class RespondWithUsersController < ApplicationController
     @user = @user_model.find(params[:id])
     # :root => :user is only used here because we need it for the node name of the MongoUser model
     respond_with @user, :api_template => params[:api_template].to_sym, :root => :user
+  end
+
+  def show_default
+    @user = @user_model.find(params[:id])
+    respond_with @user
   end
 
 end

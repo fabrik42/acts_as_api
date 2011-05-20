@@ -34,6 +34,7 @@ module ActsAsApi
     # Overrides the base implementation of respond, replacing it with
     # the render_for_api method.
     def respond
+      super and return if api_template.nil?
       controller.render_for_api api_template, options.merge!(format => resource)
     end
   end
