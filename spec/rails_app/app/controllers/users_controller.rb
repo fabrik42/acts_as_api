@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   before_filter do
     if params[:orm] == :active_record
       @user_model = User
@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       @user_model = MongoUser
     end
   end
-  
+
   def index
     @users = @user_model.all
 
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       format.json { render_for_api params[:api_template].to_sym, :json => @users, :root => :users }
     end
   end
-  
+
   def show
     @user = @user_model.find(params[:id])
 
@@ -25,6 +25,14 @@ class UsersController < ApplicationController
       format.xml  { render_for_api params[:api_template].to_sym, :xml => @user, :root => :user }
       format.json { render_for_api params[:api_template].to_sym, :json => @user, :root => :user }
     end
-  end  
-  
+  end
+
+  def show_default
+    @user = @user_model.find(params[:id])
+    respond_to do |format|
+      format.xml { render :xml => @user }
+      format.json { render :json => @user }
+    end
+  end
+
 end
