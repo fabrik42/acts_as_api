@@ -67,7 +67,6 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
   end
 
-
   describe 'json responses' do
 
     describe 'get all users' do
@@ -278,6 +277,5 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
     end
   end
-
 
 end

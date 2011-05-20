@@ -4,14 +4,6 @@ class RespondWithUsersController < ApplicationController
 
   self.responder = ActsAsApi::Responder
 
-  before_filter do
-    if params[:orm] == :active_record
-      @user_model = User
-    elsif params[:orm] == :mongoid
-      @user_model = MongoUser
-    end
-  end
-
   def index
     @users = @user_model.all
     respond_with @users, :api_template => params[:api_template].to_sym, :root => :users
@@ -26,6 +18,16 @@ class RespondWithUsersController < ApplicationController
   def show_default
     @user = @user_model.find(params[:id])
     respond_with @user
+  end
+
+  def create
+    @user = @user_model.new(params[:user])
+
+    if @user.save
+      respond_with @user, :api_template => params[:api_template]
+    else
+      respond_with @user
+    end
   end
 
 end
