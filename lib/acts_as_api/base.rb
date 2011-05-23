@@ -42,12 +42,13 @@ module ActsAsApi
           yield attributes
         end
 
-        write_inheritable_attribute("api_accessible_#{api_template}".to_sym, attributes)
+        class_attribute "api_accessible_#{api_template}".to_sym
+        send "api_accessible_#{api_template}=", attributes
       end
 
       # Returns an array of all the attributes that have been made accessible to the api response.
       def api_accessible_attributes(api_template)
-        read_inheritable_attribute("api_accessible_#{api_template}".to_sym)
+        begin send "api_accessible_#{api_template}".to_sym rescue nil end
       end
     end
 
