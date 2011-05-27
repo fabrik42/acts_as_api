@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rails', ['>= 3.0.0'])
   s.add_development_dependency('mongoid', ['>= 2.0.0'])
   
+  s.has_rdoc      = true
   s.rdoc_options  = ['--main', 'README.rdoc', '--charset=UTF-8']
   s.extra_rdoc_files = ['README.rdoc']
   
