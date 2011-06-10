@@ -1,7 +1,7 @@
 require 'bundler'
 require 'rspec/core'
 require 'rspec/core/rake_task'
-require 'rake/rdoctask'
+#require 'rake/rdoctask'
 
 Bundler::GemHelper.install_tasks
 
@@ -22,13 +22,14 @@ end
 
 gemspec = Gem::Specification.load("acts_as_api.gemspec")
 
-Rake::RDocTask.new do |rdoc|
-  rdoc.rdoc_dir = 'doc'
-  rdoc.title = "#{gemspec.name} #{gemspec.version}"
-  rdoc.options += gemspec.rdoc_options
-  rdoc.options << '--line-numbers' << '--inline-source'  
-  rdoc.rdoc_files.include(gemspec.extra_rdoc_files)
-  rdoc.rdoc_files.include('README.rdoc')
-end
+# causes crash in travis ci
+#Rake::RDocTask.new do |rdoc|
+#  rdoc.rdoc_dir = 'doc'
+#  rdoc.title = "#{gemspec.name} #{gemspec.version}"
+#  rdoc.options += gemspec.rdoc_options
+#  rdoc.options << '--line-numbers' << '--inline-source'  
+#  rdoc.rdoc_files.include(gemspec.extra_rdoc_files)
+#  rdoc.rdoc_files.include('README.rdoc')
+#end
 
 #bundle exec rocco examples/introduction/index.rb -t examples/introduction/layout.mustache
