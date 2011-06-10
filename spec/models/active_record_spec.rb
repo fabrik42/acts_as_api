@@ -23,6 +23,7 @@ describe ActiveRecord, :orm => "active_record" do
     it_supports "creating a sub hash in the api template"
     it_supports "trying to render an api template that is not defined"
     it_supports "untouched models" 
+    it_supports "defining a model callback"
   end
   
 end
