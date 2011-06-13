@@ -1,3 +1,7 @@
+=== 0.3.7 2011-06-13
+
+* Added before/around/after callbacks
+
 === 0.3.6 2011-05-13
 
 * Finally added Mongoid Support out of the box
