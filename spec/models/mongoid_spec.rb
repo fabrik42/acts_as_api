@@ -22,7 +22,8 @@ describe Mongoid, :orm => "mongoid" do
     it_supports "listing attributes in the api template"
     it_supports "creating a sub hash in the api template"
     it_supports "trying to render an api template that is not defined"
-    it_supports "untouched models" 
+    it_supports "untouched models"
+    it_supports "defining a model callback"
   end
   
 end

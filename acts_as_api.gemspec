@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# encoding: utf-8
 $:.push File.expand_path("../lib", __FILE__)
 require "acts_as_api/version"
 
@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.add_dependency('activemodel','>= 3.0.0')
   s.add_dependency('activesupport','>= 3.0.0')
   s.add_dependency('rack','>= 1.1.0')
-    
+
   s.add_development_dependency('rails', ['>= 3.0.0'])
   s.add_development_dependency('mongoid', ['>= 2.0.0'])
-  
+
   s.rdoc_options  = ['--main', 'README.rdoc', '--charset=UTF-8']
   s.extra_rdoc_files = ['README.rdoc']
   

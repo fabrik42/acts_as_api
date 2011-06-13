@@ -111,6 +111,30 @@ class User < ActiveRecord::Base
     t.add :first_name
     t.add :last_name, :unless => lambda{|u| nil }
   end
+  
+  def before_api_response(api_response)
+    @before_api_response_called = true
+  end
+  
+  def before_api_response_called?
+    !!@before_api_response_called
+  end
+  
+  def after_api_response(api_response)
+    @after_api_response_called = true
+  end
+  
+  def after_api_response_called?
+    !!@after_api_response_called
+  end
+  
+  def skip_api_response=(should_skip)
+    @skip_api_response = should_skip
+  end
+  
+  def around_api_response(api_response)
+    @skip_api_response ? { :skipped => true } : yield
+  end
 
   def over_thirty?
     age > 30
