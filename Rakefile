@@ -22,6 +22,8 @@ end
 
 gemspec = Gem::Specification.load("acts_as_api.gemspec")
 
+task :default => :spec
+
 # causes crash in travis ci
 #Rake::RDocTask.new do |rdoc|
 #  rdoc.rdoc_dir = 'doc'
