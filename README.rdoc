@@ -1,4 +1,4 @@
-= acts_as_api
+= acts_as_api http://travis-ci.org/fabrik42/acts_as_api.png
 
 acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
@@ -64,6 +64,10 @@ https://github.com/fabrik42/acts_as_api/wiki
 * Found a bug? http://github.com/fabrik42/acts_as_api/issues
 
 * Wiki: https://github.com/fabrik42/acts_as_api/wiki
+
+=== Travis CI build status http://travis-ci.org/fabrik42/acts_as_api.png
+
+Specs run with 1.9.2, 1.8.7 and REE: http://travis-ci.org/#!/fabrik42/acts_as_api
 
 === Tested with:
 
