@@ -1,17 +1,9 @@
-defaults: &defaults
-  host: localhost
-  # slaves:
-  #   - host: slave1.local
-  #     port: 27018
-  #   - host: slave2.local
-  #     port: 27019
-
 development:
-  <<: *defaults
+  host: localhost
   database: acts_as_api_example_development
 
 test:
-  <<: *defaults
+  host: localhost
   database: acts_as_api_example_test
 
 # set these environment variables on your prod server
