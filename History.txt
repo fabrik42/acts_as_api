@@ -1,3 +1,7 @@
+=== 0.3.8 2011-06-21
+
+* Fixed Rails 3.1 deprecation warning
+
 === 0.3.7 2011-06-13
 
 * Added before/around/after callbacks
