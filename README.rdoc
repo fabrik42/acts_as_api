@@ -39,6 +39,15 @@ See the Wiki for a lot of usage examples and features:
 
 https://github.com/fabrik42/acts_as_api/wiki
 
+There are a lot of how-tos like:
+
+* {Extending existing api templates}[https://github.com/fabrik42/acts_as_api/wiki/Extending-an-existing-api-template]
+* {Include attributes and all other kinds of methods of your model}[https://github.com/fabrik42/acts_as_api/wiki/Calling-a-method-of-the-model]
+* {Include child associations (if they also act_as_api this will be considered)}[https://github.com/fabrik42/acts_as_api/wiki/Including-a-child-association]
+* {Rename attributes, methods, associations}[https://github.com/fabrik42/acts_as_api/wiki/Renaming-an-attribute]
+* {Keep your API templates out of your models}[https://github.com/fabrik42/acts_as_api/wiki/Keep-your-api-templates-out-of-your-models]
+* {and much more...}[https://github.com/fabrik42/acts_as_api/wiki]
+
 == Features:
 
 * DRY templates for your api responses
