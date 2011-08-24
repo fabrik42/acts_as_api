@@ -300,13 +300,56 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
     describe 'get a single user' do
       before(:each) do
-        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :callback => @callback, :orm => @orm_for_testing
+        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
       end
 
       its "response has no named root node" do
-        response_body_json.should be_an(Hash)
+        response_body_json.should be_a(Hash)
         response_body_json.should have_key("first_name")
       end
+    end
+  end
+
+  describe 'pass meta information on rendering' do
+
+    describe 'get all users' do
+      before(:each) do
+        get :index_meta, :format => 'json', :api_template => :name_only, :orm => @orm_for_testing
+      end
+
+      it "shows model response fields" do
+        response_body_json.should be_a(Hash)
+        response_body_json.should have_key("users")
+        response_body_json["users"].should be_an(Array)
+      end
+
+      it "shows page field" do
+        response_body_json.should have_key("page")
+      end
+
+      it "shows total field" do
+        response_body_json.should have_key("total")
+      end
+    end
+
+    describe 'get a single user' do
+      before(:each) do
+        get :show_meta, :format => 'json', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
+      end
+
+      it "shows model response fields" do
+        response_body_json.should be_a(Hash)
+        response_body_json.should have_key("user")
+      end
+
+      it "shows page field" do
+        response_body_json.should have_key("page")
+      end
+
+      it "shows total field" do
+        response_body_json.should have_key("total")
+      end
+
     end
   end
 
