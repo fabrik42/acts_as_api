@@ -278,4 +278,36 @@ shared_examples_for "a controller with ActsAsApi responses" do
     end
   end
 
+  describe 'config.add_root_node_for is empty, so no root node is created' do
+    before(:each) do
+      @org_add_root_node_for_config = ActsAsApi::Config.add_root_node_for.dup
+      ActsAsApi::Config.add_root_node_for = []
+    end
+
+    after(:each) do
+      ActsAsApi::Config.add_root_node_for = @org_add_root_node_for_config
+    end
+
+    describe 'get all users' do
+      before(:each) do
+        get :index, :format => 'json', :api_template => :name_only, :callback => @callback, :orm => @orm_for_testing
+      end
+
+      its "response has no named root node" do
+        response_body_json.should be_an(Array)
+      end
+    end
+
+    describe 'get a single user' do
+      before(:each) do
+        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :callback => @callback, :orm => @orm_for_testing
+      end
+
+      its "response has no named root node" do
+        response_body_json.should be_an(Hash)
+        response_body_json.should have_key("first_name")
+      end
+    end
+  end
+
 end
