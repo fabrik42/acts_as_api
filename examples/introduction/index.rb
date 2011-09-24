@@ -7,13 +7,16 @@
 # * DRY templates for your api responses
 # * Ships with support for **ActiveRecord** and **Mongoid**
 # * Support for Rails 3 Responders
+# * Plays very well together with client libs like [Backbone.js][b1] or [RestKit][r1] (iOS).
 # * Easy but very flexible syntax for defining the templates
 # * XML, JSON and JSON-P support out of the  box, easy to extend
 # * Support for meta data like pagination info, etc...
 # * Minimal dependecies (you can also use it without Rails)
 # * Supports multiple api rendering templates for a models. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.
-
+# [b1]: http://documentcloud.github.com/backbone
+# [r1]: http://restkit.org
 # ***
+
 
 ### Rails 3.x Quickstart
 

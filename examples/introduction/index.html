@@ -61,23 +61,16 @@ You surely don’t want to expose your models always with all attributes.</p>
 <li>DRY templates for your api responses</li>
 <li>Ships with support for <strong>ActiveRecord</strong> and <strong>Mongoid</strong></li>
 <li>Support for Rails 3 Responders</li>
+<li>Plays very well together with client libs like <a href="http://documentcloud.github.com/backbone">Backbone.js</a> or <a href="http://restkit.org">RestKit</a> (iOS).</li>
 <li>Easy but very flexible syntax for defining the templates</li>
 <li>XML, JSON and JSON-P support out of the  box, easy to extend</li>
 <li>Support for meta data like pagination info, etc&hellip;</li>
 <li>Minimal dependecies (you can also use it without Rails)</li>
 <li>Supports multiple api rendering templates for a models. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.</li>
 </ul>
-      </td>
-      <td class=code>
-        <div class='highlight'><pre></pre></div>
-      </td>
-    </tr>
-    <tr id='section-3'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-3">&#182;</a>
-        </div>
-        <hr />
+
+
+<hr />
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -94,10 +87,10 @@ You surely don’t want to expose your models always with all attributes.</p>
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-5'>
+    <tr id='section-4'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-5">&#182;</a>
+          <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
         <p>Add to gemfile</p>
       </td>
@@ -105,10 +98,10 @@ You surely don’t want to expose your models always with all attributes.</p>
         <div class='highlight'><pre><span class="n">gem</span> <span class="s1">&#39;acts_as_api&#39;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-6'>
+    <tr id='section-5'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-6">&#182;</a>
+          <a class="pilcrow" href="#section-5">&#182;</a>
         </div>
         <p>Update your bundle</p>
       </td>
@@ -127,10 +120,10 @@ You surely don’t want to expose your models always with all attributes.</p>
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-8'>
+    <tr id='section-7'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-8">&#182;</a>
+          <a class="pilcrow" href="#section-7">&#182;</a>
         </div>
         <p>Given you have a model <code>User</code>.
 If you only want to expose the <code>first_name</code> and <code>last_name</code> attribute of a user via your api, you would do something like this:</p>
@@ -139,10 +132,10 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-9'>
+    <tr id='section-8'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-9">&#182;</a>
+          <a class="pilcrow" href="#section-8">&#182;</a>
         </div>
         <p>Within your model:</p>
 
@@ -163,10 +156,10 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
 <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-10'>
+    <tr id='section-9'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-10">&#182;</a>
+          <a class="pilcrow" href="#section-9">&#182;</a>
         </div>
         <p>An API template with the name <code>:name_only</code> was created.</p>
 
@@ -187,10 +180,10 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-12'>
+    <tr id='section-11'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-12">&#182;</a>
+          <a class="pilcrow" href="#section-11">&#182;</a>
         </div>
         <p>Now you just have to exchange the <code>render</code> method in your controller for the <code>render_for_api</code> method.</p>
       </td>
@@ -201,10 +194,10 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
     <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">all</span></pre></div>
       </td>
     </tr>
-    <tr id='section-13'>
+    <tr id='section-12'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-13">&#182;</a>
+          <a class="pilcrow" href="#section-12">&#182;</a>
         </div>
         <p>Note that it&rsquo;s wise to add a <code>root</code> param when rendering lists.</p>
       </td>
@@ -238,10 +231,10 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-15'>
+    <tr id='section-14'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-15">&#182;</a>
+          <a class="pilcrow" href="#section-14">&#182;</a>
         </div>
         <p>Try it. The JSON response of #show should now look like this:</p>
 
@@ -257,10 +250,10 @@ because they were not listed by <code>api_accessible</code> in the model.</p>
 <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-16'>
+    <tr id='section-15'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-16">&#182;</a>
+          <a class="pilcrow" href="#section-15">&#182;</a>
         </div>
         <hr />
       </td>
@@ -308,10 +301,10 @@ provides you some tools to customize your API responses.</p>
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-19'>
+    <tr id='section-18'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-19">&#182;</a>
+          <a class="pilcrow" href="#section-18">&#182;</a>
         </div>
         <hr />
       </td>
