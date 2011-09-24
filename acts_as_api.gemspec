@@ -19,8 +19,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rails', ['>= 3.1.0'])
   s.add_development_dependency('mongoid', ['>= 2.0.1'])
 
-  s.rdoc_options  = ['--main', 'README.rdoc', '--charset=UTF-8']
-  s.extra_rdoc_files = ['README.rdoc']
+  s.rdoc_options  = ['--charset=UTF-8']
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
