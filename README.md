@@ -17,15 +17,15 @@ class User < ActiveRecord::Base
 
   api_accessible :public do |template|
     template.add :first_name
-    template.add :age        
-  end
-
-  api_accessible :private do |template|
-    template.add :first_name
-    template.add :last_name
     template.add :age
-    template.add :birthday                
   end
+  # will render json: { "user": { "first_name": "John", "age":  "26" } }
+
+  api_accessible :private, :extend => :public do |template|
+    template.add :last_name
+    template.add :email
+  end
+  # will render json: { "user": { "first_name": "John", "last_name": "Doe", "age":  26, "email": "john@example.org" } }
 
 end
 ```
@@ -84,7 +84,7 @@ Specs run with 1.9.2, 1.8.7 and REE: http://travis-ci.org/#!/fabrik42/acts_as_ap
 
 * MRI 1.9.2-p180
 * MRI 1.8.7-p334
-* But it just should work fine with other versions too... :) 
+* But it just should work fine with other versions too... :)
 
 ### Downwards Compatibility
 
