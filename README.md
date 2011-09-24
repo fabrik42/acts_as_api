@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     template.add :first_name
     template.add :age
   end
-  # will render json: { "user": { "first_name": "John", "age":  "26" } }
+  # will render json: { "user": { "first_name": "John", "age":  26 } }
 
   api_accessible :private, :extend => :public do |template|
     template.add :last_name
