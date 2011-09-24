@@ -1,10 +1,10 @@
-# acts_as_api http://travis-ci.org/fabrik42/acts_as_api.png
+# acts_as_api ![acts_as_api on travis ci](http://travis-ci.org/fabrik42/acts_as_api.png)
 
 acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
 It provides a simple interface to determine the representation of your model data, that should be rendered in your API responses.
 
-In addition to Rails it theoretically can be used with any ruby app and any database (_ActiveRecord_ and _Mongoid_ are supported out of the box) as it only has few dependencies.
+In addition to Rails it theoretically can be used with any ruby app and any database (__ActiveRecord__ and __Mongoid__ are supported out of the box) as it only has few dependencies.
 
 ## Introduction
 
@@ -52,7 +52,7 @@ There are a lot of how-tos like:
 ## Features:
 
 * DRY templates for your api responses
-* Ships with support for _ActiveRecord_ and _Mongoid_
+* Ships with support for __ActiveRecord__ and __Mongoid__
 * Support for Rails 3 Responders
 * Plays very well together with client libs like [Backbone.js](http://documentcloud.github.com/backbone) or [RestKit](http://restkit.org) (iOS).
 * Easy but very flexible syntax for defining the templates
@@ -76,7 +76,7 @@ There are a lot of how-tos like:
 
 * Wiki: https://github.com/fabrik42/acts_as_api/wiki
 
-### Travis CI build status http://travis-ci.org/fabrik42/acts_as_api.png
+### Travis CI build status ![acts_as_api on travis ci](http://travis-ci.org/fabrik42/acts_as_api.png)
 
 Specs run with 1.9.2, 1.8.7 and REE: http://travis-ci.org/#!/fabrik42/acts_as_api
 
