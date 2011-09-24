@@ -1,35 +1,36 @@
-= acts_as_api http://travis-ci.org/fabrik42/acts_as_api.png
+# acts_as_api http://travis-ci.org/fabrik42/acts_as_api.png
 
 acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
 It provides a simple interface to determine the representation of your model data, that should be rendered in your API responses.
 
-In addition to Rails it theoretically can be used with any ruby app and any database (*ActiveRecord* and *Mongoid* are supported out of the box) as it only has few dependencies.
+In addition to Rails it theoretically can be used with any ruby app and any database (_ActiveRecord_ and _Mongoid_ are supported out of the box) as it only has few dependencies.
 
-== Introduction
+## Introduction
 
 acts_as_api enriches the models and controllers of your app in a Rails-like way so you can easily determine how your API responses should look like:
 
-    class User < ActiveRecord::Base
+```ruby
+class User < ActiveRecord::Base
 
-      acts_as_api
+  acts_as_api
 
-      api_accessible :public do |template|
-        template.add :first_name
-        template.add :age        
-      end
+  api_accessible :public do |template|
+    template.add :first_name
+    template.add :age        
+  end
 
-      api_accessible :private do |template|
-        template.add :first_name
-        template.add :last_name
-        template.add :age
-        template.add :birthday                
-      end
+  api_accessible :private do |template|
+    template.add :first_name
+    template.add :last_name
+    template.add :age
+    template.add :birthday                
+  end
 
-    end
+end
+```
 
-
-== Getting started
+## Getting started
 
 A nice introduction about acts_as_api with examples can be found here:
 
@@ -41,30 +42,31 @@ https://github.com/fabrik42/acts_as_api/wiki
 
 There are a lot of how-tos like:
 
-* {Extending existing api templates}[https://github.com/fabrik42/acts_as_api/wiki/Extending-an-existing-api-template]
-* {Include attributes and all other kinds of methods of your model}[https://github.com/fabrik42/acts_as_api/wiki/Calling-a-method-of-the-model]
-* {Include child associations (if they also act_as_api this will be considered)}[https://github.com/fabrik42/acts_as_api/wiki/Including-a-child-association]
-* {Rename attributes, methods, associations}[https://github.com/fabrik42/acts_as_api/wiki/Renaming-an-attribute]
-* {Keep your API templates out of your models}[https://github.com/fabrik42/acts_as_api/wiki/Keep-your-api-templates-out-of-your-models]
-* {and much more...}[https://github.com/fabrik42/acts_as_api/wiki]
+* [Extending existing api templates](https://github.com/fabrik42/acts_as_api/wiki/Extending-an-existing-api-template)
+* [Include attributes and all other kinds of methods of your model](https://github.com/fabrik42/acts_as_api/wiki/Calling-a-method-of-the-model)
+* [Include child associations (if they also act_as_api this will be considered)](https://github.com/fabrik42/acts_as_api/wiki/Including-a-child-association)
+* [Rename attributes, methods, associations](https://github.com/fabrik42/acts_as_api/wiki/Renaming-an-attribute)
+* [Keep your API templates out of your models](https://github.com/fabrik42/acts_as_api/wiki/Keep-your-api-templates-out-of-your-models)
+* [and much more...](https://github.com/fabrik42/acts_as_api/wiki)
 
-== Features:
+## Features:
 
 * DRY templates for your api responses
+* Ships with support for _ActiveRecord_ and _Mongoid_
+* Support for Rails 3 Responders
+* Plays very well together with client libs like [Backbone.js](http://documentcloud.github.com/backbone) or [RestKit](http://restkit.org) (iOS).
 * Easy but very flexible syntax for defining the templates
 * XML, JSON and JSON-P support out of the  box, easy to extend
-* Support for Rails 3 Responders
 * Minimal dependecies (you can also use it without Rails)
-* Ships with support for *ActiveRecord* and *Mongoid*
 * Supports multiple api rendering templates per model. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.
 
-=== Requirements:
+### Requirements:
 
 * ActiveModel (>= 3.0.0)
 * ActiveSupport (>= 3.0.0)
 * Rack (>= 1.1.0)
 
-=== Links
+### Links
 
 * Introduction: http://fabrik42.github.com/acts_as_api
 
@@ -74,22 +76,22 @@ There are a lot of how-tos like:
 
 * Wiki: https://github.com/fabrik42/acts_as_api/wiki
 
-=== Travis CI build status http://travis-ci.org/fabrik42/acts_as_api.png
+### Travis CI build status http://travis-ci.org/fabrik42/acts_as_api.png
 
 Specs run with 1.9.2, 1.8.7 and REE: http://travis-ci.org/#!/fabrik42/acts_as_api
 
-=== Tested with:
+### Tested with:
 
 * MRI 1.9.2-p180
 * MRI 1.8.7-p334
 * But it just should work fine with other versions too... :) 
 
-=== Downwards Compatibility
+### Downwards Compatibility
 
 Note that upgrading to 0.3.0 will break code that worked with previous versions due to a complete overhaul of the lib.
 For a legacy version of this readme file look here: https://github.com/fabrik42/acts_as_api/wiki/legacy-acts_as_api-0.2-readme
 
-=== LICENSE:
+### LICENSE:
 
 (The MIT License)
 
