@@ -34,4 +34,7 @@ task :default => :spec
 #  rdoc.rdoc_files.include('README.rdoc')
 #end
 
-#bundle exec rocco examples/introduction/index.rb -t examples/introduction/layout.mustache
+desc "Generate the gh_pages site"
+task :rocco do
+  system "bundle exec rocco examples/introduction/index.rb -t examples/introduction/layout.mustache"
+end
