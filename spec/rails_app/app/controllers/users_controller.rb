@@ -18,6 +18,15 @@ class UsersController < ApplicationController
       format.json { render_for_api params[:api_template].to_sym, :json => @users, :root => :users, :meta => meta_hash }
     end
   end
+  
+  def index_relation
+    @users = @user_model.limit(100)
+
+    respond_to do |format|
+      format.xml  { render_for_api params[:api_template].to_sym, :xml => @users }
+      format.json { render_for_api params[:api_template].to_sym, :json => @users }
+    end    
+  end
 
   def show
     @user = @user_model.find(params[:id])

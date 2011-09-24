@@ -94,6 +94,38 @@ shared_examples_for "a controller with ActsAsApi responses" do
       end
 
     end
+    
+    describe 'get all users as a ActiveRecord::Relation object, autodetecting the root node name' do
+
+      before(:each) do
+        get :index_relation, :format => 'json', :api_template => :name_only, :orm => @orm_for_testing
+        
+        if @orm_for_testing == :active_record
+          @root_node = "users"
+        elsif @orm_for_testing == :mongoid
+          @root_node = "mongo_users"          
+        end
+      end
+
+      it "should have a root node named users" do
+        response_body_json.should have_key(@root_node)
+      end
+
+      it "should contain all users" do
+        response_body_json[@root_node].should be_a(Array)
+      end
+
+      it "should contain the specified attributes" do
+        response_body_json[@root_node].first.should have_key("first_name")
+        response_body_json[@root_node].first.should have_key("last_name")
+      end
+
+      it "should contain the specified values" do
+        response_body_json[@root_node].first["first_name"].should eql("Luke")
+        response_body_json[@root_node].first["last_name"].should eql("Skywalker")
+      end
+
+    end    
 
     describe 'get a single user' do
 

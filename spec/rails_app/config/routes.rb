@@ -3,6 +3,7 @@ RailsApp::Application.routes.draw do
   resources :users do
     collection do
       get 'index_meta'
+      get 'index_relation'
     end
     member do
       get 'show_meta'
@@ -13,6 +14,7 @@ RailsApp::Application.routes.draw do
   resources :respond_with_users do
     collection do
       get 'index_meta'
+      get 'index_relation'      
     end
     member do
       get 'show_meta'

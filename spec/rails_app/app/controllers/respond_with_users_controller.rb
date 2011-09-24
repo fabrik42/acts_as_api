@@ -14,6 +14,11 @@ class RespondWithUsersController < ApplicationController
     meta_hash = { :page => 1, :total => 999 }
     respond_with @users, :api_template => params[:api_template].to_sym, :root => :users, :meta => meta_hash
   end
+  
+  def index_relation
+    @users = @user_model.limit(100)
+    respond_with @users, :api_template => params[:api_template].to_sym
+  end  
 
   def show
     @user = @user_model.find(params[:id])
