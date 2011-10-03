@@ -46,7 +46,7 @@ module ActsAsApi
 
       api_root_name = api_root_name.underscore.tr('/', '_')
 
-      if api_model.is_a?(Array) || api_model.is_a?(ActiveRecord::Relation)
+      if api_model.is_a?(Array) || (defined?(ActiveRecord) && api_model.is_a?(ActiveRecord::Relation))
         api_root_name = api_root_name.pluralize
       end
 
