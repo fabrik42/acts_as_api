@@ -1,3 +1,7 @@
+=== 0.3.10 2011-10-03
+
+* Fixed Mongoid problems, when no ActiveRecord is available (Ticket #36)
+
 === 0.3.9 2011-09-24
 
 * Spec suite now running on Rails 3.1
