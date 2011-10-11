@@ -56,4 +56,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_prefix_postfix
+    @user = @user_model.find(params[:id])
+    template = {:template => params[:api_template], :prefix => params[:api_prefix], :postfix => params[:api_postfix]}
+    respond_to do |format|
+      # :root => :user is only used here because we need it for the node name of the MongoUser model
+      format.xml { render_for_api template, :xml => @user, :root => :user }
+      format.json { render_for_api template, :json => @user, :root => :user }
+    end
+  end
+
 end

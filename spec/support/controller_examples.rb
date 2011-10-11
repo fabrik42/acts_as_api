@@ -385,4 +385,80 @@ shared_examples_for "a controller with ActsAsApi responses" do
     end
   end
 
+
+  describe 'api prefix' do
+
+    describe 'get single user' do
+
+      before(:each) do
+        get :show_prefix_postfix, :format => 'xml', :api_template => :name_only, :api_prefix => :with_prefix, :id => @luke.id, :orm => @orm_for_testing
+      end
+
+      it "should have a root node named user" do
+        response_body.should have_selector("user")
+      end
+
+      it "should contain the specified attributes" do
+        response_body.should have_selector("user > prefix")
+        response_body.should have_selector("user > first-name")
+        response_body.should have_selector("user > last-name")
+      end
+
+      it "should not contain the specified attributes" do
+        response_body.should_not have_selector("user > postfix")
+      end
+
+    end
+
+  end
+
+  describe 'api postfix' do
+
+    describe 'get single user' do
+
+      before(:each) do
+        get :show_prefix_postfix, :format => 'xml', :api_template => :name_only, :api_postfix => :with_postfix, :id => @luke.id, :orm => @orm_for_testing
+      end
+
+      it "should have a root node named user" do
+        response_body.should have_selector("user")
+      end
+
+      it "should contain the specified attributes" do
+        response_body.should have_selector("user > first-name")
+        response_body.should have_selector("user > last-name")
+        response_body.should have_selector("user > postfix")
+      end
+
+      it "should not contain the specified attributes" do
+        response_body.should_not have_selector("user > prefix")
+      end
+
+    end
+
+  end
+
+  describe 'api prefix and api postfix' do
+
+    describe 'get single user' do
+
+      before(:each) do
+        get :show_prefix_postfix, :format => 'xml', :api_template => :name_only, :api_prefix => :with_prefix, :api_postfix => :with_postfix, :id => @luke.id, :orm => @orm_for_testing
+      end
+
+      it "should have a root node named user" do
+        response_body.should have_selector("user")
+      end
+
+      it "should contain the specified attributes" do
+        response_body.should have_selector("user > prefix")
+        response_body.should have_selector("user > first-name")
+        response_body.should have_selector("user > last-name")
+        response_body.should have_selector("user > postfix")
+      end
+
+    end
+
+  end
+
 end
