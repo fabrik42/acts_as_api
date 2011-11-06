@@ -8,6 +8,7 @@ RailsApp::Application.routes.draw do
     member do
       get 'show_meta'
       get 'show_default'
+      get 'show_prefix_postfix'
     end
   end
 
@@ -19,6 +20,7 @@ RailsApp::Application.routes.draw do
     member do
       get 'show_meta'
       get 'show_default'
+      get 'show_prefix_postfix'
     end
   end
 

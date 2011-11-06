@@ -122,6 +122,25 @@ class VanillaUser
     t.add :last_name, :unless => lambda{|u| nil }
   end  
 
+  api_accessible :with_prefix_name_only do |t|
+    t.add lambda{|model| 'true' }, :as => :prefix
+    t.add :first_name
+    t.add :last_name
+  end
+
+  api_accessible :name_only_with_postfix do |t|
+    t.add :first_name
+    t.add :last_name
+    t.add lambda{|model| 'true' }, :as => :postfix
+  end
+
+  api_accessible :with_prefix_name_only_with_postfix do |t|
+    t.add lambda{|model| 'true' }, :as => :prefix
+    t.add :first_name
+    t.add :last_name
+    t.add lambda{|model| 'true' }, :as => :postfix
+  end
+
   def before_api_response(api_response)
     @before_api_response_called = true
   end

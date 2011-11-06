@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mongoid, :orm => "mongoid" do
+describe "Mongoid", :orm => "mongoid" do
   
   before(:each) do
     setup_mongoid_models

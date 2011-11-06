@@ -38,6 +38,12 @@ class RespondWithUsersController < ApplicationController
     respond_with @user
   end
 
+  def show_prefix_postfix
+    @user = @user_model.find(params[:id])
+    # :root => :user is only used here because we need it for the node name of the MongoUser model
+    respond_with @user, :api_template => {:template => params[:api_template], :prefix => params[:api_prefix], :postfix => params[:api_postfix]}, :root => :user
+  end
+
   def create
     @user = @user_model.new(params[:user])
 

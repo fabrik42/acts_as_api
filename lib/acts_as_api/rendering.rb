@@ -8,7 +8,16 @@ module ActsAsApi
     # to simply generate API outputs.
     #
     # The default Rails serializers are used to serialize the data.
-    def render_for_api(api_template, render_options)
+    def render_for_api(api_template_or_options, render_options)
+      if api_template_or_options.is_a?(Hash)
+        api_template = []
+        api_template << api_template_or_options.delete(:prefix)
+        api_template << api_template_or_options.delete(:template)
+        api_template << api_template_or_options.delete(:postfix)
+        api_template = api_template.reject(&:blank?).join('_')
+      else
+        api_template = api_template_or_options
+      end
 
       # extract the api format and model
       api_format_options = {}
