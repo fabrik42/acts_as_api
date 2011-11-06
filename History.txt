@@ -1,3 +1,7 @@
+=== 0.3.11 2011-11-06
+
+* Added :postfix, :prefix options for template rendering
+
 === 0.3.10 2011-10-03
 
 * Fixed Mongoid problems, when no ActiveRecord is available (Ticket #36)
