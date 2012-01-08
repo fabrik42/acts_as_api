@@ -54,7 +54,7 @@ There are a lot of how-tos like:
 * DRY templates for your api responses
 * Ships with support for __ActiveRecord__ and __Mongoid__
 * Support for Rails 3 Responders
-* Plays very well together with client libs like [Backbone.js](http://documentcloud.github.com/backbone) or [RestKit](http://restkit.org) (iOS).
+* Plays very well together with client libs like [Backbone.js](http://documentcloud.github.com/backbone), [RestKit](http://restkit.org) (iOS) or [gson](http://code.google.com/p/google-gson) (Android).
 * Easy but very flexible syntax for defining the templates
 * XML, JSON and JSON-P support out of the  box, easy to extend
 * Minimal dependecies (you can also use it without Rails)
