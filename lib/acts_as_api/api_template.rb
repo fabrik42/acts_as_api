@@ -60,7 +60,6 @@ module ActsAsApi
     # If a special template name for the passed item is specified
     # it will be returned, if not the original api template.
     def api_template_for(fieldset, field)
-      return api_template unless fieldset.is_a? ActsAsApi::ApiTemplate
       fieldset.option_for(field, :template) || api_template
     end
 
