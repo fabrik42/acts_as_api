@@ -14,7 +14,7 @@ module ActsAsApi
 
     attr_reader :options
 
-    def initialize(api_template = nil)
+    def initialize(api_template)
       self.api_template = api_template
       @options ||= {}
     end
