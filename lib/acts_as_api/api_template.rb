@@ -11,18 +11,11 @@ module ActsAsApi
 
     # The name of the api template as a Symbol.
     attr_accessor :api_template
-    
+
     attr_reader :options
 
-    # Returns a new ApiTemplate with the api template name
-    # set to the passed template.
-    def self.create(template)
-      t = ApiTemplate.new
-      t.api_template = template
-      return t
-    end
-
-    def initialize
+    def initialize(api_template = nil)
+      self.api_template = api_template
       @options ||= {}
     end
 
