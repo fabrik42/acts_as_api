@@ -82,7 +82,7 @@ module ActsAsApi
       when Proc
         result = condition.call(model)
       end
-      !result.nil? && !result.is_a?(FalseClass)
+      !!result
     end
 
     # Generates a hash that represents the api response based on this
