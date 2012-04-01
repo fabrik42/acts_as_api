@@ -24,6 +24,7 @@ describe "Mongoid", :orm => "mongoid" do
     it_supports "trying to render an api template that is not defined"
     it_supports "untouched models"
     it_supports "defining a model callback"
+    it_supports "options"
   end
   
 end

@@ -56,13 +56,13 @@ module ActsAsApi
 
       # Creates the api response of the model and returns it as a Hash.
       # Will raise an exception if the passed api template is not defined for the model
-      def as_api_response(api_template)
+      def as_api_response(api_template, options = {})
         api_attributes = self.class.api_accessible_attributes(api_template)
         raise ActsAsApi::TemplateNotFoundError.new("acts_as_api template :#{api_template.to_s} was not found for model #{self.class}") if api_attributes.nil?
 
         before_api_response(api_template)
         response_hash = around_api_response(api_template) do
-          api_attributes.to_response_hash(self)
+          api_attributes.to_response_hash(self, api_attributes, options)
         end
         after_api_response(api_template)
 

@@ -87,17 +87,17 @@ module ActsAsApi
 
     # Generates a hash that represents the api response based on this
     # template for the passed model instance.
-    def to_response_hash(model, fieldset = self)
+    def to_response_hash(model, fieldset = self, options = {})
       api_output = {}
 
       fieldset.each do |field, value|
         next unless allowed_to_render?(fieldset, field, model)
 
-        out = process_value(model, value)
+        out = process_value(model, value, options)
 
         if out.respond_to?(:as_api_response)
           sub_template = api_template_for(fieldset, field)
-          out = out.as_api_response(sub_template)
+          out = out.as_api_response(sub_template, options)
         end
 
         api_output[field] = out
@@ -108,12 +108,16 @@ module ActsAsApi
 
   private
 
-    def process_value(model, value)
+    def process_value(model, value, options)
       case value
       when Symbol
         model.send(value)
       when Proc
-        value.call(model)
+        if value.arity == 2
+          value.call(model, options)
+        else
+          value.call(model)
+        end
       when String
         value.split('.').inject(model) { |result, method| result.send(method) }
       when Hash

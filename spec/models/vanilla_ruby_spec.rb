@@ -26,6 +26,7 @@ describe Class, :orm => "vanilla" do
     # deactivated as acts_as_api won't get mixed into any class
     # it_supports "untouched models"
     it_supports "defining a model callback"
+    it_supports "options"
   end
   
 end
