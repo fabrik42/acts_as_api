@@ -11,18 +11,11 @@ module ActsAsApi
 
     # The name of the api template as a Symbol.
     attr_accessor :api_template
-    
+
     attr_reader :options
 
-    # Returns a new ApiTemplate with the api template name
-    # set to the passed template.
-    def self.create(template)
-      t = ApiTemplate.new
-      t.api_template = template
-      return t
-    end
-
-    def initialize
+    def initialize(api_template)
+      self.api_template = api_template
       @options ||= {}
     end
 
@@ -67,7 +60,6 @@ module ActsAsApi
     # If a special template name for the passed item is specified
     # it will be returned, if not the original api template.
     def api_template_for(fieldset, field)
-      return api_template unless fieldset.is_a? ActsAsApi::ApiTemplate
       fieldset.option_for(field, :template) || api_template
     end
 
@@ -90,59 +82,44 @@ module ActsAsApi
       when Proc
         result = condition.call(model)
       end
-      !result.nil? && !result.is_a?(FalseClass)
+      !!result
     end
 
     # Generates a hash that represents the api response based on this
     # template for the passed model instance.
-    def to_response_hash(model)
-      queue = []
+    def to_response_hash(model, fieldset = self)
       api_output = {}
-      
-      queue << { :output =>  api_output, :item => self }
 
-      until queue.empty? do
-        leaf = queue.pop
-        fieldset = leaf[:item]
-                
-        fieldset.each do |field, value|
+      fieldset.each do |field, value|
+        next unless allowed_to_render?(fieldset, field, model)
 
-          next unless allowed_to_render?(fieldset, field, model)
+        out = process_value(model, value)
 
-          case value
-          when Symbol
-            if model.respond_to?(value)
-              out = model.send value
-            end
-
-          when Proc
-            out = value.call(model)
-
-          when String
-            # go up the call chain
-            out = model
-            value.split(".").each do |method|
-              out = out.send(method.to_sym)
-            end
-
-          when Hash
-            leaf[:output][field] ||= {}
-            queue << { :output =>  leaf[:output][field], :item => value }
-            next
-          end
-
-          if out.respond_to?(:as_api_response)
-            sub_template = api_template_for(fieldset, field)
-            out = out.send(:as_api_response, sub_template)
-          end
-
-          leaf[:output][field] = out
+        if out.respond_to?(:as_api_response)
+          sub_template = api_template_for(fieldset, field)
+          out = out.as_api_response(sub_template)
         end
-        
+
+        api_output[field] = out
       end
-      
+
       api_output
     end
-    
+
+  private
+
+    def process_value(model, value)
+      case value
+      when Symbol
+        model.send(value)
+      when Proc
+        value.call(model)
+      when String
+        value.split('.').inject(model) { |result, method| result.send(method) }
+      when Hash
+        to_response_hash(model, value)
+      end
+    end
+
   end
 end
