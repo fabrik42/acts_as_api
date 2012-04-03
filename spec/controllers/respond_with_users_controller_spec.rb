@@ -66,7 +66,10 @@ describe RespondWithUsersController do
           response.code.should == "422"
         end
 
-        it "should return errors as json" do
+        it "should return errors as json", :meow => true do
+          puts "*" * 50
+          puts response_body_json
+          puts "*" * 50          
           response_body_json['first_name'].should include("can't be blank")
           response_body_json['last_name'].should include("can't be blank")
         end
