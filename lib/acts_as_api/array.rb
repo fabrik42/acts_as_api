@@ -10,7 +10,7 @@ class Array
 
     collect do |item|
       if item.respond_to?(:as_api_response)
-        item.as_api_response(api_template)
+        item.as_api_response(api_template,options)
       else
         item
       end
