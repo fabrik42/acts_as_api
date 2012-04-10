@@ -67,8 +67,8 @@ describe RespondWithUsersController do
         end
 
         it "should return errors as json" do
-          response_body_json['first_name'].should include("can't be blank")
-          response_body_json['last_name'].should include("can't be blank")
+          response_body_json['errors']['first_name'].should include("can't be blank")
+          response_body_json['errors']['last_name'].should include("can't be blank")
         end
 
       end

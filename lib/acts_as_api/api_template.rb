@@ -65,39 +65,39 @@ module ActsAsApi
 
     # Decides if the passed item should be added to
     # the response based on the conditional options passed.
-    def allowed_to_render?(fieldset, field, model)
+    def allowed_to_render?(fieldset, field, model, options)
       return true unless fieldset.is_a? ActsAsApi::ApiTemplate
       allowed = true
-      allowed = condition_fulfilled?(model, fieldset.option_for(field, :if)) if fieldset.option_for(field, :if)
-      allowed = !(condition_fulfilled?(model, fieldset.option_for(field, :unless))) if fieldset.option_for(field, :unless)
+      allowed = condition_fulfilled?(model, fieldset.option_for(field, :if), options) if fieldset.option_for(field, :if)
+      allowed = !(condition_fulfilled?(model, fieldset.option_for(field, :unless), options)) if fieldset.option_for(field, :unless)
       return allowed
     end
 
     # Checks if a condition is fulfilled
     # (result is not nil or false)
-    def condition_fulfilled?(model, condition)
+    def condition_fulfilled?(model, condition, options)
       case condition
       when Symbol
         result = model.send(condition)
       when Proc
-        result = condition.call(model)
+        result = call_proc(condition, model, options)
       end
       !!result
     end
 
     # Generates a hash that represents the api response based on this
     # template for the passed model instance.
-    def to_response_hash(model, fieldset = self)
+    def to_response_hash(model, fieldset = self, options = {})
       api_output = {}
 
       fieldset.each do |field, value|
-        next unless allowed_to_render?(fieldset, field, model)
+        next unless allowed_to_render?(fieldset, field, model, options)
 
-        out = process_value(model, value)
+        out = process_value(model, value, options)
 
         if out.respond_to?(:as_api_response)
           sub_template = api_template_for(fieldset, field)
-          out = out.as_api_response(sub_template)
+          out = out.as_api_response(sub_template, options)
         end
 
         api_output[field] = out
@@ -108,16 +108,24 @@ module ActsAsApi
 
   private
 
-    def process_value(model, value)
+    def process_value(model, value, options)
       case value
       when Symbol
         model.send(value)
       when Proc
-        value.call(model)
+        call_proc(value,model,options)
       when String
         value.split('.').inject(model) { |result, method| result.send(method) }
       when Hash
         to_response_hash(model, value)
+      end
+    end
+
+    def call_proc(the_proc,model,options)
+      if the_proc.arity == 2
+        the_proc.call(model, options)
+      else
+        the_proc.call(model)
       end
     end
 
