@@ -7,7 +7,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get all users' do
 
       before(:each) do
-        get :index, :format => 'xml', :api_template => :name_only, :orm => @orm_for_testing
+        get :index, :format => 'xml', :api_template => :name_only
       end
 
       it "should have a root node named users" do
@@ -30,7 +30,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a single user' do
 
       before(:each) do
-        get :show, :format => 'xml', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
+        get :show, :format => 'xml', :api_template => :name_only, :id => @luke.id
       end
 
       it "should have a root node named user" do
@@ -47,7 +47,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a user without specifying an api template' do
 
       before(:each) do
-        get :show_default, :format => 'xml', :id => @luke.id, :orm => @orm_for_testing
+        get :show_default, :format => 'xml', :id => @luke.id
       end
 
       it "should respond with HTTP 200" do
@@ -72,7 +72,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get all users' do
 
       before(:each) do
-        get :index, :format => 'json', :api_template => :name_only, :orm => @orm_for_testing
+        get :index, :format => 'json', :api_template => :name_only
       end
 
       it "should have a root node named users" do
@@ -98,31 +98,25 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get all users as a ActiveRecord::Relation object, autodetecting the root node name' do
 
       before(:each) do
-        get :index_relation, :format => 'json', :api_template => :name_only, :orm => @orm_for_testing
-        
-        if @orm_for_testing == :active_record
-          @root_node = "users"
-        elsif @orm_for_testing == :mongoid
-          @root_node = "mongo_users"          
-        end
+        get :index_relation, :format => 'json', :api_template => :name_only
       end
 
       it "should have a root node named users" do
-        response_body_json.should have_key(@root_node)
+        response_body_json.should have_key("users")
       end
 
       it "should contain all users" do
-        response_body_json[@root_node].should be_a(Array)
+        response_body_json["users"].should be_a(Array)
       end
 
       it "should contain the specified attributes" do
-        response_body_json[@root_node].first.should have_key("first_name")
-        response_body_json[@root_node].first.should have_key("last_name")
+        response_body_json["users"].first.should have_key("first_name")
+        response_body_json["users"].first.should have_key("last_name")
       end
 
       it "should contain the specified values" do
-        response_body_json[@root_node].first["first_name"].should eql("Luke")
-        response_body_json[@root_node].first["last_name"].should eql("Skywalker")
+        response_body_json["users"].first["first_name"].should eql("Luke")
+        response_body_json["users"].first["last_name"].should eql("Skywalker")
       end
 
     end    
@@ -130,7 +124,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a single user' do
 
       before(:each) do
-        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
+        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id
       end
 
       it "should have a root node named user" do
@@ -152,13 +146,13 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a single user with a nil profile' do
 
       before(:each) do
-        @profile_model.acts_as_api
-        @profile_model.api_accessible :include_profile do |t|
+        Profile.acts_as_api
+        Profile.api_accessible :include_profile do |t|
           t.add :avatar
           t.add :homepage
         end
 
-        get :show, :format => 'json', :api_template => :include_profile, :id => @han.id, :orm => @orm_for_testing
+        get :show, :format => 'json', :api_template => :include_profile, :id => @han.id
       end
 
       it "should have a root node named user" do
@@ -179,7 +173,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a user without specifying an api template' do
 
       before(:each) do
-        get :show_default, :format => 'json', :id => @luke.id, :orm => @orm_for_testing
+        get :show_default, :format => 'json', :id => @luke.id
       end
 
       it "should respond with HTTP 200" do
@@ -208,7 +202,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get all users' do
 
       before(:each) do
-        get :index, :format => 'json', :api_template => :name_only, :orm => @orm_for_testing
+        get :index, :format => 'json', :api_template => :name_only
       end
 
       it "should have a root node named users" do
@@ -238,7 +232,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get a single user' do
 
       before(:each) do
-        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
+        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id
       end
 
       it "should have a root node named user" do
@@ -262,7 +256,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
     it "should be disabled by default" do
       @callback = "mycallback"
-      get :index, :format => 'json', :api_template => :name_only, :callback => @callback, :orm => @orm_for_testing
+      get :index, :format => 'json', :api_template => :name_only, :callback => @callback
       response_body_jsonp(@callback).should be_nil
     end
 
@@ -271,14 +265,14 @@ shared_examples_for "a controller with ActsAsApi responses" do
       before(:each) do
         @callback = "mycallback"
 
-        @user_model.acts_as_api do |config|
+        User.acts_as_api do |config|
           config.allow_jsonp_callback = true
         end
       end
 
       after(:each) do
         # put things back to the way they were
-        @user_model.acts_as_api do |config|
+        User.acts_as_api do |config|
           config.allow_jsonp_callback = false
         end
       end
@@ -286,7 +280,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
       describe 'get all users' do
 
         before(:each) do
-          get :index, :format => 'json', :api_template => :name_only, :callback => @callback, :orm => @orm_for_testing
+          get :index, :format => 'json', :api_template => :name_only, :callback => @callback
         end
 
         it "should wrap the response in the callback" do
@@ -298,7 +292,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
       describe 'get a single user' do
 
         before(:each) do
-          get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :callback => @callback, :orm => @orm_for_testing
+          get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :callback => @callback
         end
 
         it "should wrap the response in the callback" do
@@ -322,7 +316,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
     describe 'get all users' do
       before(:each) do
-        get :index, :format => 'json', :api_template => :name_only, :callback => @callback, :orm => @orm_for_testing
+        get :index, :format => 'json', :api_template => :name_only, :callback => @callback
       end
 
       its "response has no named root node" do
@@ -332,7 +326,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
     describe 'get a single user' do
       before(:each) do
-        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
+        get :show, :format => 'json', :api_template => :name_only, :id => @luke.id
       end
 
       its "response has no named root node" do
@@ -346,7 +340,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
     describe 'get all users' do
       before(:each) do
-        get :index_meta, :format => 'json', :api_template => :name_only, :orm => @orm_for_testing
+        get :index_meta, :format => 'json', :api_template => :name_only
       end
 
       it "shows model response fields" do
@@ -366,7 +360,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
     describe 'get a single user' do
       before(:each) do
-        get :show_meta, :format => 'json', :api_template => :name_only, :id => @luke.id, :orm => @orm_for_testing
+        get :show_meta, :format => 'json', :api_template => :name_only, :id => @luke.id
       end
 
       it "shows model response fields" do
@@ -391,7 +385,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get single user' do
 
       before(:each) do
-        get :show_prefix_postfix, :format => 'xml', :api_template => :name_only, :api_prefix => :with_prefix, :id => @luke.id, :orm => @orm_for_testing
+        get :show_prefix_postfix, :format => 'xml', :api_template => :name_only, :api_prefix => :with_prefix, :id => @luke.id
       end
 
       it "should have a root node named user" do
@@ -417,7 +411,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get single user' do
 
       before(:each) do
-        get :show_prefix_postfix, :format => 'xml', :api_template => :name_only, :api_postfix => :with_postfix, :id => @luke.id, :orm => @orm_for_testing
+        get :show_prefix_postfix, :format => 'xml', :api_template => :name_only, :api_postfix => :with_postfix, :id => @luke.id
       end
 
       it "should have a root node named user" do
@@ -443,7 +437,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
     describe 'get single user' do
 
       before(:each) do
-        get :show_prefix_postfix, :format => 'xml', :api_template => :name_only, :api_prefix => :with_prefix, :api_postfix => :with_postfix, :id => @luke.id, :orm => @orm_for_testing
+        get :show_prefix_postfix, :format => 'xml', :api_template => :name_only, :api_prefix => :with_prefix, :api_postfix => :with_postfix, :id => @luke.id
       end
 
       it "should have a root node named user" do

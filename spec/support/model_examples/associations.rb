@@ -33,8 +33,8 @@ shared_examples_for "including an association in the api template" do
     context "has_many" do
   
       before(:each) do
-        @task_model.acts_as_api
-        @task_model.api_accessible :include_tasks do |t|
+        Task.acts_as_api
+        Task.api_accessible :include_tasks do |t|
           t.add :heading
           t.add :done
         end
@@ -74,8 +74,8 @@ shared_examples_for "including an association in the api template" do
     context "has_one" do
   
       before(:each) do
-        @profile_model.acts_as_api
-        @profile_model.api_accessible :include_profile do |t|
+        Profile.acts_as_api
+        Profile.api_accessible :include_profile do |t|
           t.add :avatar
           t.add :homepage
         end
@@ -114,8 +114,8 @@ shared_examples_for "including an association in the api template" do
   describe "which does acts_as_api, but with using another template name" do
   
     before(:each) do
-      @task_model.acts_as_api
-      @task_model.api_accessible :other_template do |t|
+      Task.acts_as_api
+      Task.api_accessible :other_template do |t|
         t.add :description
         t.add :time_spent
       end
@@ -165,11 +165,11 @@ shared_examples_for "including an association in the api template" do
     before(:each) do
       # extend task model with scope
       #class Task < ActiveRecord::Base
-      @task_model.class_eval do
+      Task.class_eval do
         scope :completed, where(:done => true)
       end
-      @task_model.acts_as_api
-      @task_model.api_accessible :include_completed_tasks do |t|
+      Task.acts_as_api
+      Task.api_accessible :include_completed_tasks do |t|
         t.add :heading
         t.add :done
       end
@@ -212,8 +212,8 @@ shared_examples_for "including an association in the api template" do
     context "has_many" do
   
       before(:each) do
-        @task_model.acts_as_api
-        @task_model.api_accessible :include_tasks do |t|
+        Task.acts_as_api
+        Task.api_accessible :include_tasks do |t|
           t.add :heading
           t.add :done
         end
@@ -244,8 +244,8 @@ shared_examples_for "including an association in the api template" do
   
     context "has one" do
       before(:each) do
-        @profile_model.acts_as_api
-        @profile_model.api_accessible :include_profile do |t|
+        Profile.acts_as_api
+        Profile.api_accessible :include_profile do |t|
           t.add :avatar
           t.add :homepage
         end

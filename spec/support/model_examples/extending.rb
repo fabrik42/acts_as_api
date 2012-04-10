@@ -3,15 +3,15 @@ shared_examples_for "extending a given api template" do
   describe "multiple times" do
 
     before(:each) do
-      @user_model.api_accessible :public do |t|
+      User.api_accessible :public do |t|
         t.add :first_name
       end
 
-      @user_model.api_accessible :for_buddies, :extend => :public do |t|
+      User.api_accessible :for_buddies, :extend => :public do |t|
         t.add :age
       end
 
-      @user_model.api_accessible :private, :extend => :for_buddies do |t|
+      User.api_accessible :private, :extend => :for_buddies do |t|
         t.add :last_name
       end
       @response = @luke.as_api_response(:private)
@@ -62,12 +62,12 @@ shared_examples_for "extending a given api template" do
   describe "and inherit a field using another template name", :meow => true do
 
     before(:each) do
-      @task_model.acts_as_api
-      @task_model.api_accessible :other_template do |t|
+      Task.acts_as_api
+      Task.api_accessible :other_template do |t|
         t.add :description
         t.add :time_spent
       end
-      @user_model.api_accessible :extending_other_template, :extend => :other_sub_template
+      User.api_accessible :extending_other_template, :extend => :other_sub_template
       @response = @luke.as_api_response(:extending_other_template)
     end
 

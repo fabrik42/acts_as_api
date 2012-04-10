@@ -4,8 +4,10 @@ pkg/*
 Gemfile.lock
 test
 acts_as_api.tmproj
-spec/rails_app/db/*.sqlite3
-spec/rails_app/tmp/**/*
-spec/rails_app/log/*.log
+spec/active_record_dummy/db/*.sqlite3
+spec/active_record_dummy/tmp/**/*
+spec/active_record_dummy/log/*.log
+spec/mongoid_dummy/tmp/**/*
+spec/mongoid_dummy/log/*.log
 .rspec
 .rvmrc

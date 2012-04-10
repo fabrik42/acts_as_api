@@ -1,0 +1,16 @@
+source 'https://rubygems.org'
+
+gem 'rails', '3.2.3'
+
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+gem 'sqlite3'
+
+gem 'shared_engine', :path => '../shared_engine'
+gem 'acts_as_api', :path => '../../'
+
+group :test do
+  gem 'rspec-rails', '>= 2.5.0'
+  gem 'webrat'  
+end

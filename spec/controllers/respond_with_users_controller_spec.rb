@@ -1,35 +1,21 @@
 require 'spec_helper'
+#
+# RSpec.configure do |config|
+#   config.include SharedEngine::Engine.routes.url_helpers
+# end
 
-describe RespondWithUsersController do
+describe SharedEngine::RespondWithUsersController do
 
-  context "using active record", :orm => :active_record do
-
-    before(:each) do
-      setup_active_record_models
-    end
-
-    after(:each) do
-     clean_up_active_record_models
-    end
-
-    # see spec/support/controller_examples.rb
-    it_behaves_like "a controller with ActsAsApi responses"
+  before(:each) do
+    setup_models
   end
 
-  context "using mongoid", :orm => :mongoid do
-
-    before(:each) do
-      setup_mongoid_models
-    end
-
-    after(:each) do
-     clean_up_mongoid_models
-    end
-
-    # see spec/support/controller_examples.rb
-    it_behaves_like "a controller with ActsAsApi responses"
+  after(:each) do
+   clean_up_models
   end
 
+  # see spec/support/controller_examples.rb
+  it_behaves_like "a controller with ActsAsApi responses"
 
   describe "default ActionController::Responder behavior" do
 
@@ -38,7 +24,7 @@ describe RespondWithUsersController do
       context "creating valid models" do
 
         before(:each) do
-          post :create, :user => { :first_name => "Luke", :last_name => "Skywalker" }, :api_template => :name_only, :format => 'json', :orm => :active_record
+          post :create, :user => { :first_name => "Luke", :last_name => "Skywalker" }, :api_template => :name_only, :format => 'json'
         end
 
         it "should return HTTP 201 status" do
@@ -59,7 +45,7 @@ describe RespondWithUsersController do
       context "creating invalid models" do
 
         before(:each) do
-          post :create, :user => {}, :api_template => :name_only, :format => 'json', :orm => :active_record
+          post :create, :user => {}, :api_template => :name_only, :format => 'json'
         end
 
         it "should return HTTP 422 status" do
@@ -80,7 +66,7 @@ describe RespondWithUsersController do
       context "creating valid models" do
 
         before(:each) do
-          post :create, :user => { :first_name => "Luke", :last_name => "Skywalker" }, :api_template => :name_only, :format => 'xml', :orm => :active_record
+          post :create, :user => { :first_name => "Luke", :last_name => "Skywalker" }, :api_template => :name_only, :format => 'xml'
         end
 
         it "should return HTTP 201 status" do
@@ -88,7 +74,8 @@ describe RespondWithUsersController do
         end
 
         it "should include HTTP Location header" do
-          response.headers["Location"].should == user_url(User.last)
+          puts response.headers["Location"]
+          response.headers["Location"].should match "/shared/users/#{User.last.id}"
         end
 
         it "should contain the specified attributes" do
@@ -101,7 +88,7 @@ describe RespondWithUsersController do
       context "creating invalid models" do
 
         before(:each) do
-          post :create, :user => {}, :api_template => :name_only, :format => 'xml', :orm => :active_record
+          post :create, :user => {}, :api_template => :name_only, :format => 'xml'
         end
 
         it "should return HTTP 422 status" do
@@ -116,6 +103,5 @@ describe RespondWithUsersController do
     end
 
   end
-
 
 end

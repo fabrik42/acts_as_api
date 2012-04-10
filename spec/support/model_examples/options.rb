@@ -3,19 +3,19 @@ shared_examples_for "options" do
   describe "options in the api template" do
 
     before :each do
-      @user_model.api_accessible :with_options do |t|
+      User.api_accessible :with_options do |t|
         t.add ->(model,options) { options } , as: :options
         t.add :profile
         t.add :first_name,    if: ->(m,options) { options[:with_name] }
       end
 
-      @profile_model.acts_as_api
-      @profile_model.api_accessible :with_options do |t|
+      Profile.acts_as_api
+      Profile.api_accessible :with_options do |t|
         t.add ->(model,options) { options } , as: :options
       end
 
-      @task_model.acts_as_api
-      @task_model.api_accessible :other_template do |t|
+      Task.acts_as_api
+      Task.api_accessible :other_template do |t|
         t.add :description
         t.add :time_spent
         t.add ->(model,options) { options } , as: :options
