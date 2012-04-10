@@ -67,10 +67,16 @@ module ActsAsApi
     # the response based on the conditional options passed.
     def allowed_to_render?(fieldset, field, model, options)
       return true unless fieldset.is_a? ActsAsApi::ApiTemplate
-      allowed = true
-      allowed = condition_fulfilled?(model, fieldset.option_for(field, :if), options) if fieldset.option_for(field, :if)
-      allowed = !(condition_fulfilled?(model, fieldset.option_for(field, :unless), options)) if fieldset.option_for(field, :unless)
-      return allowed
+      
+      fieldset_options = fieldset.options_for(field)
+      
+      if fieldset_options[:unless]
+        !(condition_fulfilled?(model, fieldset_options[:unless], options))
+      elsif fieldset_options[:if]
+        condition_fulfilled?(model, fieldset_options[:if], options)
+      else
+        true
+      end
     end
 
     # Checks if a condition is fulfilled
