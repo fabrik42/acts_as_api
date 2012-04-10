@@ -74,7 +74,6 @@ describe SharedEngine::RespondWithUsersController do
         end
 
         it "should include HTTP Location header" do
-          puts response.headers["Location"]
           response.headers["Location"].should match "/shared/users/#{User.last.id}"
         end
 
