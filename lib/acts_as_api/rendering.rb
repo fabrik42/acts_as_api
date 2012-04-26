@@ -41,14 +41,14 @@ module ActsAsApi
 
       if !output_params[:root].nil?
         api_root_name = output_params[:root].to_s
+      elsif api_model.class.respond_to?(:model_name)        
+        api_root_name = api_model.class.model_name        
       elsif api_model.respond_to?(:collection_name)
         api_root_name = api_model.collection_name
-      elsif api_model.respond_to?(:model_name)
-        api_root_name = api_model.model_name
       elsif api_model.is_a?(Array) && !api_model.empty? && api_model.first.class.respond_to?(:model_name)
         api_root_name = api_model.first.class.model_name
-      elsif api_model.class.respond_to?(:model_name)
-        api_root_name = api_model.class.model_name
+      elsif api_model.respond_to?(:model_name)
+        api_root_name = api_model.model_name        
       else
         api_root_name = ActsAsApi::Config.default_root.to_s
       end
