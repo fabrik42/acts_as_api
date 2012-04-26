@@ -89,13 +89,13 @@ shared_examples_for "a controller with ActsAsApi responses" do
       end
 
       it "should contain the specified values" do
-        response_body_json["users"].first["first_name"].should eql("Luke")
-        response_body_json["users"].first["last_name"].should eql("Skywalker")
+        response_body_json["users"].first["first_name"].should eql("Han")
+        response_body_json["users"].first["last_name"].should eql("Solo")
       end
 
     end
     
-    describe 'get all users as a ActiveRecord::Relation object, autodetecting the root node name' do
+    describe 'get all users as a ActiveRecord::Relation (or similar chained) object, autodetecting the root node name' do
 
       before(:each) do
         get :index_relation, :format => 'json', :api_template => :name_only
@@ -115,8 +115,8 @@ shared_examples_for "a controller with ActsAsApi responses" do
       end
 
       it "should contain the specified values" do
-        response_body_json["users"].first["first_name"].should eql("Luke")
-        response_body_json["users"].first["last_name"].should eql("Skywalker")
+        response_body_json["users"].first["first_name"].should eql("Han")
+        response_body_json["users"].first["last_name"].should eql("Solo")
       end
 
     end    
@@ -223,8 +223,8 @@ shared_examples_for "a controller with ActsAsApi responses" do
       end
 
       it "should contain the specified values" do
-        response_body_json["users"].first["user"]["first_name"].should eql("Luke")
-        response_body_json["users"].first["user"]["last_name"].should eql("Skywalker")
+        response_body_json["users"].first["user"]["first_name"].should eql("Han")
+        response_body_json["users"].first["user"]["last_name"].should eql("Solo")
       end
 
     end

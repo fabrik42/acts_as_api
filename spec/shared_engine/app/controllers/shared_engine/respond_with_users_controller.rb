@@ -6,7 +6,7 @@ module SharedEngine
     self.responder = ActsAsApi::Responder
 
     def index
-      @users = User.all
+      @users = User.all.sort_by(&:first_name)
       respond_with @users, :api_template => params[:api_template].to_sym, :root => :users
     end
 
@@ -17,7 +17,7 @@ module SharedEngine
     end
   
     def index_relation
-      @users = User.limit(100)
+      @users = User.limit(100).sort_by(&:first_name)
       respond_with @users, :api_template => params[:api_template].to_sym
     end  
 

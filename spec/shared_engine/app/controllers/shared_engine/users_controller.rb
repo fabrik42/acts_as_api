@@ -2,7 +2,7 @@ module SharedEngine
   class UsersController < SharedEngine::ApplicationController
 
     def index
-      @users = User.all
+      @users = User.all.sort_by(&:first_name)
 
       respond_to do |format|
         format.xml  { render_for_api params[:api_template].to_sym, :xml => @users, :root => :users }
@@ -21,7 +21,7 @@ module SharedEngine
     end
   
     def index_relation
-      @users = User.limit(100)
+      @users = User.limit(100).sort_by(&:first_name)
 
       respond_to do |format|
         format.xml  { render_for_api params[:api_template].to_sym, :xml => @users }
