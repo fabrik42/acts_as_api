@@ -11,3 +11,4 @@ spec/mongoid_dummy/tmp/**/*
 spec/mongoid_dummy/log/*.log
 .rspec
 .rvmrc
+*.sqlite3-journal
