@@ -10,7 +10,7 @@ gem "bson_ext"
 gem "mongoid", ">= 2.0.0.beta.19"
 
 gem 'shared_engine', :path => '../shared_engine'
-gem 'acts_as_api', :path => '../../'
+gem 'acts_as_api'#, :path => '../../'
 
 group :test do
   gem 'rspec-rails', '>= 2.5.0'
