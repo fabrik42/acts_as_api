@@ -16,7 +16,7 @@ class User
 
   acts_as_api
 
-  include SharedEngine::UserTemplate
+  include ::SharedEngine::UserTemplate
 
   def over_thirty?
     age > 30
