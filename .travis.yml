@@ -3,7 +3,3 @@ rvm:
   - 1.9.2
   - 1.9.3
   - ree
-gemfile:
-  - Gemfile
-  - spec/active_record_dummy/Gemfile
-  - spec/mongoid_dummy/Gemfile
