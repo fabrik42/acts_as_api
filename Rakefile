@@ -14,8 +14,6 @@ namespace :spec do
     desc "Run #{orm} specs only"
     RSpec::Core::RakeTask.new do |t|
       t.name = orm
-#      t.rspec_opts = ["--color", "--format", "documentation", "--tag", "orm:#{orm}"]
-#      t.rspec_opts = ["--color", "--format", "documentation"]
       t.rspec_opts = ["--color"]
     end
 
@@ -26,8 +24,18 @@ namespace :spec do
     Rake::Task["spec:#{orm}"].prerequisites << "spec:prepare_#{orm}"
   end
 
+
+#  task :all => supported_orms.map{|orm| "spec:#{orm}"}
+
   desc "Runs specs for all ORMs (#{supported_orms.join(', ')})"
-  task :all => supported_orms.map{|orm| "spec:#{orm}"}
+  task :all do
+    supported_orms.each do |orm|
+      puts "Starting to run specs for #{orm}..."
+      system("export DISPLAY=:99.0 && bundle exec rake spec:#{orm}")
+      raise "#{orm} failed!" unless $?.exitstatus == 0
+    end
+  end
+
 end
 
 
