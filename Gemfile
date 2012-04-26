@@ -9,6 +9,5 @@ group :test do
   gem 'rspec', '>= 2.9.0'
   gem 'rspec-rails', '>= 2.5.0'
   gem 'webrat'
-  gem 'rocco', :git => 'git://github.com/fabrik42/rocco.git'
   gem 'shared_engine', :path => './spec/shared_engine'
 end
