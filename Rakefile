@@ -31,7 +31,7 @@ namespace :spec do
   task :all do
     supported_orms.each do |orm|
       puts "Starting to run specs for #{orm}..."
-      system("export DISPLAY=:99.0 && bundle exec rake spec:#{orm}")
+      system("bundle exec rake spec:#{orm}")
       raise "#{orm} failed!" unless $?.exitstatus == 0
     end
   end
