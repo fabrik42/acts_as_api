@@ -6,6 +6,8 @@ It provides a simple interface to determine the representation of your model dat
 
 In addition to Rails it theoretically can be used with any ruby app and any database (__ActiveRecord__ and __Mongoid__ are supported out of the box) as it only has few dependencies.
 
+The lib is _very_ fast in generating your responses and battle tested in production with platforms like [Diaspora](https://joindiaspora.com) or [flinc](https://flinc.org).
+
 ## Introduction
 
 acts_as_api enriches the models and controllers of your app in a Rails-like way so you can easily determine how your API responses should look like:
@@ -76,14 +78,17 @@ There are a lot of how-tos like:
 
 * Wiki: https://github.com/fabrik42/acts_as_api/wiki
 
+* Want to contribute - the spec suite is explained here: https://github.com/fabrik42/acts_as_api/tree/master/spec
+
 ### Travis CI build status ![acts_as_api on travis ci](http://travis-ci.org/fabrik42/acts_as_api.png)
 
-Specs run with 1.9.2, 1.8.7 and REE: http://travis-ci.org/#!/fabrik42/acts_as_api
+Specs run with 1.9.3, 1.9.2, 1.8.7 and REE: http://travis-ci.org/#!/fabrik42/acts_as_api
 
 ### Tested with:
 
-* MRI 1.9.2-p180
-* MRI 1.8.7-p334
+* MRI 1.9.3-p125
+* MRI 1.9.2-p290
+* MRI 1.8.7-p358
 * But it just should work fine with other versions too... :)
 
 ### Downwards Compatibility
