@@ -1,3 +1,7 @@
+=== 0.4 2012-04-30
+
+* Added support for a second parameter (options) to pass to as_api_response
+
 === 0.3.11 2011-11-06
 
 * Added :postfix, :prefix options for template rendering
