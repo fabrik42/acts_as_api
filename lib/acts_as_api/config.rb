@@ -49,7 +49,7 @@ module ActsAsApi
       # If true the jsonp function call will get the http status passed
       # as a second parameter
       def add_http_status_to_jsonp_response
-        @add_http_status_to_jsonp_response || true     
+        @add_http_status_to_jsonp_response.nil? ? true : @add_http_status_to_jsonp_response
       end
     end
     
