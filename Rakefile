@@ -14,7 +14,7 @@ namespace :spec do
     desc "Run #{orm} specs only"
     RSpec::Core::RakeTask.new do |t|
       t.name = orm
-      t.rspec_opts = ["--color"]
+      t.rspec_opts = ["--color", "--format doc"]
     end
 
     task "prepare_#{orm}" do

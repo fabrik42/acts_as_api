@@ -58,6 +58,25 @@ describe SharedEngine::RespondWithUsersController do
         end
 
       end
+      
+      context "returning all models without default root and no order" do
+
+        before(:each) do
+          get :index_no_root_no_order, :api_template => :name_only, :format => 'json'
+        end
+
+        it "should return HTTP 200 status" do
+          response.code.should == "200"
+        end
+
+        it "should contain the specified attributes" do
+          response_body_json["users"].each do |user|
+            user.should have_key( "first_name" )
+            user.should have_key( "last_name" )
+          end
+        end
+
+      end
 
     end
 
@@ -94,8 +113,25 @@ describe SharedEngine::RespondWithUsersController do
           response.code.should == "422"
         end
 
-        it "should return errors as json" do
+        it "should return errors as xml" do
           response_body.should have_selector("errors > error")
+        end
+
+      end
+
+      context "returning all models without default root and no order" do
+
+        before(:each) do
+          get :index_no_root_no_order, :api_template => :name_only, :format => 'xml'
+        end
+
+        it "should return HTTP 200 status" do
+          response.code.should == "200"
+        end
+
+        it "should contain the specified attributes" do
+          response_body.should have_selector( "users > user > first-name", :count => 3 )
+          response_body.should have_selector( "users > user > last-name", :count => 3 )
         end
 
       end

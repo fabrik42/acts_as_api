@@ -10,6 +10,11 @@ module SharedEngine
       respond_with @users, :api_template => params[:api_template].to_sym, :root => :users
     end
 
+    def index_no_root_no_order
+      @users = User.all
+      respond_with @users, :api_template => params[:api_template].to_sym
+    end
+    
     def index_meta
       @users = User.all
       meta_hash = { :page => 1, :total => 999 }

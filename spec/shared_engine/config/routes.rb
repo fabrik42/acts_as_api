@@ -15,6 +15,7 @@ SharedEngine::Engine.routes.draw do
     collection do
       get 'index_meta'
       get 'index_relation'
+      get 'index_no_root_no_order'
     end
     member do
       get 'show_meta'

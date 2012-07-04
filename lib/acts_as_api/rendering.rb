@@ -53,7 +53,7 @@ module ActsAsApi
         api_root_name = ActsAsApi::Config.default_root.to_s
       end
 
-      api_root_name = api_root_name.underscore.tr('/', '_')
+      api_root_name = api_root_name.to_s.underscore.tr('/', '_')
 
       if api_model.is_a?(Array) || (defined?(ActiveRecord) && api_model.is_a?(ActiveRecord::Relation))
         api_root_name = api_root_name.pluralize
