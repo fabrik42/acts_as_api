@@ -82,7 +82,7 @@ There are a lot of how-tos like:
 
 ### Travis CI build status ![acts_as_api on travis ci](http://travis-ci.org/fabrik42/acts_as_api.png)
 
-Specs run with 1.9.3 and REE: http://travis-ci.org/#!/fabrik42/acts_as_api
+Specs run with 1.9.3: http://travis-ci.org/#!/fabrik42/acts_as_api
 
 ### Tested with:
 
