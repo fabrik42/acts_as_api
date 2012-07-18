@@ -5,7 +5,7 @@ gemspec
 
 group :test do
   gem 'sqlite3-ruby'
-  gem 'mongoid', '>= 3.0.0.rc'
+  gem 'mongoid', '>= 3.0.1'
   gem 'rspec', '>= 2.9.0'
   gem 'rspec-rails', '>= 2.5.0'
   gem 'webrat'
