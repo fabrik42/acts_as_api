@@ -1,3 +1,7 @@
+=== 0.4.1 2012-07-18
+
+* Added support for Mongoid 3
+
 === 0.4 2012-04-30
 
 * Added support for a second parameter (options) to pass to as_api_response
