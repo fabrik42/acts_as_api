@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency('rack','>= 1.1.0')
 
   s.add_development_dependency('rails', ['>= 3.2.3'])
-  s.add_development_dependency('mongoid', ['>= 2.0.1'])
+  s.add_development_dependency('mongoid', ['>= 3.0.0'])
 
   s.rdoc_options  = ['--charset=UTF-8']
   

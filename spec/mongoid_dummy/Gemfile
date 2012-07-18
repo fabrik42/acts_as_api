@@ -7,7 +7,7 @@ gem 'rails', '3.2.3'
 
 
 gem "bson_ext"
-gem "mongoid", ">= 2.0.0.beta.19"
+gem "mongoid", ">= 3.0.0.rc"
 
 gem 'shared_engine', :path => '../shared_engine'
 gem 'acts_as_api', :path => '../../'
