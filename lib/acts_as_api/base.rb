@@ -34,7 +34,7 @@ module ActsAsApi
       # be contained in the api responses.
       def api_accessible(api_template, options = {}, &block)
 
-        attributes = api_accessible_attributes(api_template) || ApiTemplate.new(api_template)
+        attributes = api_accessible_attributes(api_template).try(:dup) || ApiTemplate.new(api_template)
 
         attributes.merge!(api_accessible_attributes(options[:extend])) if options[:extend]
 
