@@ -12,8 +12,7 @@ namespace :spec do
 
   supported_orms.each do |orm|
     desc "Run #{orm} specs only"
-    RSpec::Core::RakeTask.new do |t|
-      t.name = orm
+    RSpec::Core::RakeTask.new(orm) do |t|
       t.rspec_opts = ["--color"]
     end
 
