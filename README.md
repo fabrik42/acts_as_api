@@ -1,4 +1,4 @@
-# acts_as_api ![acts_as_api on travis ci](http://travis-ci.org/fabrik42/acts_as_api.png)
+# acts_as_api ![acts_as_api on travis ci](https://secure.travis-ci.org/fabrik42/acts_as_api.png?branch=master)
 
 acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
@@ -80,7 +80,7 @@ There are a lot of how-tos like:
 
 * Want to contribute - the spec suite is explained here: https://github.com/fabrik42/acts_as_api/tree/master/spec
 
-### Travis CI build status ![acts_as_api on travis ci](http://travis-ci.org/fabrik42/acts_as_api.png)
+### Travis CI build status ![acts_as_api on travis ci](https://secure.travis-ci.org/fabrik42/acts_as_api.png?branch=master)
 
 Specs run with 1.9.3: http://travis-ci.org/#!/fabrik42/acts_as_api
 
