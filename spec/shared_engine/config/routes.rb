@@ -23,4 +23,6 @@ SharedEngine::Engine.routes.draw do
       get 'show_prefix_postfix'
     end
   end
+
+  resources :plain_objects
 end

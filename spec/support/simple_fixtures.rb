@@ -21,6 +21,12 @@ module SimpleFixtures
     User.delete_all
   end
 
+  def setup_objects
+    @luke = PlainObject.new({ :first_name => 'Luke',      :last_name => 'Skywalker', :age => 25, :active => true  })
+    @han  = PlainObject.new({ :first_name => 'Han',       :last_name => 'Solo',      :age => 35, :active => true  })
+    @leia = PlainObject.new({ :first_name => 'Princess',  :last_name => 'Leia',      :age => 25, :active => false })
+  end
+
   # def setup_roflscale_models
   #   @orm_for_testing  = :vanilla
   #   @user_model       = VanillaUser
