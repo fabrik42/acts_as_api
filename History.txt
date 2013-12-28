@@ -1,3 +1,7 @@
+=== 0.4.2 2013-12-28
+
+* Fixed problem with rendering of POROs (see PR #88)
+
 === 0.4.1 2012-07-18
 
 * Added support for Mongoid 3
