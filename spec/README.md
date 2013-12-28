@@ -38,7 +38,7 @@ They contain **no controllers** to be tested, just models that match the tested 
 
 * Create to Models used in the spec (`User, Profile, Untouched, Task`).
 
-* Include `SharedEngine::UserTemplate` in your `User` model.
+* Include `UserTemplate` in your `User` model.
 
 * Add `mount SharedEngine::Engine => "/shared", :as => "shared"` to your `routes.rb`
 
