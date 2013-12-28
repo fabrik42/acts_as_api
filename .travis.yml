@@ -1,4 +1,5 @@
 script: bundle exec rake spec:all
-
+services:
+  - mongodb
 rvm:
   - 1.9.3
