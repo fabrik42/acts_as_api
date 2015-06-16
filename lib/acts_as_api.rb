@@ -30,6 +30,11 @@ if defined?(ActiveRecord::Base)
   ActiveRecord::Base.extend ActsAsApi::Base
 end
 
+# Attach ourselves to ActiveResource
+if defined?(ActiveResource::Base)
+  ActiveResource::Base.extend ActsAsApi::Base
+end
+
 # Attach ourselves to Mongoid
 if defined?(Mongoid::Document)
   Mongoid::Document.send :include, ActsAsApi::Adapters::Mongoid
