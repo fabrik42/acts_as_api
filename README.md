@@ -4,7 +4,7 @@ acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
 
 It provides a simple interface to determine the representation of your model data, that should be rendered in your API responses.
 
-In addition to Rails it theoretically can be used with any ruby app and any database (__ActiveRecord__ and __Mongoid__ are supported out of the box) as it only has few dependencies.
+In addition to Rails it theoretically can be used with any ruby app and any database (__ActiveRecord__, __Mongoid__ and __ActiveResource__ are supported out of the box) as it only has few dependencies.
 
 The lib is _very_ fast in generating your responses and battle tested in production with platforms like [Diaspora](https://joindiaspora.com) or [flinc](https://flinc.org).
 
