@@ -94,7 +94,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
       end
 
     end
-    
+
     describe 'get all users as a ActiveRecord::Relation (or similar chained) object, autodetecting the root node name' do
 
       before(:each) do
@@ -119,7 +119,7 @@ shared_examples_for "a controller with ActsAsApi responses" do
         response_body_json["users"].first["last_name"].should eql("Solo")
       end
 
-    end    
+    end
 
     describe 'get a single user' do
 
@@ -297,6 +297,18 @@ shared_examples_for "a controller with ActsAsApi responses" do
 
         it "should wrap the response in the callback" do
           response_body_jsonp(@callback).should_not be_nil
+        end
+
+      end
+
+      describe 'Requesting the JSONP content as JavaScript' do
+
+        before(:each) do
+          get :index, :format => :js, :api_template => :name_only, :callback => @callback
+        end
+
+        it "should set the content type to JavaScript" do
+          response.content_type.should == Mime::JS
         end
 
       end
