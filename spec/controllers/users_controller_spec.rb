@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SharedEngine::UsersController do
-  
+describe SharedEngine::UsersController, type: :controller do
+
   before(:each) do
     setup_models
   end

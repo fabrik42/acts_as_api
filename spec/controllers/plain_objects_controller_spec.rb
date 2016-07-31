@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SharedEngine::PlainObjectsController do
+describe SharedEngine::PlainObjectsController, type: :controller do
   include ApiTestHelpers
 
   before(:each) do

@@ -10,5 +10,6 @@ spec/active_record_dummy/log/*.log
 spec/mongoid_dummy/tmp/**/*
 spec/mongoid_dummy/log/*.log
 .rspec
+.ruby-version
 .rvmrc
 *.sqlite3-journal

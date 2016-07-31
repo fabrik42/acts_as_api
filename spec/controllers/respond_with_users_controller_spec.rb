@@ -4,7 +4,7 @@ require 'spec_helper'
 #   config.include SharedEngine::Engine.routes.url_helpers
 # end
 
-describe SharedEngine::RespondWithUsersController do
+describe SharedEngine::RespondWithUsersController, type: :controller do
 
   before(:each) do
     setup_models

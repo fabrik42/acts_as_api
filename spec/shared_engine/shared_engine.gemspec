@@ -7,15 +7,14 @@ require "shared_engine/version"
 Gem::Specification.new do |s|
   s.name        = "shared_engine"
   s.version     = SharedEngine::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of SharedEngine."
-  s.description = "TODO: Description of SharedEngine."
+  s.authors     = ["Your name"]
+  s.email       = ["Your email"]
+  s.summary     = "Summary of SharedEngine."
+  s.description = "Description of SharedEngine."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 3.2.16"
+  s.add_dependency "rails", "~> 3.2.22.2"
   # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
