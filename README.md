@@ -80,21 +80,6 @@ There are a lot of how-tos like:
 
 * Want to contribute - the spec suite is explained here: https://github.com/fabrik42/acts_as_api/tree/master/spec
 
-### Travis CI build status ![acts_as_api on travis ci](https://secure.travis-ci.org/fabrik42/acts_as_api.png?branch=master)
-
-Specs run with 1.9.3: http://travis-ci.org/#!/fabrik42/acts_as_api
-
-### Tested with:
-
-It has been used in production with the following ruby versions.
-
-They are not integrated in Travis, because optional dependencies (like Mongoid 3) don't support these Ruby versions.
-
-* MRI 1.9.3-p125
-* MRI 1.9.2-p290
-* MRI 1.8.7-p358
-* But it just should work fine with other versions too... :)
-
 ### Downwards Compatibility
 
 Note that upgrading to 0.3.0 will break code that worked with previous versions due to a complete overhaul of the lib.
