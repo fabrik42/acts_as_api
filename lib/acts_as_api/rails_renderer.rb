@@ -8,7 +8,7 @@ module ActsAsApi
       ActionController.add_renderer :acts_as_api_jsonp do |json, options|
         json = ActiveSupport::JSON.encode(json) unless json.respond_to?(:to_str)
         json = "#{options[:callback]}(#{json}, #{response.status})" unless options[:callback].blank?
-        self.content_type ||= options[:callback].blank ? Mime::JSON : Mime::JS 
+        self.content_type ||= options[:callback].blank ? Mime::JSON : Mime::JS
         self.response_body = json
       end
     end
