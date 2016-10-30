@@ -28,6 +28,7 @@ MongoidDummy::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  config.eager_load = false
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
