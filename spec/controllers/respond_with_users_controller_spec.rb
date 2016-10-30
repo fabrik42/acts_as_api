@@ -5,6 +5,7 @@ require 'spec_helper'
 # end
 
 describe SharedEngine::RespondWithUsersController, type: :controller do
+  routes { SharedEngine::Engine.routes }
 
   before(:each) do
     setup_models
@@ -45,7 +46,7 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
       context "creating invalid models" do
 
         before(:each) do
-          post :create, :user => {}, :api_template => :name_only, :format => 'json'
+          post :create, :user => { first_name: 'Luke' }, :api_template => :name_only, :format => 'json'
         end
 
         it "should return HTTP 422 status" do
@@ -53,7 +54,6 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
         end
 
         it "should return errors as json" do
-          response_body_json['errors']['first_name'].should include("can't be blank")
           response_body_json['errors']['last_name'].should include("can't be blank")
         end
 
@@ -106,7 +106,7 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
       context "creating invalid models" do
 
         before(:each) do
-          post :create, :user => {}, :api_template => :name_only, :format => 'xml'
+          post :create, :user => { first_name: 'Luke' }, :api_template => :name_only, :format => 'xml'
         end
 
         it "should return HTTP 422 status" do
