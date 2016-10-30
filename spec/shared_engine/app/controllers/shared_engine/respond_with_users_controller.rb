@@ -11,12 +11,12 @@ module SharedEngine
     end
 
     def index_no_root_no_order
-      @users = User.all
+      @users = User.all.to_a
       respond_with @users, :api_template => params[:api_template].to_sym
     end
 
     def index_meta
-      @users = User.all
+      @users = User.all.to_a
       meta_hash = { :page => 1, :total => 999 }
       respond_with @users, :api_template => params[:api_template].to_sym, :root => :users, :meta => meta_hash
     end
@@ -51,7 +51,7 @@ module SharedEngine
     end
 
     def create
-      @user = User.new(params[:user])
+      @user = User.new(params[:user].permit!)
 
       if @user.save
         respond_with @user, :api_template => params[:api_template]
