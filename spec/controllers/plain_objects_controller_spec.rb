@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe SharedEngine::PlainObjectsController, type: :controller do
   include ApiTestHelpers
+  routes { SharedEngine::Engine.routes }
 
   before(:each) do
     class SharedEngine::PlainObjectsController
@@ -12,7 +13,7 @@ describe SharedEngine::PlainObjectsController, type: :controller do
   describe 'get all users as a an array of plain objects, autodetecting the root node name' do
 
     before(:each) do
-      get :index, :format => 'json', :api_template => :name_only
+      get :index, :format => 'json', params: { :api_template => :name_only }
     end
 
     it "should have a root node named users" do
