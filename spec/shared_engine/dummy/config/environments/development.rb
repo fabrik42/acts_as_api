@@ -27,6 +27,8 @@ Dummy::Application.configure do
 
   config.eager_load = false
 
+  config.secret_key_base = 'helloworld123'
+
   # Expands the lines which load the assets
   config.assets.debug = true
 end

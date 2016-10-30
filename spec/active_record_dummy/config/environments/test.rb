@@ -30,6 +30,8 @@ ActiveRecordDummy::Application.configure do
 
   config.eager_load = false
 
+  config.secret_key_base = 'helloworld123'
+
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 end
