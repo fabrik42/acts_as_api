@@ -14,17 +14,17 @@ module SharedEngine
       @users = User.all
       respond_with @users, :api_template => params[:api_template].to_sym
     end
-    
+
     def index_meta
       @users = User.all
       meta_hash = { :page => 1, :total => 999 }
       respond_with @users, :api_template => params[:api_template].to_sym, :root => :users, :meta => meta_hash
     end
-  
+
     def index_relation
       @users = User.limit(100).sort_by(&:first_name)
       respond_with @users, :api_template => params[:api_template].to_sym
-    end  
+    end
 
     def show
       @user = User.find(params[:id])
