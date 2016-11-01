@@ -4,12 +4,12 @@ require 'active_support/core_ext/class'
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
-require "acts_as_api/array"
+require "acts_as_api/collection"
 require "acts_as_api/rails_renderer"
 require "acts_as_api/exceptions"
 
 # acts_as_api is a gem that aims to make the construction of JSON and XML
-# responses in rails 3 easy and fun.
+# responses in Rails 3, 4 and 5 easy and fun.
 #
 # Therefore it attaches a couple of helper methods to active record and
 # the action controller base classes.
@@ -25,9 +25,17 @@ module ActsAsApi
   autoload :Adapters,     "acts_as_api/adapters"
 end
 
+# Neccessary to render an Array of models, e.g. the result of a search.
+Array.include(ActsAsApi::Collection)
+
 # Attach ourselves to ActiveRecord
 if defined?(ActiveRecord::Base)
   ActiveRecord::Base.extend ActsAsApi::Base
+
+  # Rails 5 compatibility for CollectionProxy and Relation
+  if defined?(ActiveRecord::Delegation)
+    ActiveRecord::Delegation.include(ActsAsApi::Collection)
+  end
 end
 
 # Attach ourselves to ActiveResource
