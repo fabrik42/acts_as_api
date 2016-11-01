@@ -166,7 +166,7 @@ shared_examples_for "including an association in the api template" do
       # extend task model with scope
       #class Task < ActiveRecord::Base
       Task.class_eval do
-        scope :completed, where(:done => true)
+        scope :completed, -> { where(:done => true) }
       end
       Task.acts_as_api
       Task.api_accessible :include_completed_tasks do |t|
