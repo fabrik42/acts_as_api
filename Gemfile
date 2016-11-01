@@ -7,7 +7,6 @@ group :test do
   gem 'pry'
   gem 'test-unit', '~> 3.0'
   gem 'sqlite3'
-  gem 'mongoid', '>= 3.0.1'
   gem 'mongoid', '>= 6.0.2'
   gem 'rspec', '>= 2.9.0'
   gem 'rspec-its'
