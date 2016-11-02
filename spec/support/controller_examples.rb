@@ -278,6 +278,16 @@ shared_examples_for "a controller with ActsAsApi responses" do
         end
 
       end
+
+      describe 'Requesting the JSONP content as JavaScript', pending: true do
+        before(:each) do
+          get :index, format: :js, params: { api_template: :name_only, callback: @callback }
+        end
+
+        it "should set the content type to JavaScript" do
+          response.content_type.should == Mime[:js]
+        end
+      end
     end
   end
 
