@@ -1,3 +1,7 @@
+=== 0.4.3 2016-07-31
+
+* Sets correct content type for JSONP responses (see PR #98)
+
 === 0.4.2 2013-12-28
 
 * Fixed problem with rendering of POROs (see PR #88)
