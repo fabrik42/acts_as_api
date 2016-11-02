@@ -41,8 +41,8 @@ module ActsAsApi
 
       if !output_params[:root].nil?
         api_root_name = output_params[:root].to_s
-      elsif api_model.class.respond_to?(:model_name)        
-        api_root_name = api_model.class.model_name        
+      elsif api_model.class.respond_to?(:model_name)
+        api_root_name = api_model.class.model_name
       elsif api_model.respond_to?(:collection_name)
         api_root_name = api_model.collection_name
       elsif api_model.is_a?(Array) && !api_model.empty? && api_model.first.class.respond_to?(:model_name)
@@ -50,7 +50,7 @@ module ActsAsApi
       elsif api_model.is_a?(Array) && !api_model.empty? && api_model.first.respond_to?(:model_name)
         api_root_name = api_model.first.model_name
       elsif api_model.respond_to?(:model_name)
-        api_root_name = api_model.model_name        
+        api_root_name = api_model.model_name
       else
         api_root_name = ActsAsApi::Config.default_root.to_s
       end
@@ -78,7 +78,7 @@ module ActsAsApi
       end
 
       api_response = meta_hash.merge api_response if meta_hash
-      
+
       if ActsAsApi::Config.allow_jsonp_callback && params[:callback]
         output_params[:callback] = params[:callback]
         api_format = :acts_as_api_jsonp if ActsAsApi::Config.add_http_status_to_jsonp_response
