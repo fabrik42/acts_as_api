@@ -21,7 +21,11 @@ module SharedEngine
     end
 
     def index_relation
-      @users = User.where('id > 0').order('first_name ASC').all
+      @users = if defined?(ActiveRecord::Base) && User < ActiveRecord::Base
+        User.where('id > 0').order('first_name ASC').all
+      else
+        User.limit(100).sort_by(&:first_name)
+      end
 
       respond_to do |format|
         format.xml  { render_for_api params[:api_template].to_sym, :xml => @users }
