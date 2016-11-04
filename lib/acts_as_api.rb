@@ -32,9 +32,17 @@ Array.include(ActsAsApi::Collection)
 if defined?(ActiveRecord::Base)
   ActiveRecord::Base.extend ActsAsApi::Base
 
-  # Rails 5 compatibility for CollectionProxy and Relation
-  if defined?(ActiveRecord::Delegation)
-    ActiveRecord::Delegation.include(ActsAsApi::Collection)
+  # Rails 5 compatibility
+  if defined?(ActiveRecord::Relation)
+    ActiveRecord::Relation.include(ActsAsApi::Collection)
+  end
+
+  if defined?(ActiveRecord::Associations::CollectionProxy)
+    ActiveRecord::Associations::CollectionProxy.include(ActsAsApi::Collection)
+  end
+
+  if defined?(ActiveRecord::AssociationRelation)
+    ActiveRecord::AssociationRelation.include(ActsAsApi::Collection)
   end
 end
 
