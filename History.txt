@@ -1,3 +1,7 @@
+=== 0.4.4 2016-11-09
+
+* Updates spec suite to Rails 5
+
 === 0.4.3 2016-07-31
 
 * Sets correct content type for JSONP responses (see PR #98)

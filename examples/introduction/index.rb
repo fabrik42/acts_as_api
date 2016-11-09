@@ -6,7 +6,7 @@
 ### Features
 # * DRY templates for your api responses
 # * Ships with support for **ActiveRecord** and **Mongoid**
-# * Support for Rails 3 Responders
+# * Support for Rails 3, 4 and 5 Responders
 # * Plays very well together with client libs like [Backbone.js][b1] or [RestKit][r1] (iOS).
 # * Easy but very flexible syntax for defining the templates
 # * XML, JSON and JSON-P support out of the  box, easy to extend
