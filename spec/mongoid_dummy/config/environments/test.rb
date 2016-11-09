@@ -9,7 +9,6 @@ MongoidDummy::Application.configure do
 
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
-  config.static_cache_control = "public, max-age=3600"
 
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
@@ -29,6 +28,9 @@ MongoidDummy::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  config.eager_load = false
+
+  config.secret_key_base = 'helloworld123'
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr

@@ -9,7 +9,6 @@ ActiveRecordDummy::Application.configure do
 
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
-  config.static_cache_control = "public, max-age=3600"
 
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
@@ -29,8 +28,9 @@ ActiveRecordDummy::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
-  # Raise exception on mass assignment protection for Active Record models
-  config.active_record.mass_assignment_sanitizer = :strict
+  config.eager_load = false
+
+  config.secret_key_base = 'helloworld123'
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr

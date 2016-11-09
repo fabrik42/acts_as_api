@@ -5,6 +5,7 @@ require 'spec_helper'
 # end
 
 describe SharedEngine::RespondWithUsersController, type: :controller do
+  routes { SharedEngine::Engine.routes }
 
   before(:each) do
     setup_models
@@ -24,7 +25,7 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
       context "creating valid models" do
 
         before(:each) do
-          post :create, :user => { :first_name => "Luke", :last_name => "Skywalker" }, :api_template => :name_only, :format => 'json'
+          post :create, format: 'json', params: { user: { first_name: "Luke", last_name: "Skywalker" }, api_template: :name_only }
         end
 
         it "should return HTTP 201 status" do
@@ -45,7 +46,7 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
       context "creating invalid models" do
 
         before(:each) do
-          post :create, :user => {}, :api_template => :name_only, :format => 'json'
+          post :create, format: 'json', params: { user: { first_name: 'Luke' }, api_template: :name_only }
         end
 
         it "should return HTTP 422 status" do
@@ -53,16 +54,15 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
         end
 
         it "should return errors as json" do
-          response_body_json['errors']['first_name'].should include("can't be blank")
           response_body_json['errors']['last_name'].should include("can't be blank")
         end
 
       end
-      
+
       context "returning all models without default root and no order" do
 
         before(:each) do
-          get :index_no_root_no_order, :api_template => :name_only, :format => 'json'
+          get :index_no_root_no_order, format: 'json', params: { api_template: :name_only }
         end
 
         it "should return HTTP 200 status" do
@@ -85,7 +85,7 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
       context "creating valid models" do
 
         before(:each) do
-          post :create, :user => { :first_name => "Luke", :last_name => "Skywalker" }, :api_template => :name_only, :format => 'xml'
+          post :create, format: 'xml', params: { user: { first_name: "Luke", last_name: "Skywalker" }, api_template: :name_only }
         end
 
         it "should return HTTP 201 status" do
@@ -106,7 +106,7 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
       context "creating invalid models" do
 
         before(:each) do
-          post :create, :user => {}, :api_template => :name_only, :format => 'xml'
+          post :create, :format => 'xml', params: { user: { first_name: 'Luke' }, api_template: :name_only }
         end
 
         it "should return HTTP 422 status" do
@@ -122,7 +122,7 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
       context "returning all models without default root and no order" do
 
         before(:each) do
-          get :index_no_root_no_order, :api_template => :name_only, :format => 'xml'
+          get :index_no_root_no_order, format: 'xml', params: { api_template: :name_only }
         end
 
         it "should return HTTP 200 status" do

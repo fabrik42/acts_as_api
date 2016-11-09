@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.22.2'
+gem 'rails', '5.0.0.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
 gem "bson_ext"
-gem "mongoid", ">= 3.0.0.rc"
+gem 'mongoid', '>= 6.0.2'
 
 gem 'shared_engine', :path => '../shared_engine'
 gem 'acts_as_api', :path => '../../'

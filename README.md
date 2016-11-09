@@ -1,6 +1,6 @@
 # acts_as_api ![acts_as_api on travis ci](https://secure.travis-ci.org/fabrik42/acts_as_api.png?branch=master)
 
-acts_as_api makes creating XML/JSON responses in Rails 3 easy and fun.
+acts_as_api makes creating XML/JSON responses in Rails 3, 4 and 5 easy and fun.
 
 It provides a simple interface to determine the representation of your model data, that should be rendered in your API responses.
 
@@ -55,7 +55,7 @@ There are a lot of how-tos like:
 
 * DRY templates for your api responses
 * Ships with support for __ActiveRecord__ and __Mongoid__
-* Support for Rails 3 Responders
+* Support for Rails 3/4 Responders (extracted to responders gem since Rails 5)
 * Plays very well together with client libs like [Backbone.js](http://documentcloud.github.com/backbone), [RestKit](http://restkit.org) (iOS) or [gson](http://code.google.com/p/google-gson) (Android).
 * Easy but very flexible syntax for defining the templates
 * XML, JSON and JSON-P support out of the  box, easy to extend

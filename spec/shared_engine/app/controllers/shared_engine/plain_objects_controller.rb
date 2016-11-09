@@ -1,6 +1,6 @@
 module SharedEngine
   class PlainObjectsController < SharedEngine::ApplicationController
-    before_filter :setup_objects
+    before_action :setup_objects
 
     def index
       @users = [@han, @luke, @leia]

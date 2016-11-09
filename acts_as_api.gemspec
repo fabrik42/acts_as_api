@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# encoding: utf-8
 $:.push File.expand_path("../lib", __FILE__)
 require "acts_as_api/version"
 
@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Christian Bäuerlein"]
   s.email       = ["christian@ffwdme.com"]
   s.homepage    = "https://github.com/fabrik42/acts_as_api"
-  s.summary     = %q{Makes creating XML/JSON responses in Rails 3 easy and fun.}
+  s.summary     = %q{Makes creating XML/JSON responses in Rails 3, 4 and 5 easy and fun.}
   s.description = %q{acts_as_api enriches the models and controllers of your app in a rails-like way so you can easily determine how your XML/JSON API responses should look like.}
 
   s.add_dependency('activemodel','>= 3.0.0')
