@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('rails', ['>= 3.2.22.2'])
   s.add_development_dependency('mongoid', ['>= 3.0.1'])
+  s.add_development_dependency('rocco', ['>= 0.8.0'])
 
   s.rdoc_options  = ['--charset=UTF-8']
 

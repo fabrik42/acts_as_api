@@ -44,10 +44,10 @@
         <p>The built-in XML/JSON support of Rails is great but:
 You surely don’t want to expose your models always with all attributes.</p>
 
-<p>acts_as_api enriches the models and controllers of your app in a rails-like way so you can easily determine how your API responses should look like.</p>
+<p>acts<em>as</em>api enriches the models and controllers of your app in a rails-like way so you can easily determine how your API responses should look like.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre></pre></div>
+        <div class='highlight'><pre><span></span></pre></div>
       </td>
     </tr>
     <tr id='section-Features'>
@@ -60,17 +60,16 @@ You surely don’t want to expose your models always with all attributes.</p>
 <ul>
 <li>DRY templates for your api responses</li>
 <li>Ships with support for <strong>ActiveRecord</strong> and <strong>Mongoid</strong></li>
-<li>Support for Rails 3/4 Responders (extracted to responders gem since Rails 5)</li>
+<li>Support for Rails 3, 4 and 5 Responders</li>
 <li>Plays very well together with client libs like <a href="http://documentcloud.github.com/backbone">Backbone.js</a> or <a href="http://restkit.org">RestKit</a> (iOS).</li>
 <li>Easy but very flexible syntax for defining the templates</li>
 <li>XML, JSON and JSON-P support out of the  box, easy to extend</li>
-<li>Support for meta data like pagination info, etc&hellip;</li>
+<li>Support for meta data like pagination info, etc...</li>
 <li>Minimal dependecies (you can also use it without Rails)</li>
 <li>Supports multiple api rendering templates for a models. This is especially useful for API versioning or for example for private vs. public access points to a user’s profile.</li>
 </ul>
 
-
-<hr />
+<hr>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -81,7 +80,7 @@ You surely don’t want to expose your models always with all attributes.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-Rails_3.x_Quickstart">&#182;</a>
         </div>
-        <h2>Rails Quickstart</h2>
+        <h2>Rails 3.x Quickstart</h2>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -139,7 +138,7 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
         </div>
         <p>Within your model:</p>
 
-<p>First you activate acts_as_api for your model by calling <code>acts_as_api</code>.</p>
+<p>First you activate acts<em>as</em>api for your model by calling <code>acts_as_api</code>.</p>
 
 <p>Then you define an api template to render the model with <code>api_accessible</code>.</p>
       </td>
@@ -199,7 +198,7 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
         <div class="pilwrap">
           <a class="pilcrow" href="#section-12">&#182;</a>
         </div>
-        <p>Note that it&rsquo;s wise to add a <code>root</code> param when rendering lists.</p>
+        <p>Note that it&#39;s wise to add a <code>root</code> param when rendering lists.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
@@ -220,12 +219,12 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
 <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-That&amp;rsquo;s_it!'>
+    <tr id='section-That&amp;#39;s_it!'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-That&amp;rsquo;s_it!">&#182;</a>
+          <a class="pilcrow" href="#section-That&amp;#39;s_it!">&#182;</a>
         </div>
-        <h3>That&rsquo;s it!</h3>
+        <h3>That&#39;s it!</h3>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -255,20 +254,20 @@ because they were not listed by <code>api_accessible</code> in the model.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-15">&#182;</a>
         </div>
-        <hr />
+        <hr>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-But_wait!_&amp;hellip;_there&amp;rsquo;s_more'>
+    <tr id='section-But_wait!_..._there&amp;#39;s_more'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-But_wait!_&amp;hellip;_there&amp;rsquo;s_more">&#182;</a>
+          <a class="pilcrow" href="#section-But_wait!_..._there&amp;#39;s_more">&#182;</a>
         </div>
-        <h2>But wait! &hellip; there&rsquo;s more</h2>
+        <h2>But wait! ... there&#39;s more</h2>
 
-<p>Often the pure rendering of database values is just not enough, so acts_as_api
+<p>Often the pure rendering of database values is just not enough, so acts<em>as</em>api
 provides you some tools to customize your API responses.</p>
       </td>
       <td class=code>
@@ -286,14 +285,13 @@ provides you some tools to customize your API responses.</p>
 
 <ul>
 <li><a href="https://github.com/fabrik42/acts_as_api/wiki/Calling-a-method-of-the-model">Include attributes and all other kinds of methods of your model</a></li>
-<li><a href="https://github.com/fabrik42/acts_as_api/wiki/Including-a-child-association">Include child associations (if they also act_as_api this will be considered)</a></li>
+<li><a href="https://github.com/fabrik42/acts_as_api/wiki/Including-a-child-association">Include child associations (if they also act<em>as</em>api this will be considered)</a></li>
 <li><a href="https://github.com/fabrik42/acts_as_api/wiki/Calling-a-lambda-in-the-api-template">Include lambdas and Procs</a></li>
 <li><a href="https://github.com/fabrik42/acts_as_api/wiki/Calling-a-method-of-the-model">Call methods of a parent association</a></li>
 <li><a href="https://github.com/fabrik42/acts_as_api/wiki/Calling-a-scope-of-a-sub-resource">Call scopes of your model or child associations</a></li>
 <li><a href="https://github.com/fabrik42/acts_as_api/wiki/Renaming-an-attribute">Rename attributes, methods, associations</a></li>
 <li><a href="https://github.com/fabrik42/acts_as_api/wiki/Creating-a-completely-different-response-structure">Create your own hierarchies</a></li>
 </ul>
-
 
 <p>You can find more advanced examples in the <a href="https://github.com/fabrik42/acts_as_api/wiki/">Github Wiki</a></p>
       </td>
@@ -306,7 +304,7 @@ provides you some tools to customize your API responses.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-18">&#182;</a>
         </div>
-        <hr />
+        <hr>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -325,7 +323,6 @@ provides you some tools to customize your API responses.</p>
 <li>Found a bug or do you have a feature request? <a href="https://github.com/fabrik42/acts_as_api/issues">issue tracker</a></li>
 <li><a href="http://rdoc.info/github/fabrik42/acts_as_api">Docs</a></li>
 </ul>
-
 
       </td>
       <td class=code>

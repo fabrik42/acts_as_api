@@ -37,5 +37,5 @@ task default: 'spec:all'
 
 desc 'Generate the gh_pages site'
 task :rocco do
-  system 'bundle exec rocco examples/introduction/index.rb -t examples/introduction/layout.mustache'
+  system 'bundle exec rocco docs/index.rb -t docs/layout.mustache'
 end
