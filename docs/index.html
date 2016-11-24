@@ -202,8 +202,8 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-      <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:xml</span> <span class="o">=&gt;</span> <span class="vi">@users</span><span class="p">,</span> <span class="ss">:root</span> <span class="o">=&gt;</span> <span class="ss">:users</span>  <span class="p">}</span>
-      <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:json</span> <span class="o">=&gt;</span> <span class="vi">@users</span><span class="p">,</span> <span class="ss">:root</span> <span class="o">=&gt;</span> <span class="ss">:users</span> <span class="p">}</span>
+      <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">xml</span><span class="p">:</span> <span class="vi">@users</span><span class="p">,</span>  <span class="ss">root</span><span class="p">:</span> <span class="ss">:users</span> <span class="p">}</span>
+      <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@users</span><span class="p">,</span> <span class="ss">root</span><span class="p">:</span> <span class="ss">:users</span> <span class="p">}</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
@@ -211,8 +211,8 @@ If you only want to expose the <code>first_name</code> and <code>last_name</code
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
 
     <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-      <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:xml</span>  <span class="o">=&gt;</span> <span class="vi">@user</span> <span class="p">}</span>
-      <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">:json</span> <span class="o">=&gt;</span> <span class="vi">@user</span> <span class="p">}</span>
+      <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">xml</span><span class="p">:</span> <span class="vi">@user</span>  <span class="p">}</span>
+      <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render_for_api</span> <span class="ss">:name_only</span><span class="p">,</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@user</span> <span class="p">}</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
