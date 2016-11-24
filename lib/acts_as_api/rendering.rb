@@ -1,9 +1,7 @@
 module ActsAsApi
-
   # The methods of this module are included into the AbstractController::Rendering
   # module.
   module Rendering
-
     # Provides an alternative to the +render+ method used within the controller
     # to simply generate API outputs.
     #
@@ -23,13 +21,13 @@ module ActsAsApi
       api_format_options = {}
 
       ActsAsApi::Config.accepted_api_formats.each do |item|
-        if render_options.has_key?(item)
+        if render_options.key?(item)
           api_format_options[item] = render_options[item]
           render_options.delete item
         end
       end
 
-      meta_hash = render_options[:meta] if render_options.has_key?(:meta)
+      meta_hash = render_options[:meta] if render_options.key?(:meta)
 
       api_format =  api_format_options.keys.first
       api_model  =  api_format_options.values.first
@@ -64,17 +62,14 @@ module ActsAsApi
 
       output_params[:root] = api_root_name
 
-      #output_params[:root] = output_params[:root].camelize if render_options.has_key?(:camelize) && render_options[:camelize]
-      #output_params[:root] = output_params[:root].dasherize if !render_options.has_key?(:dasherize) || render_options[:dasherize]
-
       api_response = api_model.as_api_response(api_template)
 
       if api_response.is_a?(Array) && api_format.to_sym == :json && ActsAsApi::Config.include_root_in_json_collections
-        api_response = api_response.collect{|f| { api_root_name.singularize => f } }
+        api_response = api_response.collect { |f| { api_root_name.singularize => f } }
       end
 
-      if meta_hash or ActsAsApi::Config.add_root_node_for.include? api_format
-        api_response = { api_root_name.to_sym =>  api_response}
+      if meta_hash || ActsAsApi::Config.add_root_node_for.include?(api_format)
+        api_response = { api_root_name.to_sym => api_response }
       end
 
       api_response = meta_hash.merge api_response if meta_hash
@@ -89,7 +84,5 @@ module ActsAsApi
 
       render output_params
     end
-
   end
-
 end

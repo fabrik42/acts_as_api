@@ -1,23 +1,19 @@
-shared_examples_for "calling a method in the api template" do
+shared_examples_for 'calling a method in the api template' do
+  subject(:response) { @luke.as_api_response(:only_full_name) }
 
-  before(:each) do
-    @response = @luke.as_api_response(:only_full_name)
+  it 'returns a hash' do
+    expect(response).to be_kind_of(Hash)
   end
 
-  it "returns a hash" do
-    @response.should be_kind_of(Hash)
+  it 'returns the correct number of fields' do
+    expect(response).to have(1).keys
   end
 
-  it "returns the correct number of fields" do
-    @response.should have(1).keys
+  it 'returns all specified fields by name' do
+    expect(response.keys).to include(:full_name)
   end
 
-  it "returns all specified fields by name" do
-    @response.keys.should include(:full_name)
+  it 'returns the correct values for the specified fields' do
+    expect(response.values).to include(@luke.full_name)
   end
-
-  it "returns the correct values for the specified fields" do
-    @response.values.should include(@luke.full_name)
-  end
-
 end

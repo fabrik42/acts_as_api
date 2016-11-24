@@ -1,9 +1,6 @@
 module ActsAsApi
-
   module Config
-
     class << self
-
       attr_writer :accepted_api_formats, :dasherize_for, :include_root_in_json_collections, :add_root_node_for, :default_root, :allow_jsonp_callback, :add_http_status_to_jsonp_response
 
       # The accepted response formats
@@ -52,7 +49,5 @@ module ActsAsApi
         @add_http_status_to_jsonp_response.nil? ? true : @add_http_status_to_jsonp_response
       end
     end
-
   end
-
 end

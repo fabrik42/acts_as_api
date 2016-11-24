@@ -6,12 +6,11 @@ module ActsAsApi
     def as_api_response(api_template, options = {})
       collect do |item|
         if item.respond_to?(:as_api_response)
-          item.as_api_response(api_template,options)
+          item.as_api_response(api_template, options)
         else
           item
         end
       end
     end
-
   end
 end

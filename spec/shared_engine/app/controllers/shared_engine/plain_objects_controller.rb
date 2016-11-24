@@ -6,8 +6,8 @@ module SharedEngine
       @users = [@han, @luke, @leia]
 
       respond_to do |format|
-        format.xml  { render_for_api params[:api_template].to_sym, :xml => @users }
-        format.json { render_for_api params[:api_template].to_sym, :json => @users }
+        format.xml { render_for_api params[:api_template].to_sym, xml: @users }
+        format.json { render_for_api params[:api_template].to_sym, json: @users }
       end
     end
   end

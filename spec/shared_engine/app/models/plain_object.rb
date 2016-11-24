@@ -1,5 +1,7 @@
-class PlainObject < Struct.new(:first_name, :last_name, :age, :active)
+class PlainObject
   extend ActsAsApi::Base
+
+  attr_accessor :first_name, :last_name, :age, :active
 
   def initialize(opts)
     opts.each do |k, v|
