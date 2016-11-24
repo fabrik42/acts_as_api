@@ -1,9 +1,6 @@
 require 'active_model'
 require 'active_support/core_ext/class'
 
-$LOAD_PATH.unshift(File.dirname(__FILE__)) unless
-  $LOAD_PATH.include?(File.dirname(__FILE__)) || $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
-
 require 'acts_as_api/collection'
 require 'acts_as_api/rails_renderer'
 require 'acts_as_api/exceptions'
