@@ -1,3 +1,8 @@
+=== 1.0.0 2016-11-24
+
+* Ditch Ruby 1.8 syntax, overall modernization
+* Finally, 1.0!
+
 === 0.4.4 2016-11-09
 
 * Updates spec suite to Rails 5
