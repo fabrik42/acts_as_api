@@ -62,8 +62,8 @@ class UsersController < ApplicationController
     @users = User.all
     # Note that it's wise to add a `root` param when rendering lists.
     respond_to do |format|
-      format.xml  { render_for_api :name_only, :xml => @users, :root => :users  }
-      format.json { render_for_api :name_only, :json => @users, :root => :users }
+      format.xml  { render_for_api :name_only, xml: @users,  root: :users }
+      format.json { render_for_api :name_only, json: @users, root: :users }
     end
   end
 
@@ -71,8 +71,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      format.xml  { render_for_api :name_only, :xml  => @user }
-      format.json { render_for_api :name_only, :json => @user }
+      format.xml  { render_for_api :name_only, xml: @user  }
+      format.json { render_for_api :name_only, json: @user }
     end
   end
 
