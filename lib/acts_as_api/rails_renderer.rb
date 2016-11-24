@@ -3,7 +3,6 @@ module ActsAsApi
   #
   # See ActsAsApi::Config about the possible configurations
   module RailsRenderer
-
     def self.setup
       ActionController.add_renderer :acts_as_api_jsonp do |json, options|
         json = ActiveSupport::JSON.encode(json) unless json.respond_to?(:to_str)
@@ -16,6 +15,5 @@ module ActsAsApi
         self.response_body = json
       end
     end
-
   end
 end

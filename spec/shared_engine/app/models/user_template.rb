@@ -12,11 +12,11 @@ module UserTemplate
     end
 
     api_accessible :rename_last_name do |t|
-      t.add :last_name, :as => :family_name
+      t.add :last_name, as: :family_name
     end
 
     api_accessible :rename_full_name do |t|
-      t.add :full_name, :as => :other_full_name
+      t.add :full_name, as: :other_full_name
     end
 
     api_accessible :with_former_value do |t|
@@ -24,19 +24,19 @@ module UserTemplate
       t.add :last_name
     end
 
-    api_accessible :age_and_first_name, :extend => :with_former_value do |t|
+    api_accessible :age_and_first_name, extend: :with_former_value do |t|
       t.add :age
       t.remove :last_name
     end
 
     api_accessible :calling_a_proc do |t|
-      t.add Proc.new{|model| model.full_name.upcase  }, :as => :all_caps_name
-      t.add Proc.new{|model| Time.now.class.to_s  }, :as => :without_param
+      t.add proc { |model| model.full_name.upcase }, as: :all_caps_name
+      t.add proc { |_| Time.now.class.to_s }, as: :without_param
     end
 
     api_accessible :calling_a_lambda do |t|
-      t.add lambda{|model| model.full_name.upcase  }, :as => :all_caps_name
-      t.add lambda{|model| Time.now.class.to_s  }, :as => :without_param
+      t.add ->(model) { model.full_name.upcase }, as: :all_caps_name
+      t.add ->(_) { Time.now.class.to_s }, as: :without_param
     end
     api_accessible :include_tasks do |t|
       t.add :tasks
@@ -48,19 +48,19 @@ module UserTemplate
 
     api_accessible :other_sub_template do |t|
       t.add :first_name
-      t.add :tasks, :template => :other_template
+      t.add :tasks, template: :other_template
     end
 
     api_accessible :include_completed_tasks do |t|
-      t.add "tasks.completed.all", :as => :completed_tasks
+      t.add 'tasks.completed.all', as: :completed_tasks
     end
 
     api_accessible :sub_node do |t|
-      t.add Hash[:foo => :say_something], :as => :sub_nodes
+      t.add Hash[foo: :say_something], as: :sub_nodes
     end
 
     api_accessible :nested_sub_node do |t|
-      t.add Hash[:foo, Hash[:bar, :last_name]], :as => :sub_nodes
+      t.add Hash[:foo, Hash[:bar, :last_name]], as: :sub_nodes
     end
 
     api_accessible :nested_sub_hash do |t|
@@ -69,46 +69,46 @@ module UserTemplate
 
     api_accessible :if_over_thirty do |t|
       t.add :first_name
-      t.add :last_name, :if => :over_thirty?
+      t.add :last_name, if: :over_thirty?
     end
 
     api_accessible :if_returns_nil do |t|
       t.add :first_name
-      t.add :last_name, :if => :return_nil
+      t.add :last_name, if: :return_nil
     end
 
     api_accessible :if_over_thirty_proc do |t|
       t.add :first_name
-      t.add :last_name, :if => lambda{|u| u.over_thirty? }
+      t.add :last_name, if: ->(model) { model.over_thirty? }
     end
 
     api_accessible :if_returns_nil_proc do |t|
       t.add :first_name
-      t.add :last_name, :if => lambda{|u| nil }
+      t.add :last_name, if: ->(_) { nil }
     end
 
     api_accessible :unless_under_thirty do |t|
       t.add :first_name
-      t.add :last_name, :unless => :under_thirty?
+      t.add :last_name, unless: :under_thirty?
     end
 
     api_accessible :unless_returns_nil do |t|
       t.add :first_name
-      t.add :last_name, :unless => :return_nil
+      t.add :last_name, unless: :return_nil
     end
 
     api_accessible :unless_under_thirty_proc do |t|
       t.add :first_name
-      t.add :last_name, :unless => lambda{|u| u.under_thirty? }
+      t.add :last_name, unless: ->(model) { model.under_thirty? }
     end
 
     api_accessible :unless_returns_nil_proc do |t|
       t.add :first_name
-      t.add :last_name, :unless => lambda{|u| nil }
+      t.add :last_name, unless: ->(_) { nil }
     end
 
     api_accessible :with_prefix_name_only do |t|
-      t.add lambda{|model| 'true' }, :as => :prefix
+      t.add ->(_) { 'true' }, as: :prefix
       t.add :first_name
       t.add :last_name
     end
@@ -116,17 +116,17 @@ module UserTemplate
     api_accessible :name_only_with_postfix do |t|
       t.add :first_name
       t.add :last_name
-      t.add lambda{|model| 'true' }, :as => :postfix
+      t.add ->(_) { 'true' }, as: :postfix
     end
 
     api_accessible :with_prefix_name_only_with_postfix do |t|
-      t.add lambda{|model| 'true' }, :as => :prefix
+      t.add ->(_) { 'true' }, as: :prefix
       t.add :first_name
       t.add :last_name
-      t.add lambda{|model| 'true' }, :as => :postfix
+      t.add ->(_) { 'true' }, as: :postfix
     end
 
-    def before_api_response(api_response)
+    def before_api_response(_api_response)
       @before_api_response_called = true
     end
 
@@ -134,7 +134,7 @@ module UserTemplate
       !!@before_api_response_called
     end
 
-    def after_api_response(api_response)
+    def after_api_response(_api_response)
       @after_api_response_called = true
     end
 
@@ -146,9 +146,8 @@ module UserTemplate
       @skip_api_response = should_skip
     end
 
-    def around_api_response(api_response)
-      @skip_api_response ? { :skipped => true } : yield
+    def around_api_response(_api_response)
+      @skip_api_response ? { skipped: true } : yield
     end
-
   end
 end

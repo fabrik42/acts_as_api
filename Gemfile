@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source 'http://rubygems.org'
 
 # Specify your gem's dependencies in acts_as_api.gemspec
 gemspec
@@ -15,5 +15,5 @@ group :test do
   gem 'rspec-rails', '>= 2.5.0'
   gem 'webrat'
   gem 'responders'
-  gem 'shared_engine', :path => './spec/shared_engine'
+  gem 'shared_engine', path: './spec/shared_engine'
 end

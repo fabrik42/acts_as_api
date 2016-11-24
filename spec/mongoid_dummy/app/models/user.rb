@@ -1,18 +1,17 @@
 class User
-
   include Mongoid::Document
 
-  field :first_name, :type => String
-  field :last_name, :type => String
-  field :age, :type => Integer
-  field :active, :type => Boolean
-  field :created_at, :type => DateTime
-  field :updated_at, :type => DateTime
+  field :first_name, type: String
+  field :last_name, type: String
+  field :age, type: Integer
+  field :active, type: Boolean
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
 
-  embeds_one :profile, :class_name => "Profile", :inverse_of => :user
-  embeds_many :tasks, :class_name => "Task", :inverse_of => :user
+  embeds_one :profile, class_name: 'Profile', inverse_of: :user
+  embeds_many :tasks, class_name: 'Task', inverse_of: :user
 
-  validates :first_name, :last_name, :presence => true
+  validates :first_name, :last_name, presence: true
 
   acts_as_api
 
@@ -35,14 +34,13 @@ class User
   end
 
   def say_something
-    "something"
+    'something'
   end
 
   def sub_hash
     {
-      :foo => "bar",
-      :hello => "world"
+      foo: 'bar',
+      hello: 'world'
     }
   end
-
 end

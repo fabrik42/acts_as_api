@@ -8,7 +8,6 @@ module ActsAsApi
   # Please note that +ApiTemplate+ inherits from +Hash+ so you can use all
   # kind of +Hash+ and +Enumerable+ methods to manipulate the template.
   class ApiTemplate < Hash
-
     # The name of the api template as a Symbol.
     attr_accessor :api_template
 
@@ -21,7 +20,7 @@ module ActsAsApi
 
     def merge!(other_hash, &block)
       super
-      self.options.merge!(other_hash.options) if other_hash.respond_to?(:options)
+      options.merge!(other_hash.options) if other_hash.respond_to?(:options)
     end
 
     # Adds a field to the api template
@@ -44,7 +43,7 @@ module ActsAsApi
 
     # Removes a field from the template
     def remove(field)
-      self.delete(field)
+      delete(field)
     end
 
     # Returns the options of a field in the api template
@@ -67,9 +66,9 @@ module ActsAsApi
     # the response based on the conditional options passed.
     def allowed_to_render?(fieldset, field, model, options)
       return true unless fieldset.is_a? ActsAsApi::ApiTemplate
-      
+
       fieldset_options = fieldset.options_for(field)
-      
+
       if fieldset_options[:unless]
         !(condition_fulfilled?(model, fieldset_options[:unless], options))
       elsif fieldset_options[:if]
@@ -112,28 +111,27 @@ module ActsAsApi
       api_output
     end
 
-  private
+    private
 
-    def process_value(model, value, options)
-      case value
-      when Symbol
-        model.send(value)
-      when Proc
-        call_proc(value,model,options)
-      when String
-        value.split('.').inject(model) { |result, method| result.send(method) }
-      when Hash
-        to_response_hash(model, value)
+      def process_value(model, value, options)
+        case value
+        when Symbol
+          model.send(value)
+        when Proc
+          call_proc(value, model, options)
+        when String
+          value.split('.').inject(model) { |result, method| result.send(method) }
+        when Hash
+          to_response_hash(model, value)
+        end
       end
-    end
 
-    def call_proc(the_proc,model,options)
-      if the_proc.arity == 2
-        the_proc.call(model, options)
-      else
-        the_proc.call(model)
+      def call_proc(the_proc, model, options)
+        if the_proc.arity == 2
+          the_proc.call(model, options)
+        else
+          the_proc.call(model)
+        end
       end
-    end
-
   end
 end

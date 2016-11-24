@@ -1,5 +1,4 @@
 module ApiTestHelpers
-
   def response_body
     response.body.strip
   end
@@ -15,7 +14,6 @@ module ApiTestHelpers
   def jsonp_callback(callback)
     /\A#{callback}\((.*),\s+\d{3}\)\z/
   end
-
 end
 
 RSpec.configure do |c|

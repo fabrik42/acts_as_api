@@ -5,12 +5,11 @@ gem 'rails', '5.0.0.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-
-gem "bson_ext"
+gem 'bson_ext'
 gem 'mongoid', '>= 6.0.2'
 
-gem 'shared_engine', :path => '../shared_engine'
-gem 'acts_as_api', :path => '../../'
+gem 'shared_engine', path: '../shared_engine'
+gem 'acts_as_api', path: '../../'
 
 group :test do
   gem 'rspec-rails', '>= 2.5.0'

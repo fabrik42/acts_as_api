@@ -10,7 +10,6 @@ module ActsAsApi
     # When invoked, it enriches the current model with the
     # class and instance methods to act as api.
     def acts_as_api
-
       class_eval do
         include ActsAsApi::Base::InstanceMethods
         extend ActsAsApi::Base::ClassMethods
@@ -19,13 +18,11 @@ module ActsAsApi
       if block_given?
         yield ActsAsApi::Config
       end
-
     end
 
     module ClassMethods
-
-      def acts_as_api?#:nodoc:
-        self.included_modules.include?(InstanceMethods)
+      def acts_as_api? #:nodoc:
+        included_modules.include?(InstanceMethods)
       end
 
       # Determines the attributes, methods of the model that are accessible in the api response.
@@ -33,9 +30,7 @@ module ActsAsApi
       # So once the model acts as api, you have to determine all attributes here that should
       # be contained in the api responses.
       def api_accessible(api_template, options = {}, &block)
-
         attributes = api_accessible_attributes(api_template).try(:dup) || ApiTemplate.new(api_template)
-
         attributes.merge!(api_accessible_attributes(options[:extend])) if options[:extend]
 
         if block_given?
@@ -53,12 +48,11 @@ module ActsAsApi
     end
 
     module InstanceMethods
-
       # Creates the api response of the model and returns it as a Hash.
       # Will raise an exception if the passed api template is not defined for the model
       def as_api_response(api_template, options = {})
         api_attributes = self.class.api_accessible_attributes(api_template)
-        raise ActsAsApi::TemplateNotFoundError.new("acts_as_api template :#{api_template.to_s} was not found for model #{self.class}") if api_attributes.nil?
+        raise ActsAsApi::TemplateNotFoundError.new("acts_as_api template :#{api_template} was not found for model #{self.class}") if api_attributes.nil?
 
         before_api_response(api_template)
         response_hash = around_api_response(api_template) do
@@ -69,20 +63,17 @@ module ActsAsApi
         response_hash
       end
 
-    protected
+      protected
 
-      def before_api_response(api_remplate)
-      end
+        def before_api_response(_api_template)
+        end
 
-      def after_api_response(api_remplate)
-      end
+        def after_api_response(_api_template)
+        end
 
-      def around_api_response(api_remplate)
-        yield
-      end
-
+        def around_api_response(_api_template)
+          yield
+        end
     end
-
   end
-
 end

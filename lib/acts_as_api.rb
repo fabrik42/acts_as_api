@@ -1,12 +1,12 @@
 require 'active_model'
 require 'active_support/core_ext/class'
 
-$:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+$LOAD_PATH.unshift(File.dirname(__FILE__)) unless
+  $LOAD_PATH.include?(File.dirname(__FILE__)) || $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
 
-require "acts_as_api/collection"
-require "acts_as_api/rails_renderer"
-require "acts_as_api/exceptions"
+require 'acts_as_api/collection'
+require 'acts_as_api/rails_renderer'
+require 'acts_as_api/exceptions'
 
 # acts_as_api is a gem that aims to make the construction of JSON and XML
 # responses in Rails 3, 4 and 5 easy and fun.
@@ -17,12 +17,12 @@ require "acts_as_api/exceptions"
 # acts_as_api uses the default serializers of your rails app and doesn't
 # force you into more dependencies.
 module ActsAsApi
-  autoload :Config,       "acts_as_api/config"
-  autoload :ApiTemplate,  "acts_as_api/api_template"
-  autoload :Base,         "acts_as_api/base"
-  autoload :Rendering,    "acts_as_api/rendering"
-  autoload :Responder,    "acts_as_api/responder"
-  autoload :Adapters,     "acts_as_api/adapters"
+  autoload :Config,       'acts_as_api/config'
+  autoload :ApiTemplate,  'acts_as_api/api_template'
+  autoload :Base,         'acts_as_api/base'
+  autoload :Rendering,    'acts_as_api/rendering'
+  autoload :Responder,    'acts_as_api/responder'
+  autoload :Adapters,     'acts_as_api/adapters'
 end
 
 # Neccessary to render an Array of models, e.g. the result of a search.
