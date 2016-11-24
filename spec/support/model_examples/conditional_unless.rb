@@ -2,71 +2,65 @@ shared_examples_for 'conditional unless statements' do
   describe 'using the :unless option' do
     describe 'passing a symbol' do
       describe 'that returns false' do
-        before(:each) do
-          @response = @luke.as_api_response(:unless_under_thirty)
-        end
+        subject(:response) { @luke.as_api_response(:unless_under_thirty) }
 
         it 'returns a hash' do
-          expect(@response).to be_kind_of(Hash)
+          expect(response).to be_kind_of(Hash)
         end
 
         it 'returns the correct number of fields' do
-          expect(@response).to have(1).keys
+          expect(response).to have(1).keys
         end
 
         it 'will not add the conditional field but all others' do
-          expect(@response.keys).to include(:first_name)
-          expect(@response.keys).not_to include(:full_name)
+          expect(response.keys).to include(:first_name)
+          expect(response.keys).not_to include(:full_name)
         end
 
         it 'the other specified fields have the correct value' do
-          expect(@response.values).to include(@luke.first_name)
+          expect(response.values).to include(@luke.first_name)
         end
       end
 
       describe 'that returns nil' do
-        before(:each) do
-          @response = @luke.as_api_response(:unless_returns_nil)
-        end
+        subject(:response) { @luke.as_api_response(:unless_returns_nil) }
 
         it 'returns a hash' do
-          expect(@response).to be_kind_of(Hash)
+          expect(response).to be_kind_of(Hash)
         end
 
         it 'returns the correct number of fields' do
-          expect(@response).to have(2).keys
+          expect(response).to have(2).keys
         end
 
         it 'will not add the conditional field but all others' do
-          expect(@response.keys).to include(:first_name)
-          expect(@response.keys).to include(:last_name)
+          expect(response.keys).to include(:first_name)
+          expect(response.keys).to include(:last_name)
         end
 
         it 'the other specified fields have the correct value' do
-          expect(@response.values).to include(@luke.first_name, @luke.last_name)
+          expect(response.values).to include(@luke.first_name, @luke.last_name)
         end
       end
 
       describe 'that returns true' do
-        before(:each) do
-          @response = @han.as_api_response(:unless_under_thirty)
-        end
+        subject(:response) { @han.as_api_response(:unless_under_thirty) }
 
         it 'returns a hash' do
-          expect(@response).to be_kind_of(Hash)
+          expect(response).to be_kind_of(Hash)
         end
 
         it 'returns the correct number of fields' do
-          expect(@response).to have(2).keys
+          expect(response).to have(2).keys
         end
 
         it 'will not add the conditional field but all others' do
-          expect(@response.keys).to include(:first_name)
-          expect(@response.keys).to include(:last_name)
+          expect(response.keys).to include(:first_name)
+          expect(response.keys).to include(:last_name)
         end
 
         it 'the other specified fields have the correct value' do
-          expect(@response.values).to include(@han.first_name, @han.last_name)
+          expect(response.values).to include(@han.first_name, @han.last_name)
         end
       end
     end
@@ -74,71 +68,65 @@ shared_examples_for 'conditional unless statements' do
 
   describe 'passing a proc' do
     describe 'that returns false' do
-      before(:each) do
-        @response = @luke.as_api_response(:unless_under_thirty_proc)
-      end
+      subject(:response) { @luke.as_api_response(:unless_under_thirty_proc) }
 
       it 'returns a hash' do
-        expect(@response).to be_kind_of(Hash)
+        expect(response).to be_kind_of(Hash)
       end
 
       it 'returns the correct number of fields' do
-        expect(@response).to have(1).keys
+        expect(response).to have(1).keys
       end
 
       it 'will not add the conditional field but all others' do
-        expect(@response.keys).to include(:first_name)
-        expect(@response.keys).not_to include(:full_name)
+        expect(response.keys).to include(:first_name)
+        expect(response.keys).not_to include(:full_name)
       end
 
       it 'the other specified fields have the correct value' do
-        expect(@response.values).to include(@luke.first_name)
+        expect(response.values).to include(@luke.first_name)
       end
     end
 
     describe 'that returns nil' do
-      before(:each) do
-        @response = @luke.as_api_response(:if_returns_nil_proc)
-      end
+      subject(:response) { @luke.as_api_response(:if_returns_nil_proc) }
 
       it 'returns a hash' do
-        expect(@response).to be_kind_of(Hash)
+        expect(response).to be_kind_of(Hash)
       end
 
       it 'returns the correct number of fields' do
-        expect(@response).to have(1).keys
+        expect(response).to have(1).keys
       end
 
       it 'will not add the conditional field but all others' do
-        expect(@response.keys).to include(:first_name)
-        expect(@response.keys).not_to include(:full_name)
+        expect(response.keys).to include(:first_name)
+        expect(response.keys).not_to include(:full_name)
       end
 
       it 'the other specified fields have the correct value' do
-        expect(@response.values).to include(@luke.first_name)
+        expect(response.values).to include(@luke.first_name)
       end
     end
 
     describe 'that returns true' do
-      before(:each) do
-        @response = @han.as_api_response(:unless_under_thirty_proc)
-      end
+      subject(:response) { @han.as_api_response(:unless_under_thirty_proc) }
 
       it 'returns a hash' do
-        expect(@response).to be_kind_of(Hash)
+        expect(response).to be_kind_of(Hash)
       end
 
       it 'returns the correct number of fields' do
-        expect(@response).to have(2).keys
+        expect(response).to have(2).keys
       end
 
       it 'will not add the conditional field but all others' do
-        expect(@response.keys).to include(:first_name)
-        expect(@response.keys).to include(:last_name)
+        expect(response.keys).to include(:first_name)
+        expect(response.keys).to include(:last_name)
       end
 
       it 'the other specified fields have the correct value' do
-        expect(@response.values).to include(@han.first_name, @han.last_name)
+        expect(response.values).to include(@han.first_name, @han.last_name)
       end
     end
   end
