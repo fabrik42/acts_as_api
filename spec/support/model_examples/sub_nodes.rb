@@ -5,27 +5,27 @@ shared_examples_for 'creating a sub hash in the api template' do
     end
 
     it 'returns a hash' do
-      @response.should be_kind_of(Hash)
+      expect(@response).to be_kind_of(Hash)
     end
 
     it 'returns the correct number of fields' do
-      @response.should have(1).keys
+      expect(@response).to have(1).keys
     end
 
     it 'returns all specified fields' do
-      @response.keys.should include(:sub_nodes)
+      expect(@response.keys).to include(:sub_nodes)
     end
 
     it 'returns the correct values for the specified fields' do
-      @response[:sub_nodes].should be_a Hash
+      expect(@response[:sub_nodes]).to be_a Hash
     end
 
     it 'provides the correct number of sub nodes' do
-      @response[:sub_nodes].should have(1).keys
+      expect(@response[:sub_nodes]).to have(1).keys
     end
 
     it 'provides the correct sub nodes values' do
-      @response[:sub_nodes][:foo].should eql('something')
+      expect(@response[:sub_nodes][:foo]).to eql('something')
     end
   end
 
@@ -35,33 +35,33 @@ shared_examples_for 'creating a sub hash in the api template' do
     end
 
     it 'returns a hash' do
-      @response.should be_kind_of(Hash)
+      expect(@response).to be_kind_of(Hash)
     end
 
     it 'returns the correct number of fields' do
-      @response.should have(1).keys
+      expect(@response).to have(1).keys
     end
 
     it 'returns all specified fields' do
-      @response.keys.should include(:sub_nodes)
+      expect(@response.keys).to include(:sub_nodes)
     end
 
     it 'returns the correct values for the specified fields' do
-      @response[:sub_nodes].should be_a Hash
+      expect(@response[:sub_nodes]).to be_a Hash
     end
 
     it 'provides the correct number of sub nodes' do
-      @response[:sub_nodes].should have(1).keys
+      expect(@response[:sub_nodes]).to have(1).keys
     end
 
     it 'provides the correct number of sub nodes in the second level' do
-      @response[:sub_nodes][:foo].should have(1).keys
+      expect(@response[:sub_nodes][:foo]).to have(1).keys
     end
 
     it 'provides the correct sub nodes values' do
       @response[:sub_nodes][:foo].tap do |foo|
         foo[:bar].tap do |bar|
-          bar.should eql(@luke.last_name)
+          expect(bar).to eql(@luke.last_name)
         end
       end
     end
@@ -73,27 +73,27 @@ shared_examples_for 'creating a sub hash in the api template' do
     end
 
     it 'returns a hash' do
-      @response.should be_kind_of(Hash)
+      expect(@response).to be_kind_of(Hash)
     end
 
     it 'returns the correct number of fields' do
-      @response.should have(1).keys
+      expect(@response).to have(1).keys
     end
 
     it 'returns all specified fields' do
-      @response.keys.should include(:sub_hash)
+      expect(@response.keys).to include(:sub_hash)
     end
 
     it 'provides the correct number of sub nodes' do
-      @response[:sub_hash].should have(2).keys
+      expect(@response[:sub_hash]).to have(2).keys
     end
 
     it 'provides the correct sub nodes' do
-      @response[:sub_hash].keys.should include(:foo, :hello)
+      expect(@response[:sub_hash].keys).to include(:foo, :hello)
     end
 
     it 'provides the correct values in its sub nodes' do
-      @response[:sub_hash].values.should include('bar', 'world')
+      expect(@response[:sub_hash].values).to include('bar', 'world')
     end
   end
 end

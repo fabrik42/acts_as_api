@@ -16,21 +16,21 @@ describe SharedEngine::PlainObjectsController, type: :controller do
     end
 
     it 'should have a root node named users' do
-      response_body_json.should have_key('plain_objects')
+      expect(response_body_json).to have_key('plain_objects')
     end
 
     it 'should contain all users' do
-      response_body_json['plain_objects'].should be_a(Array)
+      expect(response_body_json['plain_objects']).to be_a(Array)
     end
 
     it 'should contain the specified attributes' do
-      response_body_json['plain_objects'].first.should have_key('first_name')
-      response_body_json['plain_objects'].first.should have_key('last_name')
+      expect(response_body_json['plain_objects'].first).to have_key('first_name')
+      expect(response_body_json['plain_objects'].first).to have_key('last_name')
     end
 
     it 'should contain the specified values' do
-      response_body_json['plain_objects'].first['first_name'].should eql('Han')
-      response_body_json['plain_objects'].first['last_name'].should eql('Solo')
+      expect(response_body_json['plain_objects'].first['first_name']).to eql('Han')
+      expect(response_body_json['plain_objects'].first['last_name']).to eql('Solo')
     end
   end
 end

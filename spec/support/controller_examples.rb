@@ -9,18 +9,18 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named users' do
-        response_body.should have_selector('users')
+        expect(response_body).to have_selector('users')
       end
 
       it 'should contain all users' do
-        response_body.should have_selector('users > user') do |users|
-          users.size.should eql(3)
+        expect(response_body).to have_selector('users > user') do |users|
+          expect(users.size).to eql(3)
         end
       end
 
       it 'should contain the specified attributes' do
-        response_body.should have_selector('users > user > first-name')
-        response_body.should have_selector('users > user > last-name')
+        expect(response_body).to have_selector('users > user > first-name')
+        expect(response_body).to have_selector('users > user > last-name')
       end
     end
 
@@ -30,12 +30,12 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named user' do
-        response_body.should have_selector('user')
+        expect(response_body).to have_selector('user')
       end
 
       it 'should contain the specified attributes' do
-        response_body.should have_selector('user > first-name')
-        response_body.should have_selector('user > last-name')
+        expect(response_body).to have_selector('user > first-name')
+        expect(response_body).to have_selector('user > last-name')
       end
     end
   end
@@ -47,21 +47,21 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named users' do
-        response_body_json.should have_key('users')
+        expect(response_body_json).to have_key('users')
       end
 
       it 'should contain all users' do
-        response_body_json['users'].should be_a(Array)
+        expect(response_body_json['users']).to be_a(Array)
       end
 
       it 'should contain the specified attributes' do
-        response_body_json['users'].first.should have_key('first_name')
-        response_body_json['users'].first.should have_key('last_name')
+        expect(response_body_json['users'].first).to have_key('first_name')
+        expect(response_body_json['users'].first).to have_key('last_name')
       end
 
       it 'should contain the specified values' do
-        response_body_json['users'].first['first_name'].should eql('Han')
-        response_body_json['users'].first['last_name'].should eql('Solo')
+        expect(response_body_json['users'].first['first_name']).to eql('Han')
+        expect(response_body_json['users'].first['last_name']).to eql('Solo')
       end
     end
 
@@ -71,21 +71,21 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named users' do
-        response_body_json.should have_key('users')
+        expect(response_body_json).to have_key('users')
       end
 
       it 'should contain all users' do
-        response_body_json['users'].should be_a(Array)
+        expect(response_body_json['users']).to be_a(Array)
       end
 
       it 'should contain the specified attributes' do
-        response_body_json['users'].first.should have_key('first_name')
-        response_body_json['users'].first.should have_key('last_name')
+        expect(response_body_json['users'].first).to have_key('first_name')
+        expect(response_body_json['users'].first).to have_key('last_name')
       end
 
       it 'should contain the specified values' do
-        response_body_json['users'].first['first_name'].should eql('Han')
-        response_body_json['users'].first['last_name'].should eql('Solo')
+        expect(response_body_json['users'].first['first_name']).to eql('Han')
+        expect(response_body_json['users'].first['last_name']).to eql('Solo')
       end
     end
 
@@ -95,17 +95,17 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named user' do
-        response_body_json.should have_key('user')
+        expect(response_body_json).to have_key('user')
       end
 
       it 'should contain the specified attributes' do
-        response_body_json['user'].should have_key('first_name')
-        response_body_json['user'].should have_key('last_name')
+        expect(response_body_json['user']).to have_key('first_name')
+        expect(response_body_json['user']).to have_key('last_name')
       end
 
       it 'should contain the specified values' do
-        response_body_json['user']['first_name'].should eql('Luke')
-        response_body_json['user']['last_name'].should eql('Skywalker')
+        expect(response_body_json['user']['first_name']).to eql('Luke')
+        expect(response_body_json['user']['last_name']).to eql('Skywalker')
       end
     end
 
@@ -121,16 +121,16 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named user' do
-        response_body_json.should have_key('user')
+        expect(response_body_json).to have_key('user')
       end
 
       it 'should contain the specified attributes' do
-        response_body_json['user'].should have(1).keys
-        response_body_json['user'].should have_key('profile')
+        expect(response_body_json['user']).to have(1).keys
+        expect(response_body_json['user']).to have_key('profile')
       end
 
       it 'should contain the specified values' do
-        response_body_json['user']['profile'].should be_nil
+        expect(response_body_json['user']['profile']).to be_nil
       end
     end
 
@@ -140,11 +140,11 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should respond with HTTP 200' do
-        response.code.should == '200'
+        expect(response.code).to eq('200')
       end
 
       it 'should render the model with to_json' do
-        response.body.should == @luke.to_json
+        expect(response.body).to eq(@luke.to_json)
       end
     end
   end
@@ -165,25 +165,25 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named users' do
-        response_body_json.should have_key('users')
+        expect(response_body_json).to have_key('users')
       end
 
       it 'should contain all users' do
-        response_body_json['users'].should be_a(Array)
+        expect(response_body_json['users']).to be_a(Array)
       end
 
       it 'should contain the specified attributes' do
-        response_body_json['users'].first['user'].should have_key('first_name')
-        response_body_json['users'].first['user'].should have_key('last_name')
+        expect(response_body_json['users'].first['user']).to have_key('first_name')
+        expect(response_body_json['users'].first['user']).to have_key('last_name')
       end
 
       it 'contains the user root nodes' do
-        response_body_json['users'].collect(&:keys).flatten.uniq.should eql(['user'])
+        expect(response_body_json['users'].collect(&:keys).flatten.uniq).to eql(['user'])
       end
 
       it 'should contain the specified values' do
-        response_body_json['users'].first['user']['first_name'].should eql('Han')
-        response_body_json['users'].first['user']['last_name'].should eql('Solo')
+        expect(response_body_json['users'].first['user']['first_name']).to eql('Han')
+        expect(response_body_json['users'].first['user']['last_name']).to eql('Solo')
       end
     end
 
@@ -193,17 +193,17 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named user' do
-        response_body_json.should have_key('user')
+        expect(response_body_json).to have_key('user')
       end
 
       it 'should contain the specified attributes' do
-        response_body_json['user'].should have_key('first_name')
-        response_body_json['user'].should have_key('last_name')
+        expect(response_body_json['user']).to have_key('first_name')
+        expect(response_body_json['user']).to have_key('last_name')
       end
 
       it 'should contain the specified values' do
-        response_body_json['user']['first_name'].should eql('Luke')
-        response_body_json['user']['last_name'].should eql('Skywalker')
+        expect(response_body_json['user']['first_name']).to eql('Luke')
+        expect(response_body_json['user']['last_name']).to eql('Skywalker')
       end
     end
   end
@@ -212,7 +212,7 @@ shared_examples_for 'a controller with ActsAsApi responses' do
     it 'should be disabled by default' do
       @callback = 'mycallback'
       get :index, format: 'json', params: { api_template: :name_only, callback: @callback }
-      response_body_jsonp(@callback).should be_nil
+      expect(response_body_jsonp(@callback)).to be_nil
     end
 
     describe 'enabled jsonp callbacks' do
@@ -237,7 +237,7 @@ shared_examples_for 'a controller with ActsAsApi responses' do
         end
 
         it 'should wrap the response in the callback' do
-          response_body_jsonp(@callback).should_not be_nil
+          expect(response_body_jsonp(@callback)).not_to be_nil
         end
       end
 
@@ -247,7 +247,7 @@ shared_examples_for 'a controller with ActsAsApi responses' do
         end
 
         it 'should wrap the response in the callback' do
-          response_body_jsonp(@callback).should_not be_nil
+          expect(response_body_jsonp(@callback)).not_to be_nil
         end
       end
 
@@ -257,7 +257,7 @@ shared_examples_for 'a controller with ActsAsApi responses' do
         end
 
         it 'should set the content type to JavaScript' do
-          response.content_type.should == Mime[:js]
+          expect(response.content_type).to eq(Mime[:js])
         end
       end
     end
@@ -278,8 +278,8 @@ shared_examples_for 'a controller with ActsAsApi responses' do
         get :index, format: 'json', params: { api_template: :name_only, callback: @callback }
       end
 
-      its 'response has no named root node' do
-        response_body_json.should be_an(Array)
+      it 'response has no named root node' do
+        expect(response_body_json).to be_an(Array)
       end
     end
 
@@ -288,9 +288,9 @@ shared_examples_for 'a controller with ActsAsApi responses' do
         get :show, format: 'json', params: { api_template: :name_only, id: @luke.id }
       end
 
-      its 'response has no named root node' do
-        response_body_json.should be_a(Hash)
-        response_body_json.should have_key('first_name')
+      it 'response has no named root node' do
+        expect(response_body_json).to be_a(Hash)
+        expect(response_body_json.keys).to include('first_name')
       end
     end
   end
@@ -302,17 +302,17 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'shows model response fields' do
-        response_body_json.should be_a(Hash)
-        response_body_json.should have_key('users')
-        response_body_json['users'].should be_an(Array)
+        expect(response_body_json).to be_a(Hash)
+        expect(response_body_json).to have_key('users')
+        expect(response_body_json['users']).to be_an(Array)
       end
 
       it 'shows page field' do
-        response_body_json.should have_key('page')
+        expect(response_body_json).to have_key('page')
       end
 
       it 'shows total field' do
-        response_body_json.should have_key('total')
+        expect(response_body_json).to have_key('total')
       end
     end
 
@@ -322,16 +322,16 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'shows model response fields' do
-        response_body_json.should be_a(Hash)
-        response_body_json.should have_key('user')
+        expect(response_body_json).to be_a(Hash)
+        expect(response_body_json).to have_key('user')
       end
 
       it 'shows page field' do
-        response_body_json.should have_key('page')
+        expect(response_body_json).to have_key('page')
       end
 
       it 'shows total field' do
-        response_body_json.should have_key('total')
+        expect(response_body_json).to have_key('total')
       end
     end
   end
@@ -343,17 +343,17 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named user' do
-        response_body.should have_selector('user')
+        expect(response_body).to have_selector('user')
       end
 
       it 'should contain the specified attributes' do
-        response_body.should have_selector('user > prefix')
-        response_body.should have_selector('user > first-name')
-        response_body.should have_selector('user > last-name')
+        expect(response_body).to have_selector('user > prefix')
+        expect(response_body).to have_selector('user > first-name')
+        expect(response_body).to have_selector('user > last-name')
       end
 
       it 'should not contain the specified attributes' do
-        response_body.should_not have_selector('user > postfix')
+        expect(response_body).not_to have_selector('user > postfix')
       end
     end
   end
@@ -365,17 +365,17 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named user' do
-        response_body.should have_selector('user')
+        expect(response_body).to have_selector('user')
       end
 
       it 'should contain the specified attributes' do
-        response_body.should have_selector('user > first-name')
-        response_body.should have_selector('user > last-name')
-        response_body.should have_selector('user > postfix')
+        expect(response_body).to have_selector('user > first-name')
+        expect(response_body).to have_selector('user > last-name')
+        expect(response_body).to have_selector('user > postfix')
       end
 
       it 'should not contain the specified attributes' do
-        response_body.should_not have_selector('user > prefix')
+        expect(response_body).not_to have_selector('user > prefix')
       end
     end
   end
@@ -387,14 +387,14 @@ shared_examples_for 'a controller with ActsAsApi responses' do
       end
 
       it 'should have a root node named user' do
-        response_body.should have_selector('user')
+        expect(response_body).to have_selector('user')
       end
 
       it 'should contain the specified attributes' do
-        response_body.should have_selector('user > prefix')
-        response_body.should have_selector('user > first-name')
-        response_body.should have_selector('user > last-name')
-        response_body.should have_selector('user > postfix')
+        expect(response_body).to have_selector('user > prefix')
+        expect(response_body).to have_selector('user > first-name')
+        expect(response_body).to have_selector('user > last-name')
+        expect(response_body).to have_selector('user > postfix')
       end
     end
   end

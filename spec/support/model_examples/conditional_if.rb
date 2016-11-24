@@ -7,20 +7,20 @@ shared_examples_for 'conditional if statements' do
         end
 
         it 'returns a hash' do
-          @response.should be_kind_of(Hash)
+          expect(@response).to be_kind_of(Hash)
         end
 
         it 'returns the correct number of fields' do
-          @response.should have(1).keys
+          expect(@response).to have(1).keys
         end
 
         it 'will not add the conditional field but all others' do
-          @response.keys.should include(:first_name)
-          @response.keys.should_not include(:full_name)
+          expect(@response.keys).to include(:first_name)
+          expect(@response.keys).not_to include(:full_name)
         end
 
         it 'the other specified fields have the correct value' do
-          @response.values.should include(@luke.first_name)
+          expect(@response.values).to include(@luke.first_name)
         end
       end
 
@@ -30,20 +30,20 @@ shared_examples_for 'conditional if statements' do
         end
 
         it 'returns a hash' do
-          @response.should be_kind_of(Hash)
+          expect(@response).to be_kind_of(Hash)
         end
 
         it 'returns the correct number of fields' do
-          @response.should have(1).keys
+          expect(@response).to have(1).keys
         end
 
         it 'will not add the conditional field but all others' do
-          @response.keys.should include(:first_name)
-          @response.keys.should_not include(:full_name)
+          expect(@response.keys).to include(:first_name)
+          expect(@response.keys).not_to include(:full_name)
         end
 
         it 'the other specified fields have the correct value' do
-          @response.values.should include(@luke.first_name)
+          expect(@response.values).to include(@luke.first_name)
         end
       end
 
@@ -53,20 +53,20 @@ shared_examples_for 'conditional if statements' do
         end
 
         it 'returns a hash' do
-          @response.should be_kind_of(Hash)
+          expect(@response).to be_kind_of(Hash)
         end
 
         it 'returns the correct number of fields' do
-          @response.should have(2).keys
+          expect(@response).to have(2).keys
         end
 
         it 'will not add the conditional field but all others' do
-          @response.keys.should include(:first_name)
-          @response.keys.should include(:last_name)
+          expect(@response.keys).to include(:first_name)
+          expect(@response.keys).to include(:last_name)
         end
 
         it 'the other specified fields have the correct value' do
-          @response.values.should include(@han.first_name, @han.last_name)
+          expect(@response.values).to include(@han.first_name, @han.last_name)
         end
       end
     end
@@ -79,20 +79,20 @@ shared_examples_for 'conditional if statements' do
       end
 
       it 'returns a hash' do
-        @response.should be_kind_of(Hash)
+        expect(@response).to be_kind_of(Hash)
       end
 
       it 'returns the correct number of fields' do
-        @response.should have(1).keys
+        expect(@response).to have(1).keys
       end
 
       it 'will not add the conditional field but all others' do
-        @response.keys.should include(:first_name)
-        @response.keys.should_not include(:full_name)
+        expect(@response.keys).to include(:first_name)
+        expect(@response.keys).not_to include(:full_name)
       end
 
       it 'the other specified fields have the correct value' do
-        @response.values.should include(@luke.first_name)
+        expect(@response.values).to include(@luke.first_name)
       end
     end
 
@@ -102,20 +102,20 @@ shared_examples_for 'conditional if statements' do
       end
 
       it 'returns a hash' do
-        @response.should be_kind_of(Hash)
+        expect(@response).to be_kind_of(Hash)
       end
 
       it 'returns the correct number of fields' do
-        @response.should have(1).keys
+        expect(@response).to have(1).keys
       end
 
       it 'will not add the conditional field but all others' do
-        @response.keys.should include(:first_name)
-        @response.keys.should_not include(:full_name)
+        expect(@response.keys).to include(:first_name)
+        expect(@response.keys).not_to include(:full_name)
       end
 
       it 'the other specified fields have the correct value' do
-        @response.values.should include(@luke.first_name)
+        expect(@response.values).to include(@luke.first_name)
       end
     end
 
@@ -125,20 +125,20 @@ shared_examples_for 'conditional if statements' do
       end
 
       it 'returns a hash' do
-        @response.should be_kind_of(Hash)
+        expect(@response).to be_kind_of(Hash)
       end
 
       it 'returns the correct number of fields' do
-        @response.should have(2).keys
+        expect(@response).to have(2).keys
       end
 
       it 'will not add the conditional field but all others' do
-        @response.keys.should include(:first_name)
-        @response.keys.should include(:last_name)
+        expect(@response.keys).to include(:first_name)
+        expect(@response.keys).to include(:last_name)
       end
 
       it 'the other specified fields have the correct value' do
-        @response.values.should include(@han.first_name, @han.last_name)
+        expect(@response.values).to include(@han.first_name, @han.last_name)
       end
     end
   end

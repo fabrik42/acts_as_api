@@ -22,17 +22,17 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
         end
 
         it 'should return HTTP 201 status' do
-          response.code.should == '201'
+          expect(response.code).to eq('201')
         end
 
         it 'should contain the specified attributes' do
-          response_body_json['user'].should have_key('first_name')
-          response_body_json['user'].should have_key('last_name')
+          expect(response_body_json['user']).to have_key('first_name')
+          expect(response_body_json['user']).to have_key('last_name')
         end
 
         it 'should contain the specified values' do
-          response_body_json['user']['first_name'].should eql('Luke')
-          response_body_json['user']['last_name'].should eql('Skywalker')
+          expect(response_body_json['user']['first_name']).to eql('Luke')
+          expect(response_body_json['user']['last_name']).to eql('Skywalker')
         end
       end
 
@@ -42,11 +42,11 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
         end
 
         it 'should return HTTP 422 status' do
-          response.code.should == '422'
+          expect(response.code).to eq('422')
         end
 
         it 'should return errors as json' do
-          response_body_json['errors']['last_name'].should include('can\'t be blank')
+          expect(response_body_json['errors']['last_name']).to include('can\'t be blank')
         end
       end
 
@@ -56,13 +56,13 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
         end
 
         it 'should return HTTP 200 status' do
-          response.code.should == '200'
+          expect(response.code).to eq('200')
         end
 
         it 'should contain the specified attributes' do
           response_body_json['users'].each do |user|
-            user.should have_key('first_name')
-            user.should have_key('last_name')
+            expect(user).to have_key('first_name')
+            expect(user).to have_key('last_name')
           end
         end
       end
@@ -75,16 +75,16 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
         end
 
         it 'should return HTTP 201 status' do
-          response.code.should == '201'
+          expect(response.code).to eq('201')
         end
 
         it 'should include HTTP Location header' do
-          response.headers['Location'].should match "/shared/users/#{User.last.id}"
+          expect(response.headers['Location']).to match "/shared/users/#{User.last.id}"
         end
 
         it 'should contain the specified attributes' do
-          response_body.should have_selector('user > first-name')
-          response_body.should have_selector('user > last-name')
+          expect(response_body).to have_selector('user > first-name')
+          expect(response_body).to have_selector('user > last-name')
         end
       end
 
@@ -94,11 +94,11 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
         end
 
         it 'should return HTTP 422 status' do
-          response.code.should == '422'
+          expect(response.code).to eq('422')
         end
 
         it 'should return errors as xml' do
-          response_body.should have_selector('errors > error')
+          expect(response_body).to have_selector('errors > error')
         end
       end
 
@@ -108,12 +108,12 @@ describe SharedEngine::RespondWithUsersController, type: :controller do
         end
 
         it 'should return HTTP 200 status' do
-          response.code.should == '200'
+          expect(response.code).to eq('200')
         end
 
         it 'should contain the specified attributes' do
-          response_body.should have_selector('users > user > first-name', count: 3)
-          response_body.should have_selector('users > user > last-name', count: 3)
+          expect(response_body).to have_selector('users > user > first-name', count: 3)
+          expect(response_body).to have_selector('users > user > last-name', count: 3)
         end
       end
     end

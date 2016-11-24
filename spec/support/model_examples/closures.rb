@@ -5,19 +5,19 @@ shared_examples_for 'calling a closure in the api template' do
     end
 
     it 'returns a hash' do
-      @response.should be_kind_of(Hash)
+      expect(@response).to be_kind_of(Hash)
     end
 
     it 'returns the correct number of fields' do
-      @response.should have(2).keys
+      expect(@response).to have(2).keys
     end
 
     it 'returns all specified fields' do
-      @response.keys.sort_by(&:to_s).should eql([:all_caps_name, :without_param])
+      expect(@response.keys.sort_by(&:to_s)).to eql([:all_caps_name, :without_param])
     end
 
     it 'returns the correct values for the specified fields' do
-      @response.values.sort.should eql(['LUKE SKYWALKER', 'Time'])
+      expect(@response.values.sort).to eql(['LUKE SKYWALKER', 'Time'])
     end
   end
 
@@ -27,19 +27,19 @@ shared_examples_for 'calling a closure in the api template' do
     end
 
     it 'returns a hash' do
-      @response.should be_kind_of(Hash)
+      expect(@response).to be_kind_of(Hash)
     end
 
     it 'returns the correct number of fields' do
-      @response.should have(2).keys
+      expect(@response).to have(2).keys
     end
 
     it 'returns all specified fields' do
-      @response.keys.sort_by(&:to_s).should eql([:all_caps_name, :without_param])
+      expect(@response.keys.sort_by(&:to_s)).to eql([:all_caps_name, :without_param])
     end
 
     it 'returns the correct values for the specified fields' do
-      @response.values.sort.should eql(['LUKE SKYWALKER', 'Time'])
+      expect(@response.values.sort).to eql(['LUKE SKYWALKER', 'Time'])
     end
   end
 end

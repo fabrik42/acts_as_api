@@ -26,23 +26,23 @@ shared_examples_for 'options' do
       end
 
       it 'returns the options field as specified' do
-        @response[:options][:loc].should == [12, 13]
+        expect(@response[:options][:loc]).to eq([12, 13])
       end
 
       it 'returns the option for the associations ' do
-        @response[:profile][:options][:loc].should == [12, 13]
+        expect(@response[:profile][:options][:loc]).to eq([12, 13])
       end
     end
 
     context 'allowed_to_render accept options' do
       it 'should not contains first_name when options[:with_name] is false' do
         @response = @luke.as_api_response(:with_options, with_name: false)
-        @response.should_not include(:first_name)
+        expect(@response).not_to include(:first_name)
       end
 
       it 'should contains first_name when options[:with_name] is true' do
         @response = @luke.as_api_response(:with_options, with_name: true)
-        @response[:first_name].should == 'Luke'
+        expect(@response[:first_name]).to eq('Luke')
       end
     end
   end

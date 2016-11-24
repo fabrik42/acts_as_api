@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Models' do
+describe 'Models', type: :model do
   before(:each) do
     setup_models
   end
