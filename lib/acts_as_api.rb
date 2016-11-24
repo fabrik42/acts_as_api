@@ -14,12 +14,12 @@ require 'acts_as_api/exceptions'
 # acts_as_api uses the default serializers of your rails app and doesn't
 # force you into more dependencies.
 module ActsAsApi
-  autoload :Config,       'acts_as_api/config'
-  autoload :ApiTemplate,  'acts_as_api/api_template'
-  autoload :Base,         'acts_as_api/base'
-  autoload :Rendering,    'acts_as_api/rendering'
-  autoload :Responder,    'acts_as_api/responder'
-  autoload :Adapters,     'acts_as_api/adapters'
+  autoload :Config,      'acts_as_api/config'
+  autoload :ApiTemplate, 'acts_as_api/api_template'
+  autoload :Base,        'acts_as_api/base'
+  autoload :Rendering,   'acts_as_api/rendering'
+  autoload :Responder,   'acts_as_api/responder'
+  autoload :Adapters,    'acts_as_api/adapters'
 end
 
 # Neccessary to render an Array of models, e.g. the result of a search.
