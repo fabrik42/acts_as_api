@@ -1,3 +1,7 @@
+=== 1.0.1 2017-08-04
+
+* Updates spec suite to Rails 5.1.3
+
 === 1.0.0 2016-11-24
 
 * Ditch Ruby 1.8 syntax, overall modernization
@@ -59,13 +63,13 @@
 
 === 0.3.2 2011-04-20
 
-* Raise an exception if a specified api template is not found 
+* Raise an exception if a specified api template is not found
 
 === 0.3.1 2011-04-08
 
 * Added the :template option to specify sub templates
 
-* Fixed a bug concerning extended api templates 
+* Fixed a bug concerning extended api templates
 
 === 0.3.0 2011-02-22
 
