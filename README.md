@@ -1,6 +1,6 @@
 # acts_as_api ![acts_as_api on travis ci](https://secure.travis-ci.org/fabrik42/acts_as_api.png?branch=master)
 
-acts_as_api makes creating XML/JSON responses in Rails 3, 4 and 5 easy and fun.
+acts_as_api makes creating XML/JSON responses in Rails 3, 4, 5 and 6 easy and fun.
 
 It provides a simple interface to determine the representation of your model data, that should be rendered in your API responses.
 
