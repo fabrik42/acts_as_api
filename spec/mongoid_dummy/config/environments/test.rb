@@ -10,6 +10,9 @@ MongoidDummy::Application.configure do
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
 
+  # Disable assset pipeline
+  config.assets.enabled = false
+
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
 
