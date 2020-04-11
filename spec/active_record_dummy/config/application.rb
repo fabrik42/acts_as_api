@@ -1,6 +1,31 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+# Do not use require 'rails/all'
+# see https://guides.rubyonrails.org/initialization.html
+# Do not include:
+# action_text/engine
+#
+# active_storage/engine
+# action_mailbox/engine
+# action_cable/engine
+# active_job/railtie
+
+require "rails"
+
+%w(
+  active_record/railtie
+  action_controller/railtie
+  action_view/railtie
+  action_mailer/railtie
+  active_job/railtie
+  rails/test_unit/railtie
+  sprockets/railtie
+).each do |railtie|
+  begin
+    require railtie
+  rescue LoadError
+  end
+end
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
