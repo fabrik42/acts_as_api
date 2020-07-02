@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActsAsApi
   # This module enriches the ActiveRecord::Base module of Rails.
   module Base
@@ -15,9 +17,7 @@ module ActsAsApi
         extend ActsAsApi::Base::ClassMethods
       end
 
-      if block_given?
-        yield ActsAsApi::Config
-      end
+      yield ActsAsApi::Config if block_given?
     end
 
     module ClassMethods
@@ -33,9 +33,7 @@ module ActsAsApi
         attributes = api_accessible_attributes(api_template).try(:dup) || ApiTemplate.new(api_template)
         attributes.merge!(api_accessible_attributes(options[:extend])) if options[:extend]
 
-        if block_given?
-          yield attributes
-        end
+        yield attributes if block_given?
 
         class_attribute "api_accessible_#{api_template}".to_sym
         send "api_accessible_#{api_template}=", attributes
@@ -52,7 +50,11 @@ module ActsAsApi
       # Will raise an exception if the passed api template is not defined for the model
       def as_api_response(api_template, options = {})
         api_attributes = self.class.api_accessible_attributes(api_template)
-        raise ActsAsApi::TemplateNotFoundError.new("acts_as_api template :#{api_template} was not found for model #{self.class}") if api_attributes.nil?
+
+        if api_attributes.nil?
+          raise ActsAsApi::TemplateNotFoundError,
+                "acts_as_api template :#{api_template} was not found for model #{self.class}"
+        end
 
         before_api_response(api_template)
         response_hash = around_api_response(api_template) do
@@ -65,15 +67,13 @@ module ActsAsApi
 
       protected
 
-        def before_api_response(_api_template)
-        end
+      def before_api_response(_api_template); end
 
-        def after_api_response(_api_template)
-        end
+      def after_api_response(_api_template); end
 
-        def around_api_response(_api_template)
-          yield
-        end
+      def around_api_response(_api_template)
+        yield
+      end
     end
   end
 end

@@ -13,4 +13,5 @@ group :test do
   gem 'rspec-rails', '>= 3.5.0'
   gem 'responders'
   gem 'shared_engine', path: './spec/shared_engine'
+  gem 'rubocop', '~> 0.86.0', require: false
 end

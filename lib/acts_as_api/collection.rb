@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActsAsApi
   module Collection
     # The collection checks all its items if they respond to the +as_api_response+ method.

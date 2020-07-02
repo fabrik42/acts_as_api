@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActsAsApi
   # Contains rails specific renderers used by acts_as_api to render a jsonp response
   #

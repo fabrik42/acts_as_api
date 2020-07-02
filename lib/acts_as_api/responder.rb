@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActsAsApi
   # A custom Rails responder class to automatically use render_for_api in your
   # controller actions.

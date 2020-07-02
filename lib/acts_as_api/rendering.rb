@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActsAsApi
   # The methods of this module are included into the AbstractController::Rendering
   # module.
