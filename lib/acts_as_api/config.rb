@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 module ActsAsApi
   module Config
     class << self
-      attr_writer :accepted_api_formats, :dasherize_for, :include_root_in_json_collections, :add_root_node_for, :default_root, :allow_jsonp_callback, :add_http_status_to_jsonp_response
+      attr_writer :accepted_api_formats, :dasherize_for, :include_root_in_json_collections,
+                  :add_root_node_for, :default_root, :allow_jsonp_callback, :add_http_status_to_jsonp_response
 
       # The accepted response formats
       # Default is <tt>[:xml, :json]</tt>
       def accepted_api_formats
-        @accepted_api_formats || [:xml, :json]
+        @accepted_api_formats || %i[xml json]
       end
 
       # Holds formats that should be dasherized

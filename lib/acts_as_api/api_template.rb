@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActsAsApi
   # Represents an api template for a model.
   # This class should not be initiated by yourself, api templates
@@ -70,7 +72,7 @@ module ActsAsApi
       fieldset_options = fieldset.options_for(field)
 
       if fieldset_options[:unless]
-        !(condition_fulfilled?(model, fieldset_options[:unless], options))
+        !condition_fulfilled?(model, fieldset_options[:unless], options)
       elsif fieldset_options[:if]
         condition_fulfilled?(model, fieldset_options[:if], options)
       else
@@ -113,25 +115,25 @@ module ActsAsApi
 
     private
 
-      def process_value(model, value, options)
-        case value
-        when Symbol
-          model.send(value)
-        when Proc
-          call_proc(value, model, options)
-        when String
-          value.split('.').inject(model) { |result, method| result.send(method) }
-        when Hash
-          to_response_hash(model, value)
-        end
+    def process_value(model, value, options)
+      case value
+      when Symbol
+        model.send(value)
+      when Proc
+        call_proc(value, model, options)
+      when String
+        value.split('.').inject(model) { |result, method| result.send(method) }
+      when Hash
+        to_response_hash(model, value)
       end
+    end
 
-      def call_proc(the_proc, model, options)
-        if the_proc.arity == 2
-          the_proc.call(model, options)
-        else
-          the_proc.call(model)
-        end
+    def call_proc(the_proc, model, options)
+      if the_proc.arity == 2
+        the_proc.call(model, options)
+      else
+        the_proc.call(model)
       end
+    end
   end
 end
