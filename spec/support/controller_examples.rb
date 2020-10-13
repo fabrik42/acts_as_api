@@ -257,7 +257,7 @@ shared_examples_for 'a controller with ActsAsApi responses' do
         end
 
         it 'should set the content type to JavaScript' do
-          expect(response.content_type).to eq(Mime[:js])
+          expect(response.media_type).to eq(Mime[:js])
         end
       end
     end
