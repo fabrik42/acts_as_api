@@ -1,0 +1,27 @@
+name: Run rspec test suite
+
+on: [push]
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Start Postgres
+      uses: harmon758/postgresql-action@v1
+      with:
+        postgresql version: '11'
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.3.0
+      with:
+        mongodb-version: '4.4'
+    - name: Setup Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+        bundler-cache: true
+    - name: Install dependencies
+      run: bundle install
+    - name: Rspec
+      run: bundle exec rake spec:all
